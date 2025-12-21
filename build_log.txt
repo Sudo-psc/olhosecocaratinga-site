@@ -1,0 +1,58 @@
+
+> olhos-secos-caratinga@1.0.0 build /Users/philipecruz/Saraiva Vision/Olhosecocaratinga.com
+> next build
+
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/philipecruz/package-lock.json as the root directory.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
+ Detected additional lockfiles: 
+   * /Users/philipecruz/Saraiva Vision/Olhosecocaratinga.com/pnpm-lock.yaml
+
+   ▲ Next.js 15.5.9
+   - Environments: .env.local, .env
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 10.6s
+   Linting and checking validity of types ...
+
+Failed to compile.
+
+./src/app/blog/[slug]/page.tsx
+149:41  Error: Do not use an `<a>` element to navigate to `/blog/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+158:37  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+177:41  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./src/app/blog/page.tsx
+3:8  Warning: 'Image' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+6:10  Warning: 'urlFor' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/app/videos/[slug]/page.tsx
+69:41  Error: Do not use an `<a>` element to navigate to `/videos/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+78:37  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+187:45  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./src/components/__tests__/post-card.test.tsx
+7:22  Warning: 'source' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/components/__tests__/video-card.test.tsx
+8:22  Warning: 'source' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/components/seo/article-json-ld.tsx
+120:58  Warning: 'settings' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/components/seo/local-business-json-ld.tsx
+20:9  Warning: 'director' is assigned a value but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/sanity/schemas/objects/medical-compliance.ts
+19:30  Warning: 'value' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+19:37  Warning: 'context' is defined but never used. Allowed unused args must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/sanity/schemas/objects/portable-text-body.ts
+1:22  Warning: 'defineField' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+
+./src/sanity/schemas/video.ts
+1:35  Warning: 'defineArrayMember' is defined but never used. Allowed unused vars must match /^_/u.  @typescript-eslint/no-unused-vars
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+ ELIFECYCLE  Command failed with exit code 1.

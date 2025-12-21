@@ -1,0 +1,17 @@
+# robots.txt para olhosecocaratinga.com.br
+# Saraiva Vision Care LTDA
+
+User-agent: *
+Allow: /
+
+# Bloquear páginas administrativas
+Disallow: /studio
+Disallow: /studio/*
+Disallow: /api/*
+Disallow: /_next/*
+
+# Sitemap
+Sitemap: https://olhosecocaratinga.com.br/sitemap.xml
+
+# Crawl-delay sugerido (em segundos)
+Crawl-delay: 1

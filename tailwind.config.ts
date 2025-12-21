@@ -10,22 +10,28 @@ const config: Config = {
         extend: {
             colors: {
                 primary: {
-                    50: '#eff6ff',
-                    100: '#dbeafe',
-                    200: '#bfdbfe',
-                    300: '#93c5fd',
-                    400: '#60a5fa',
-                    500: '#3b82f6',
-                    600: '#2563eb',
-                    700: '#1d4ed8',
-                    800: '#1e40af',
-                    900: '#1e3a8a',
-                    950: '#172554',
+                    DEFAULT: '#0891b2', // cyan-600
+                    hover: '#0e7490',   // cyan-700
                 },
+                secondary: {
+                    DEFAULT: '#0e7490', // cyan-700
+                    border: '#06b6d4',  // cyan-500
+                },
+                slate: {
+                    850: '#1d283a', // Custom dark slate
+                }
             },
             fontFamily: {
-                sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+                sans: ['var(--font-inter)', 'sans-serif'],
+                heading: ['var(--font-sora)', 'var(--font-outfit)', 'sans-serif'],
             },
+            borderRadius: {
+                DEFAULT: '12px',
+                xl: '12px',
+            },
+            boxShadow: {
+                '3d': '0px 20px 60px 0px rgba(0, 0, 0, 0.3)',
+            }
         },
     },
     plugins: [],

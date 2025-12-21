@@ -1,12 +1,22 @@
 import { groq } from 'next-sanity'
 import { sanityFetch } from './client'
-import type { Post, PostSummary, Video, VideoSummary, SiteSettings } from './types'
+import type {
+  Post,
+  PostSummary,
+  Video,
+  VideoSummary,
+  SiteSettings,
+  Category,
+  Tag,
+  Author,
+} from './types'
 
 // ========================================
 // GROQ Queries
 // ========================================
 
-// Posts
+// ==== POSTS ====
+
 const postsQuery = groq`
   *[_type == "post"] | order(publishedAt desc) {
     _id,
@@ -16,14 +26,45 @@ const postsQuery = groq`
     excerpt,
     coverImage,
     publishedAt,
+    postType,
+    featured,
+    readingTime,
     "author": author->{
       name,
       slug,
       photo
     },
     "categories": categories[]->{
+      _id,
       title,
-      slug
+      slug,
+      color
+    }
+  }
+`
+
+const featuredPostsQuery = groq`
+  *[_type == "post" && featured == true] | order(publishedAt desc)[0...5] {
+    _id,
+    _type,
+    title,
+    slug,
+    excerpt,
+    coverImage,
+    publishedAt,
+    postType,
+    featured,
+    readingTime,
+    "author": author->{
+      name,
+      slug,
+      photo
+    },
+    "categories": categories[]->{
+      _id,
+      title,
+      slug,
+      color
     }
   }
 `
@@ -39,27 +80,124 @@ const postBySlugQuery = groq`
     excerpt,
     coverImage,
     body,
+    readingTime,
+    faq,
     publishedAt,
-    tags,
+    updatedAt,
+    postType,
+    featured,
     seo,
-    canonicalUrl,
+    medicalCompliance {
+      reviewedByMedical,
+      "medicalReviewer": medicalReviewer->{
+        _id,
+        name,
+        slug,
+        photo,
+        credentials
+      },
+      medicalReviewDate,
+      disclaimerType,
+      customDisclaimer
+    },
     "author": author->{
       _id,
       name,
       slug,
       photo,
-      bio
+      bio,
+      role,
+      credentials,
+      isMedicalProfessional
     },
     "categories": categories[]->{
       _id,
       title,
       slug,
-      description
+      description,
+      color
+    },
+    "tags": tags[]->{
+      _id,
+      title,
+      slug,
+      color
+    },
+    "relatedPosts": relatedPosts[]->{
+      _id,
+      title,
+      slug,
+      excerpt,
+      coverImage,
+      publishedAt,
+      "author": author->{ name, slug }
+    }[0...3],
+    "relatedVideos": relatedVideos[]->{
+      _id,
+      title,
+      slug,
+      youtubeUrl,
+      duration,
+      thumbnail
+    }[0...3],
+    references
+  }
+`
+
+const postsByCategoryQuery = groq`
+  *[_type == "post" && $categorySlug in categories[]->slug.current] | order(publishedAt desc) {
+    _id,
+    _type,
+    title,
+    slug,
+    excerpt,
+    coverImage,
+    publishedAt,
+    postType,
+    featured,
+    readingTime,
+    "author": author->{
+      name,
+      slug,
+      photo
+    },
+    "categories": categories[]->{
+      _id,
+      title,
+      slug,
+      color
     }
   }
 `
 
-// Videos
+const postsByTagQuery = groq`
+  *[_type == "post" && $tagSlug in tags[]->slug.current] | order(publishedAt desc) {
+    _id,
+    _type,
+    title,
+    slug,
+    excerpt,
+    coverImage,
+    publishedAt,
+    postType,
+    featured,
+    readingTime,
+    "author": author->{
+      name,
+      slug,
+      photo
+    },
+    "categories": categories[]->{
+      _id,
+      title,
+      slug,
+      color
+    }
+  }
+`
+
+// ==== VIDEOS ====
+
 const videosQuery = groq`
   *[_type == "video"] | order(publishedAt desc) {
     _id,
@@ -69,7 +207,32 @@ const videosQuery = groq`
     youtubeUrl,
     duration,
     thumbnail,
-    publishedAt
+    publishedAt,
+    videoType,
+    featured,
+    "author": author->{
+      name,
+      slug
+    }
+  }
+`
+
+const featuredVideosQuery = groq`
+  *[_type == "video" && featured == true] | order(publishedAt desc)[0...5] {
+    _id,
+    _type,
+    title,
+    slug,
+    youtubeUrl,
+    duration,
+    thumbnail,
+    publishedAt,
+    videoType,
+    featured,
+    "author": author->{
+      name,
+      slug
+    }
   }
 `
 
@@ -85,24 +248,175 @@ const videoBySlugQuery = groq`
     youtubeUrl,
     duration,
     transcript,
+    timestamps,
     thumbnail,
     publishedAt,
-    tags,
+    updatedAt,
+    videoType,
+    featured,
+    seo,
+    medicalCompliance {
+      reviewedByMedical,
+      "medicalReviewer": medicalReviewer->{
+        _id,
+        name,
+        slug,
+        photo,
+        credentials
+      },
+      medicalReviewDate,
+      disclaimerType
+    },
+    "author": author->{
+      _id,
+      name,
+      slug,
+      photo,
+      bio,
+      role,
+      credentials,
+      isMedicalProfessional
+    },
+    "categories": categories[]->{
+      _id,
+      title,
+      slug,
+      color
+    },
+    "tags": tags[]->{
+      _id,
+      title,
+      slug,
+      color
+    },
+    "relatedPosts": relatedPosts[]->{
+      _id,
+      title,
+      slug,
+      excerpt,
+      coverImage,
+      publishedAt
+    }[0...3],
+    "relatedVideos": relatedVideos[]->{
+      _id,
+      title,
+      slug,
+      youtubeUrl,
+      duration,
+      thumbnail
+    }[0...3]
+  }
+`
+
+// ==== CATEGORIES ====
+
+const categoriesQuery = groq`
+  *[_type == "category"] | order(order asc, title asc) {
+    _id,
+    _type,
+    title,
+    slug,
+    description,
+    icon,
+    color,
+    image,
+    "parent": parent->{
+      _id,
+      title,
+      slug
+    },
+    order,
     seo
   }
 `
 
-// Site Settings
+const categoryBySlugQuery = groq`
+  *[_type == "category" && slug.current == $slug][0] {
+    _id,
+    _type,
+    title,
+    slug,
+    description,
+    icon,
+    color,
+    image,
+    "parent": parent->{
+      _id,
+      title,
+      slug
+    },
+    order,
+    seo
+  }
+`
+
+// ==== TAGS ====
+
+const tagsQuery = groq`
+  *[_type == "tag"] | order(title asc) {
+    _id,
+    _type,
+    title,
+    slug,
+    description,
+    color
+  }
+`
+
+// ==== AUTHORS ====
+
+const authorsQuery = groq`
+  *[_type == "author"] | order(name asc) {
+    _id,
+    _type,
+    name,
+    slug,
+    role,
+    photo,
+    bio,
+    credentials,
+    socialLinks,
+    email,
+    isMedicalProfessional
+  }
+`
+
+const authorBySlugQuery = groq`
+  *[_type == "author" && slug.current == $slug][0] {
+    _id,
+    _type,
+    name,
+    slug,
+    role,
+    photo,
+    bio,
+    credentials,
+    socialLinks,
+    email,
+    isMedicalProfessional
+  }
+`
+
+// ==== SITE SETTINGS ====
+
 const siteSettingsQuery = groq`
   *[_type == "siteSettings"][0] {
     _id,
     _type,
     siteTitle,
     siteDescription,
-    defaultSeo,
-    socialLinks,
     logo,
-    favicon
+    favicon,
+    clinic,
+    medicalDirector,
+    businessHours,
+    contact,
+    socialLinks,
+    defaultSeo,
+    localSeo,
+    medicalDisclaimers,
+    privacyPolicyUrl,
+    termsOfUseUrl
   }
 `
 
@@ -110,12 +424,25 @@ const siteSettingsQuery = groq`
 // Fetch Functions
 // ========================================
 
+// ==== POSTS ====
+
 /**
  * Busca todos os posts (resumidos)
  */
 export async function getPosts(preview = false): Promise<PostSummary[]> {
   return sanityFetch<PostSummary[]>({
     query: postsQuery,
+    tags: ['posts'],
+    preview,
+  })
+}
+
+/**
+ * Busca posts em destaque
+ */
+export async function getFeaturedPosts(preview = false): Promise<PostSummary[]> {
+  return sanityFetch<PostSummary[]>({
+    query: featuredPostsQuery,
     tags: ['posts'],
     preview,
   })
@@ -134,6 +461,33 @@ export async function getPostBySlug(slug: string, preview = false): Promise<Post
 }
 
 /**
+ * Busca posts por categoria
+ */
+export async function getPostsByCategory(
+  categorySlug: string,
+  preview = false
+): Promise<PostSummary[]> {
+  return sanityFetch<PostSummary[]>({
+    query: postsByCategoryQuery,
+    params: { categorySlug },
+    tags: ['posts', `category:${categorySlug}`],
+    preview,
+  })
+}
+
+/**
+ * Busca posts por tag
+ */
+export async function getPostsByTag(tagSlug: string, preview = false): Promise<PostSummary[]> {
+  return sanityFetch<PostSummary[]>({
+    query: postsByTagQuery,
+    params: { tagSlug },
+    tags: ['posts', `tag:${tagSlug}`],
+    preview,
+  })
+}
+
+/**
  * Busca todos os slugs de posts (para generateStaticParams)
  */
 export async function getAllPostSlugs(): Promise<{ slug: string }[]> {
@@ -145,12 +499,25 @@ export async function getAllPostSlugs(): Promise<{ slug: string }[]> {
   return posts.map((post) => ({ slug: post.slug.current }))
 }
 
+// ==== VIDEOS ====
+
 /**
  * Busca todos os videos (resumidos)
  */
 export async function getVideos(preview = false): Promise<VideoSummary[]> {
   return sanityFetch<VideoSummary[]>({
     query: videosQuery,
+    tags: ['videos'],
+    preview,
+  })
+}
+
+/**
+ * Busca videos em destaque
+ */
+export async function getFeaturedVideos(preview = false): Promise<VideoSummary[]> {
+  return sanityFetch<VideoSummary[]>({
+    query: featuredVideosQuery,
     tags: ['videos'],
     preview,
   })
@@ -179,6 +546,86 @@ export async function getAllVideoSlugs(): Promise<{ slug: string }[]> {
 
   return videos.map((video) => ({ slug: video.slug.current }))
 }
+
+// ==== CATEGORIES ====
+
+/**
+ * Busca todas as categorias
+ */
+export async function getCategories(preview = false): Promise<Category[]> {
+  return sanityFetch<Category[]>({
+    query: categoriesQuery,
+    tags: ['categories'],
+    preview,
+  })
+}
+
+/**
+ * Busca uma categoria pelo slug
+ */
+export async function getCategoryBySlug(
+  slug: string,
+  preview = false
+): Promise<Category | null> {
+  return sanityFetch<Category | null>({
+    query: categoryBySlugQuery,
+    params: { slug },
+    tags: ['categories', `category:${slug}`],
+    preview,
+  })
+}
+
+/**
+ * Busca todos os slugs de categorias
+ */
+export async function getAllCategorySlugs(): Promise<{ slug: string }[]> {
+  const categories = await sanityFetch<{ slug: { current: string } }[]>({
+    query: groq`*[_type == "category" && defined(slug.current)]{ slug }`,
+    tags: ['categories'],
+  })
+
+  return categories.map((cat) => ({ slug: cat.slug.current }))
+}
+
+// ==== TAGS ====
+
+/**
+ * Busca todas as tags
+ */
+export async function getTags(preview = false): Promise<Tag[]> {
+  return sanityFetch<Tag[]>({
+    query: tagsQuery,
+    tags: ['tags'],
+    preview,
+  })
+}
+
+// ==== AUTHORS ====
+
+/**
+ * Busca todos os autores
+ */
+export async function getAuthors(preview = false): Promise<Author[]> {
+  return sanityFetch<Author[]>({
+    query: authorsQuery,
+    tags: ['authors'],
+    preview,
+  })
+}
+
+/**
+ * Busca um autor pelo slug
+ */
+export async function getAuthorBySlug(slug: string, preview = false): Promise<Author | null> {
+  return sanityFetch<Author | null>({
+    query: authorBySlugQuery,
+    params: { slug },
+    tags: ['authors', `author:${slug}`],
+    preview,
+  })
+}
+
+// ==== SITE SETTINGS ====
 
 /**
  * Busca configurações do site

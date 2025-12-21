@@ -2,7 +2,10 @@ import type { PortableTextBlock } from '@portabletext/types'
 
 /**
  * Tipos para documentos do Sanity
+ * Atualizados para suportar SEO, compliance médico e Local SEO
  */
+
+// ===== TIPOS BASE =====
 
 // Tipo base para imagens do Sanity
 export interface SanityImage {
@@ -13,6 +16,13 @@ export interface SanityImage {
   }
   alt?: string
   caption?: string
+  credit?: string
+  hotspot?: {
+    x: number
+    y: number
+    height: number
+    width: number
+  }
 }
 
 // Tipo para slugs
@@ -21,38 +31,143 @@ export interface SanitySlug {
   current: string
 }
 
-// Tipo para SEO
+// ===== TIPOS SEO =====
+
+// Campos SEO reutilizáveis
 export interface SeoFields {
   title?: string
   description?: string
+  seoTitle?: string
+  seoDescription?: string
+  ogImage?: SanityImage
+  canonicalUrl?: string
+  noindex?: boolean
+  focusKeyword?: string
 }
 
-// Author
+// ===== TIPOS COMPLIANCE MÉDICO =====
+
+export type DisclaimerType = 'standard' | 'educational' | 'consultation' | 'none'
+
+export interface MedicalCompliance {
+  reviewedByMedical?: boolean
+  medicalReviewer?: Author
+  medicalReviewDate?: string
+  disclaimerType?: DisclaimerType
+  customDisclaimer?: string
+}
+
+// ===== TIPOS FAQ =====
+
+export interface FaqItem {
+  _key: string
+  question: string
+  answer: PortableTextBlock[]
+}
+
+// ===== AUTHOR =====
+
+export interface AuthorCredentials {
+  crm?: string
+  specialty?: string
+  rqe?: string
+}
+
+export interface SocialLink {
+  _key: string
+  platform: 'instagram' | 'linkedin' | 'twitter' | 'facebook' | 'youtube' | 'website'
+  url: string
+}
+
 export interface Author {
   _id: string
   _type: 'author'
   name: string
   slug: SanitySlug
+  role?: string
   photo?: SanityImage
   bio?: PortableTextBlock[]
+  credentials?: AuthorCredentials
+  socialLinks?: SocialLink[]
+  email?: string
+  isMedicalProfessional?: boolean
 }
 
-// Category
+// Author resumido para referências
+export interface AuthorReference {
+  _id: string
+  name: string
+  slug: SanitySlug
+  photo?: SanityImage
+  role?: string
+  credentials?: AuthorCredentials
+  isMedicalProfessional?: boolean
+}
+
+// ===== CATEGORY =====
+
 export interface Category {
   _id: string
   _type: 'category'
   title: string
   slug: SanitySlug
   description?: string
+  icon?: string
+  color?: string
+  image?: SanityImage
+  parent?: Category
+  order?: number
+  seo?: {
+    seoTitle?: string
+    seoDescription?: string
+  }
 }
 
-// Tag (inline em posts/videos)
+// Category resumida para referências
+export interface CategoryReference {
+  _id: string
+  title: string
+  slug: SanitySlug
+  icon?: string
+  color?: string
+}
+
+// ===== TAG =====
+
 export interface Tag {
-  _key: string
-  value: string
+  _id: string
+  _type: 'tag'
+  title: string
+  slug: SanitySlug
+  description?: string
+  color?: string
 }
 
-// Post
+// Tag resumida para referências
+export interface TagReference {
+  _id: string
+  title: string
+  slug: SanitySlug
+  color?: string
+}
+
+// ===== POST =====
+
+export type PostType = 'standard' | 'pillar' | 'news' | 'listicle' | 'faq'
+
+export interface ReadingTime {
+  minutes?: number
+  autoCalculate?: boolean
+}
+
+export interface Reference {
+  _key: string
+  title?: string
+  url?: string
+  source?: string
+  year?: number
+}
+
 export interface Post {
   _id: string
   _type: 'post'
@@ -63,12 +178,21 @@ export interface Post {
   excerpt?: string
   coverImage?: SanityImage
   body?: PortableTextBlock[]
-  author?: Author
-  categories?: Category[]
-  tags?: string[]
-  publishedAt?: string
+  readingTime?: ReadingTime
+  faq?: FaqItem[]
   seo?: SeoFields
   canonicalUrl?: string
+  author?: AuthorReference
+  categories?: CategoryReference[]
+  tags?: TagReference[]
+  publishedAt?: string
+  updatedAt?: string
+  postType?: PostType
+  featured?: boolean
+  medicalCompliance?: MedicalCompliance
+  relatedPosts?: PostSummary[]
+  relatedVideos?: VideoSummary[]
+  references?: Reference[]
 }
 
 // Post resumido para listagens
@@ -85,13 +209,27 @@ export interface PostSummary {
     photo?: SanityImage
   }
   categories?: {
+    _id: string
     title: string
     slug: SanitySlug
+    color?: string
   }[]
   publishedAt?: string
+  postType?: PostType
+  featured?: boolean
+  readingTime?: ReadingTime
 }
 
-// Video
+// ===== VIDEO =====
+
+export type VideoType = 'standard' | 'tutorial' | 'interview' | 'qa' | 'short' | 'live'
+
+export interface Timestamp {
+  _key: string
+  time: string
+  label: string
+}
+
 export interface Video {
   _id: string
   _type: 'video'
@@ -99,14 +237,23 @@ export interface Video {
   _updatedAt: string
   title: string
   slug: SanitySlug
-  description?: PortableTextBlock[]
   youtubeUrl: string
   duration?: string
-  transcript?: PortableTextBlock[]
   thumbnail?: SanityImage
-  publishedAt?: string
-  tags?: string[]
+  description?: PortableTextBlock[]
+  transcript?: PortableTextBlock[]
+  timestamps?: Timestamp[]
   seo?: SeoFields
+  author?: AuthorReference
+  categories?: CategoryReference[]
+  tags?: TagReference[]
+  publishedAt?: string
+  updatedAt?: string
+  videoType?: VideoType
+  featured?: boolean
+  medicalCompliance?: MedicalCompliance
+  relatedPosts?: PostSummary[]
+  relatedVideos?: VideoSummary[]
 }
 
 // Video resumido para listagens
@@ -119,22 +266,143 @@ export interface VideoSummary {
   duration?: string
   thumbnail?: SanityImage
   publishedAt?: string
+  videoType?: VideoType
+  featured?: boolean
+  author?: {
+    name: string
+    slug: SanitySlug
+  }
 }
 
-// Site Settings
+// ===== SITE SETTINGS =====
+
+export interface Address {
+  street?: string
+  number?: string
+  complement?: string
+  neighborhood?: string
+  city: string
+  state: string
+  postalCode?: string
+  country?: string
+}
+
+export interface GeoCoordinates {
+  latitude?: number
+  longitude?: number
+}
+
+export interface ClinicInfo {
+  name: string
+  cnpj?: string
+  legalName?: string
+  address?: Address
+  geo?: GeoCoordinates
+  googleMapsUrl?: string
+  googlePlaceId?: string
+}
+
+export interface MedicalDirector {
+  name?: string
+  crm: string
+  specialty?: string
+  rqe?: string
+}
+
+export interface BusinessHours {
+  _key: string
+  days: string
+  openTime?: string
+  closeTime?: string
+}
+
+export interface WhatsAppContact {
+  number?: string
+  url?: string
+  defaultMessage?: string
+}
+
+export interface ContactInfo {
+  email?: string
+  phone?: string
+  whatsapp?: WhatsAppContact
+  appointmentUrl?: string
+}
+
+export interface SocialLinks {
+  instagram?: string
+  facebook?: string
+  youtube?: string
+  linkedin?: string
+  twitter?: string
+  tiktok?: string
+}
+
+export interface DefaultSeo {
+  titleTemplate?: string
+  defaultTitle?: string
+  defaultDescription?: string
+  defaultOgImage?: SanityImage
+  keywords?: string[]
+}
+
+export interface LocalSeo {
+  primaryCity?: string
+  primaryRegion?: string
+  serviceArea?: string[]
+  businessType?: 'MedicalClinic' | 'Physician' | 'Hospital' | 'HealthAndBeautyBusiness'
+}
+
+export interface MedicalDisclaimers {
+  standardDisclaimer?: string
+  educationalDisclaimer?: string
+  consultationDisclaimer?: string
+  showDisclaimerOnAllPosts?: boolean
+}
+
 export interface SiteSettings {
   _id: string
   _type: 'siteSettings'
   siteTitle?: string
   siteDescription?: string
-  defaultSeo?: SeoFields
-  socialLinks?: {
-    facebook?: string
-    instagram?: string
-    twitter?: string
-    youtube?: string
-    linkedin?: string
-  }
   logo?: SanityImage
   favicon?: SanityImage
+  clinic?: ClinicInfo
+  medicalDirector?: MedicalDirector
+  businessHours?: BusinessHours[]
+  contact?: ContactInfo
+  socialLinks?: SocialLinks
+  defaultSeo?: DefaultSeo
+  localSeo?: LocalSeo
+  medicalDisclaimers?: MedicalDisclaimers
+  privacyPolicyUrl?: string
+  termsOfUseUrl?: string
+}
+
+// ===== HELPERS =====
+
+// Helper para extrair YouTube Video ID
+export function getYouTubeVideoId(url: string): string | null {
+  const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/
+  const match = url.match(regExp)
+  return match && match[7].length === 11 ? match[7] : null
+}
+
+// Helper para gerar URL de thumbnail do YouTube
+export function getYouTubeThumbnail(
+  url: string,
+  quality: 'default' | 'medium' | 'high' | 'standard' | 'maxres' = 'high'
+): string | null {
+  const videoId = getYouTubeVideoId(url)
+  if (!videoId) return null
+
+  const qualityMap = {
+    default: 'default',
+    medium: 'mqdefault',
+    high: 'hqdefault',
+    standard: 'sddefault',
+    maxres: 'maxresdefault',
+  }
+
+  return `https://img.youtube.com/vi/${videoId}/${qualityMap[quality]}.jpg`
 }
