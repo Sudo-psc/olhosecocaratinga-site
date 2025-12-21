@@ -22,6 +22,7 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+.env.*.local
 
 # Vercel
 .vercel
@@ -44,5 +45,71 @@ next-env.d.ts
 coverage
 .nyc_output
 
+# Logs
+*.log
+logs/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Cache
+.cache
+.parcel-cache
+.eslintcache
+.stylelintcache
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# Optional npm cache directory
+.npm
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+.env.test
+
+# Secrets and keys
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+credentials/
+
+# Backup files
+*.bak
+*.backup
+*.tmp
+
+# Docker
+.dockerignore
+
+# API keys and sensitive data
+config/production.json
+config/secrets.json
+api-keys.txt
+tokens.json
+
+# Sanity
+.sanity/
+
 # Misc
 *.log
+  +++++++ REPLACE
