@@ -6,6 +6,9 @@ Site oficial da Olho Seco Caratinga - Clínica oftalmológica especializada no d
 
 A Olho Seco Caratinga é uma clínica especializada que oferece tratamento avançado para pacientes com olho seco, síndrome dos olhos secos e outras condições oculares relacionadas. Nossa equipe de oftalmologistas especializados está comprometida em proporcionar o melhor cuidado e qualidade de vida aos nossos pacientes.
 
+Este projeto é desenvolvido sob a coordenação do **Dr. Philipe Saraiva Cruz**, oftalmologista especialista, e faz parte do ecossistema da **Saraiva Vision**, referência em cuidado oftalmológico.
+  +++++++ REPLACE
+
 ## 🌐 Tecnologias Utilizadas
 
 Este site foi desenvolvido com tecnologias modernas e performáticas:
@@ -110,11 +113,48 @@ O conteúdo do site é gerenciado através do [Sanity CMS](https://www.sanity.io
 
 ## 🚀 Deploy
 
-### Deploy Automático (Vercel)
+### Deploy Automático (Vercel) - Recomendado
 
 1. Conecte seu repositório GitHub à Vercel
-2. Configure as variáveis de ambiente
-3. Deploy automático será feito a cada push para a branch principal
+2. Configure as variáveis de ambiente (veja `.env.local.example`)
+3. Configure o domínio personalizado `olhosecocaratinga.com.br`
+4. Deploy automático será feito a cada push para a branch principal
+
+### Configuração do Domínio `olhosecocaratinga.com.br`
+
+#### Na Vercel:
+
+1. Acesse **Settings > Domains** no projeto Vercel
+2. Adicione o domínio `olhosecocaratinga.com.br`
+3. Adicione também `www.olhosecocaratinga.com.br`
+4. Configure o redirecionamento de `www` para o domínio raiz
+
+#### No Registro.br ou provedor DNS:
+
+Configure os seguintes registros DNS:
+
+```
+# Para o domínio raiz (olhosecocaratinga.com.br)
+Tipo: A
+Nome: @
+Valor: 76.76.21.21
+
+# Para www (www.olhosecocaratinga.com.br)
+Tipo: CNAME
+Nome: www
+Valor: cname.vercel-dns.com
+```
+
+> **Nota**: Os valores de IP podem mudar. Verifique sempre nas configurações da Vercel.
+
+#### Variáveis de Ambiente em Produção:
+
+```env
+NEXT_PUBLIC_SITE_URL=https://olhosecocaratinga.com.br
+NEXT_PUBLIC_SITE_DOMAIN=olhosecocaratinga.com.br
+NEXT_PUBLIC_SANITY_PROJECT_ID=seu-project-id
+NEXT_PUBLIC_SANITY_DATASET=production
+```
 
 ### Deploy Manual
 
@@ -124,6 +164,16 @@ npm run build
 
 # Inicie servidor de produção
 npm start
+```
+
+### Deploy com Docker
+
+```bash
+# Build da imagem
+docker build -t olhosecocaratinga .
+
+# Rodar container
+docker run -p 3000:3000 --env-file .env.local olhosecocaratinga
 ```
 
 ## 🤝 Contribuindo
@@ -144,12 +194,20 @@ Este projeto está licenciado sob a MIT License. Veja o arquivo [LICENSE](LICENS
 
 - **Clínica Olho Seco Caratinga**
 - Website: [www.olhosecocaratinga.com.br](https://www.olhosecocaratinga.com.br)
+- **Saraiva Vision**
+- Website: [www.saraivavision.com.br](https://www.saraivavision.com.br)
 - GitHub Issues: [Reporte um problema](https://github.com/Sudo-psc/olhosecocaratinga-site/issues)
+  +++++++ REPLACE
 
 ## 👨‍⚕️ Equipe
 
-Este projeto foi desenvolvido para a equipe da Olho Seco Caratinga, visando proporcionar a melhor experiência digital para nossos pacientes.
+**Autoria e Desenvolvimento:**
+- **Dr. Philipe Saraiva Cruz** - Coordenador do projeto e oftalmologista especialista
+- **Saraiva Vision** - Clínica oftalmológica referência em cuidado ocular
+
+Este projeto foi desenvolvido sob a coordenação do Dr. Philipe Saraiva Cruz como parte do ecossistema da Saraiva Vision, visando proporcionar a melhor experiência digital para nossos pacientes da Olho Seco Caratinga.
 
 ---
 
-**Nota**: Este é um projeto comercial desenvolvido para fins específicos da clínica. Para dúvidas técnicas, utilize os issues do GitHub.
+**Nota**: Este é um projeto comercial desenvolvido pela equipe do Dr. Philipe Saraiva Cruz e Saraiva Vision. Para dúvidas técnicas, utilize os issues do GitHub.
+  +++++++ REPLACE
