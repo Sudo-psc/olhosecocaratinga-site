@@ -1,0 +1,410 @@
+---
+import Header from '../components/Header.astro';
+export interface Props {
+    title: string;
+    description?: string;
+    image?: string;
+    type?: string;
+    canonical?: string;
+}
+
+const { title, description, image, type = "website", canonical } = Astro.props;
+
+const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).href;
+
+// Meta tags básicas
+const meta = {
+    title,
+    description: description || "Clínica Oftalmológica em Caratinga - Tratamento especializado para olho seco e outras condições oculares",
+    image: image || "/og-image.jpg",
+    url: canonicalUrl,
+    type,
+    siteName: "Olho Seco Caratinga",
+    locale: "pt_BR"
+};
+
+// Structured Data para a clínica
+const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "LocalBusiness",
+            "@id": "https://olhosecocaratinga.com/#clinic",
+            name: "Clínica Oftalmológica Caratinga",
+            description: "Clínica especializada em tratamento de olho seco e doenças oculares em Caratinga, MG",
+            url: "https://olhosecocaratinga.com",
+            telephone: "(33) 98765-4321",
+            email: "contato@olhosecocaratinga.com",
+            address: {
+                "@type": "PostalAddress",
+                streetAddress: "Rua Principal, 123",
+                addressLocality: "Caratinga",
+                addressRegion: "MG",
+                postalCode: "35300-000",
+                addressCountry: "BR"
+            },
+            openingHours: [
+                "Mo-Fr 08:00-18:00",
+                "Sa 08:00-12:00"
+            ],
+            priceRange: "$$",
+            paymentAccepted: ["Cash", "Credit Card", "Debit Card"],
+            currenciesAccepted: "BRL",
+            image: meta.image,
+            geo: {
+                "@type": "GeoCoordinates",
+                latitude: "-19.7925",
+                longitude: "-42.1447"
+            }
+        },
+        {
+            "@type": "Physician",
+            "@id": "https://olhosecocaratinga.com/#doctor",
+            name: "Dr. João Silva",
+            jobTitle: "Oftalmologista",
+            specializesIn: "Oftalmologia",
+            description: "Médico oftalmologista especialista em tratamento de olho seco",
+            worksFor: {
+                "@type": "Organization",
+                name: "Clínica Oftalmológica Caratinga"
+            },
+            medicalSpecialty: "Oftalmologia",
+            knowsAbout: ["Olho Seco", "Doenças Oculares", "Cirurgia Ocular"],
+            url: "https://olhosecocaratinga.com"
+        },
+        {
+            "@type": "WebPage",
+            "@id": canonicalUrl,
+            url: canonicalUrl,
+            name: title,
+            description: meta.description,
+            isPartOf: {
+                "@type": "WebSite",
+                "@id": "https://olhosecocaratinga.com/#website"
+            },
+            about: {
+                "@type": "Thing",
+                name: "Olho Seco"
+            },
+            mainEntity: {
+                "@type": "MedicalCondition",
+                name: "Olho Seco",
+                alternateName: "Síndrome do Olho Seco",
+                description: "Condição ocular caracterizada por falta de lubrificação adequada na superfície do olho"
+            }
+        },
+        {
+            "@type": "WebSite",
+            "@id": "https://olhosecocaratinga.com/#website",
+            url: "https://olhosecocaratinga.com",
+            name: "Olho Seco Caratinga",
+            description: "Clínica oftalmológica especializada em tratamento de olho seco em Caratinga, MG",
+            publisher: {
+                "@type": "Organization",
+                name: "Clínica Oftalmológica Caratinga"
+            },
+            inLanguage: "pt-BR",
+            potentialAction: {
+                "@type": "SearchAction",
+                target: {
+                    "@type": "EntryPoint",
+                    urlTemplate: "https://olhosecocaratinga.com/search?q={search_term_string}"
+                },
+                "query-input": "required name=search_term_string"
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": canonicalUrl + "#breadcrumb",
+            itemListElement: [
+                {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Início",
+                    item: "https://olhosecocaratinga.com"
+                },
+                {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: title,
+                    item: canonicalUrl
+                }
+            ]
+        }
+    ]
+};
+---
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={meta.description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={meta.type} />
+    <meta property="og:url" content={meta.url} />
+    <meta property="og:title" content={meta.title} />
+    <meta property="og:description" content={meta.description} />
+    <meta property="og:image" content={meta.image} />
+    <meta property="og:site_name" content={meta.siteName} />
+    <meta property="og:locale" content={meta.locale} />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={meta.url} />
+    <meta property="twitter:title" content={meta.title} />
+    <meta property="twitter:description" content={meta.description} />
+    <meta property="twitter:image" content={meta.image} />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalUrl} />
+    
+    <!-- DNS Prefetch -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+    
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    
+    <!-- Title -->
+    <title>{meta.title}</title>
+    
+    <!-- Styles -->
+    <style is:global>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --background: #ffffff;
+            --background-secondary: #f9fafb;
+            --border-color: #e5e7eb;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--background);
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mb-8 { margin-bottom: 2rem; }
+        
+        .mt-2 { margin-top: 0.5rem; }
+        .mt-4 { margin-top: 1rem; }
+        .mt-6 { margin-top: 1.5rem; }
+        .mt-8 { margin-top: 2rem; }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 16px;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <Header />
+    <main class="pt-20"> <!-- Added padding-top to account for fixed header -->
+        <slot />
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Clínica -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Clínica Oftalmológica</h3>
+                    <p class="text-gray-300 mb-4">
+                        Especializada em tratamento de olho seco e doenças oculares em Caratinga, MG.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-white">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Links Rápidos -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Links Rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/" class="text-gray-300 hover:text-white">Início</a></li>
+                        <li><a href="/olho-seco" class="text-gray-300 hover:text-white">Olho Seco</a></li>
+                        <li><a href="/tratamentos" class="text-gray-300 hover:text-white">Tratamentos</a></li>
+                        <li><a href="/blog" class="text-gray-300 hover:text-white">Blog</a></li>
+                        <li><a href="/faq" class="text-gray-300 hover:text-white">FAQ</a></li>
+                        <li><a href="/contato" class="text-gray-300 hover:text-white">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contato -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contato</h3>
+                    <div class="space-y-2 text-gray-300">
+                        <p>
+                            <strong>Endereço:</strong><br>
+                            Rua Principal, 123<br>
+                            Caratinga - MG<br>
+                            CEP: 35300-000
+                        </p>
+                        <p>
+                            <strong>Telefone:</strong><br>
+                            (33) 98765-4321
+                        </p>
+                        <p>
+                            <strong>E-mail:</strong><br>
+                            contato@olhosecocaratinga.com
+                        </p>
+                        <p>
+                            <strong>Horário:</strong><br>
+                            Seg-Sex: 8h-18h<br>
+                            Sábado: 8h-12h
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Clínica Oftalmológica Caratinga. Todos os direitos reservados.</p>
+                <p class="mt-2">
+                    <small>CRM-MG 69.870 | Responsável Técnico: Dr. João Silva</small>
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

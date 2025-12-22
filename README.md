@@ -4,114 +4,70 @@ Site informativo especializado em tratamento de olho seco em Caratinga/MG, desen
 
 ## 🎯 Visão Geral
 
-Site Next.js 15 com Sanity CMS integrado, focado em SEO local, educação médica e autoridade (E-E-A-T) para pacientes com síndrome do olho seco.
+Este projeto foi refatorado para utilizar **Astro** como framework frontend de alta performance e **WordPress Headless** como sistema de gerenciamento de conteúdo (CMS). O objetivo é garantir velocidade extrema (Core Web Vitals), excelente SEO e facilidade de edição de conteúdo.
 
 ## 🚀 Tecnologias
 
-- **Framework**: Next.js 15.1.3 (App Router)
-- **React**: 19.0.0
-- **CMS**: Sanity 3.72.1
-- **Styling**: Tailwind CSS 3.4.17
-- **Language**: TypeScript 5.7.2
-- **Package Manager**: pnpm 9.15.2
-- **Testing**: Jest + React Testing Library + Playwright
+- **Framework**: [Astro](https://astro.build) (v4)
+- **CMS**: WordPress (Headless via REST API)
+- **Styling**: Tailwind CSS
+- **Deploy**: Cloudflare Pages / Vercel / Netlify (Suporte a SSR/Hybrid)
 
 ## 📋 Pré-requisitos
 
-- Node.js 20.x ou superior
-- pnpm 9.x (recomendado) ou npm/yarn
-- Conta Sanity.io (para CMS)
+- Node.js 18.x ou superior
+- Instância WordPress (pode ser local, hospedada ou WordPress.com)
 
 ## 🛠️ Instalação
 
 ### 1. Clonar o Repositório
 
-\`\`\`bash
+```bash
 git clone <repository-url>
 cd olhosecocaratinga.com
-\`\`\`
+```
 
 ### 2. Instalar Dependências
 
-\`\`\`bash
-pnpm install
-\`\`\`
+```bash
+npm install
+```
 
 ### 3. Configurar Variáveis de Ambiente
 
-Copie o arquivo de exemplo e preencha as variáveis:
+Copie o arquivo de exemplo:
 
-\`\`\`bash
-cp .env.example .env.local
-\`\`\`
+```bash
+cp .env.example .env
+```
 
-Edite \`.env.local\` com suas credenciais Sanity.
+Edite o arquivo `.env` e defina a URL da sua API WordPress:
+
+```env
+WORDPRESS_API_URL=https://seu-wordpress.com/wp-json/wp/v2
+```
 
 ### 4. Iniciar Servidor de Desenvolvimento
 
-\`\`\`bash
-pnpm dev
-\`\`\`
+```bash
+npm run dev
+```
 
-Abra [http://localhost:3000](http://localhost:3000) no navegador.
+Abra [http://localhost:4321](http://localhost:4321) no navegador.
 
-## 📝 Scripts Disponíveis
+## 🏗️ Estrutura do Projeto
 
-### Desenvolvimento
+- `src/pages`: Rotas do site (Início, Blog, Postagem única).
+- `src/components`: Componentes reutilizáveis (Header, Cards).
+- `src/layouts`: Layout principal (HTML structure, SEO tags).
+- `src/lib/wordpress.ts`: Cliente de conexão com a API do WordPress.
 
-\`\`\`bash
-pnpm dev          # Inicia servidor de desenvolvimento
-pnpm build        # Cria build de produção
-pnpm start        # Inicia servidor de produção
-\`\`\`
+## 📝 Scripts
 
-### Qualidade de Código
-
-\`\`\`bash
-pnpm lint         # Verifica problemas ESLint
-pnpm lint:fix     # Corrige problemas ESLint automaticamente
-pnpm format       # Formata código com Prettier
-pnpm format:check # Verifica formatação
-\`\`\`
-
-### Testes
-
-\`\`\`bash
-pnpm test              # Executa testes unitários
-pnpm test:watch        # Modo watch (desenvolvimento)
-pnpm test:coverage     # Testes com relatório de cobertura
-pnpm test:e2e          # Testes E2E com Playwright
-pnpm test:e2e:ui       # Testes E2E em modo UI
-pnpm test:all          # Todos os testes (unit + E2E)
-\`\`\`
-
-### Sanity CMS
-
-\`\`\`bash
-pnpm seed:posts        # Importa conteúdo inicial (6 artigos sobre olho seco)
-\`\`\`
-
-## 🧪 Testes
-
-Consulte [TESTING.md](./TESTING.md) para documentação completa.
-
-### Cobertura de Testes Atual
-
-- **Componentes**: PostCard, VideoCard
-- **API Routes**: Revalidation webhook
-- **E2E**: Homepage, Blog, Videos, SEO, Accessibility
-
-## 📚 Documentação Adicional
-
-- [TESTING.md](./TESTING.md) - Documentação de testes
-- [SANITY_INTEGRATION.md](./docs/SANITY_INTEGRATION.md) - Integração Sanity CMS e importação de conteúdo
-- [CLAUDE.md](./CLAUDE.md) - Guia para Claude Code
+- `npm run dev`: Inicia o servidor local.
+- `npm run build`: Gera o build de produção (SSR/Hybrid).
+- `npm run preview`: Visualiza o build localmente.
 
 ## 📄 Licença
 
-Este projeto é propriedade da **Saraiva Vision Care LTDA** (CNPJ: 53.864.119/0001-79).
-
----
-
-**Dr. Philipe Saraiva Cruz**
-CRM-MG 69.870 | Médico Oftalmologista
+Propriedade da **Saraiva Vision Care LTDA**.

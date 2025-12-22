@@ -1,0 +1,59 @@
+---
+const links = [
+  { name: "Início", href: "/" },
+  { name: "Blog", href: "/blog" },
+  { name: "Sobre", href: "/sobre" },
+  { name: "Contato", href: "/contato" },
+];
+---
+
+<header class="fixed w-full z-50 transition-all duration-300 bg-white/80 backdrop-blur-md border-b border-gray-100">
+  <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="/" class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
+      Olho Seco Caratinga
+    </a>
+
+    <nav class="hidden md:flex items-center gap-8">
+      {links.map((link) => (
+        <a 
+          href={link.href} 
+          class="text-gray-600 hover:text-blue-600 font-medium transition-colors relative group"
+        >
+          {link.name}
+          <span class="absolute inset-x-0 -bottom-1 h-0.5 bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+        </a>
+      ))}
+      <a href="/agendar" class="px-5 py-2.5 rounded-full bg-blue-600 text-white font-medium hover:bg-blue-700 transition-all transform hover:-translate-y-0.5 shadow-lg shadow-blue-200">
+        Agendar Consulta
+      </a>
+    </nav>
+
+    <!-- Mobile Menu Button (Hamburger) -->
+    <button id="mobile-menu-btn" class="md:hidden text-gray-700 focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white border-b border-gray-100 shadow-xl">
+    <div class="flex flex-col p-4 space-y-4">
+      {links.map((link) => (
+        <a href={link.href} class="text-gray-600 hover:text-blue-600 font-medium p-2 block border-b border-gray-50 bg-gray-50/50 rounded">{link.name}</a>
+      ))}
+      <a href="/agendar" class="block w-full text-center px-5 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700">
+        Agendar Consulta
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+
+  btn?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+  });
+</script>
