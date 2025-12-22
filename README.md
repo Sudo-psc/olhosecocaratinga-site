@@ -85,6 +85,12 @@ pnpm test:e2e:ui       # Testes E2E em modo UI
 pnpm test:all          # Todos os testes (unit + E2E)
 \`\`\`
 
+### Sanity CMS
+
+\`\`\`bash
+pnpm seed:posts        # Importa conteúdo inicial (6 artigos sobre olho seco)
+\`\`\`
+
 ## 🧪 Testes
 
 Consulte [TESTING.md](./TESTING.md) para documentação completa.
@@ -98,6 +104,7 @@ Consulte [TESTING.md](./TESTING.md) para documentação completa.
 ## 📚 Documentação Adicional
 
 - [TESTING.md](./TESTING.md) - Documentação de testes
+- [SANITY_INTEGRATION.md](./docs/SANITY_INTEGRATION.md) - Integração Sanity CMS e importação de conteúdo
 - [CLAUDE.md](./CLAUDE.md) - Guia para Claude Code
 
 ## 📄 Licença

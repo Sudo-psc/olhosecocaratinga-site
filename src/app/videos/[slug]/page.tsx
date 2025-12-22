@@ -1,7 +1,9 @@
 import { StructuredData } from '@/components/StructuredData'
 import { generateVideoObjectSchema, generateLocalBusinessSchema, generateBreadcrumbSchema, MEDICAL_DISCLAIMER } from '@/lib/structured-data'
 import Link from 'next/link'
-import Image from 'next/image'
+import { notFound } from 'next/navigation'
+import { localVideos } from '@/lib/local-videos'
+import { ArrowLeft } from 'lucide-react'
 
 interface VideoPageProps {
     params: Promise<{
@@ -11,25 +13,22 @@ interface VideoPageProps {
 
 export default async function VideoPage({ params }: VideoPageProps) {
     const { slug } = await params
-    // Dados mock do vídeo (em produção viria do Sanity)
-    const videoData = {
-        title: 'Como Aplicar Lágrimas Artificiais Corretamente',
-        description: 'Aprenda a técnica correta para aplicação de lágrimas artificiais e maximize o alívio dos sintomas de olho seco. Vídeo educativo com dicas práticas do Dr. Philipe Saraiva Cruz.',
-        thumbnailUrl: 'https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg',
-        uploadDate: '2024-01-15T10:00:00Z',
-        duration: 'PT5M30S',
-        contentUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-        youtubeId: 'dQw4w9WgXcQ'
+    const video = localVideos.find((v) => v.slug === slug)
+
+    if (!video) {
+        notFound()
     }
+
+    const videoUrl = `/videos/${video.fileName}`
 
     // Schema para vídeo
     const videoSchema = generateVideoObjectSchema(
-        videoData.title,
-        videoData.description,
-        videoData.thumbnailUrl,
-        videoData.uploadDate,
-        videoData.duration,
-        videoData.contentUrl
+        video.title,
+        video.description,
+        '', // Thumbnail URL (optional or placeholder)
+        video.uploadDate,
+        video.duration,
+        `https://olhosecocaratinga.com.br${videoUrl}`
     )
 
     // Schema para informações do negócio
@@ -39,7 +38,7 @@ export default async function VideoPage({ params }: VideoPageProps) {
     const breadcrumbSchema = generateBreadcrumbSchema([
         { name: 'Início', url: '/' },
         { name: 'Vídeos', url: '/videos' },
-        { name: videoData.title, url: `/videos/${slug}` }
+        { name: video.title, url: `/videos/${slug}` }
     ])
 
     return (
@@ -49,230 +48,80 @@ export default async function VideoPage({ params }: VideoPageProps) {
             <StructuredData data={localBusinessSchema} />
             <StructuredData data={breadcrumbSchema} />
 
-            <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-                {/* Hero Section */}
-                <section className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-                    <div className="container mx-auto px-4 py-16">
-                        <div className="max-w-4xl mx-auto">
-                            <div className="grid md:grid-cols-2 gap-8 items-center">
-                                <div>
-                                    <h1 className="text-3xl md:text-4xl font-bold mb-4">
-                                        {videoData.title}
-                                    </h1>
-                                    <p className="text-lg text-blue-100 mb-6">
-                                        Vídeo educativo sobre cuidados com olho seco
-                                    </p>
-                                    <div className="flex flex-col sm:flex-row gap-4">
-                                        <a
-                                            href="https://saraivavision.com.br/agendamento"
-                                            className="px-6 py-3 bg-white text-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
-                                        >
-                                            Agendar Consulta
-                                        </a>
-                                        <Link
-                                            href="/videos"
-                                            className="px-6 py-3 border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors"
-                                        >
-                                            Mais Vídeos
-                                        </Link>
-                                    </div>
-                                </div>
-                                <div className="relative">
-                                    <Image
-                                        src={videoData.thumbnailUrl}
-                                        alt={videoData.title}
-                                        width={640}
-                                        height={360}
-                                        className="rounded-lg shadow-2xl w-full"
-                                        unoptimized
-                                    />
-                                </div>
-                            </div>
-                        </div>
+            <div className="min-h-screen bg-slate-50">
+                {/* Header / Breadcrumb */}
+                <div className="bg-white border-b border-slate-200">
+                    <div className="container mx-auto px-4 py-4">
+                        <Link href="/videos" className="inline-flex items-center text-sm text-slate-600 hover:text-primary-600 transition-colors">
+                            <ArrowLeft className="h-4 w-4 mr-1" />
+                            Voltar para Vídeos
+                        </Link>
                     </div>
-                </section>
+                </div>
 
-                {/* Video Player */}
-                <main className="container mx-auto px-4 py-16">
+                <main className="container mx-auto px-4 py-8">
                     <div className="max-w-4xl mx-auto">
-                        {/* Video Embed */}
-                        <section className="mb-12">
-                            <div className="relative rounded-lg overflow-hidden shadow-xl">
-                                <iframe
-                                    src={`https://www.youtube.com/embed/${videoData.youtubeId}`}
-                                    title={videoData.title}
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowFullScreen
-                                    className="w-full aspect-video"
-                                />
+                        {/* Video Player */}
+                        <section className="mb-8">
+                            <div className="relative rounded-2xl overflow-hidden shadow-xl bg-black aspect-video">
+                                <video
+                                    controls
+                                    className="w-full h-full"
+                                    src={videoUrl}
+                                    poster="/images/video-placeholder.jpg" // You might want to add a generic poster
+                                >
+                                    Seu navegador não suporta a reprodução de vídeos.
+                                </video>
                             </div>
                         </section>
 
                         {/* Video Information */}
-                        <section className="mb-12">
-                            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
-                                <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                                    Sobre este Vídeo
-                                </h2>
-                                <p className="text-gray-700 leading-relaxed mb-6">
-                                    {videoData.description}
-                                </p>
+                        <section className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 mb-8">
+                            <h1 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
+                                {video.title}
+                            </h1>
 
-                                <div className="grid md:grid-cols-2 gap-6">
-                                    <div>
-                                        <h3 className="font-semibold text-gray-900 mb-2">
-                                            Duração
-                                        </h3>
-                                        <p className="text-gray-600">
-                                            {videoData.duration.replace('PT', '').replace('M', 'min ').replace('S', 's')}
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <h3 className="font-semibold text-gray-900 mb-2">
-                                            Publicado em
-                                        </h3>
-                                        <p className="text-gray-600">
-                                            {new Date(videoData.uploadDate).toLocaleDateString('pt-BR')}
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="mt-6 pt-6 border-t border-gray-200">
-                                    <h3 className="font-semibold text-gray-900 mb-3">
-                                        Tópicos Abordados
-                                    </h3>
-                                    <div className="grid md:grid-cols-2 gap-3">
-                                        {[
-                                            'Técnica correta de aplicação',
-                                            'Tipos de lágrimas artificiais',
-                                            'Frequência ideal de uso',
-                                            'Armazenamento do produto',
-                                            'Dicas para maximizar efeito',
-                                            'Cuidados com higiene',
-                                            'Quando procurar especialista'
-                                        ].map((topico, index) => (
-                                            <div key={index} className="flex items-center space-x-2">
-                                                <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
-                                                <span className="text-gray-700">{topico}</span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
+                            <div className="flex items-center gap-4 text-sm text-slate-500 mb-6 pb-6 border-b border-slate-100">
+                                <time dateTime={video.uploadDate}>
+                                    {new Date(video.uploadDate).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })}
+                                </time>
+                                <span>•</span>
+                                <span>{video.duration.replace('PT', '').replace('M', ' min')}</span>
                             </div>
-                        </section>
 
-                        {/* Related Videos */}
-                        <section className="mb-12">
-                            <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                                Vídeos Relacionados
-                            </h2>
-                            <div className="grid md:grid-cols-3 gap-6">
-                                {[
-                                    {
-                                        title: 'Causas do Olho Seco',
-                                        thumbnail: 'https://img.youtube.com/vi/example1/maxresdefault.jpg',
-                                        slug: 'causas-olho-seco'
-                                    },
-                                    {
-                                        title: 'Tratamentos Avançados',
-                                        thumbnail: 'https://img.youtube.com/vi/example2/maxresdefault.jpg',
-                                        slug: 'tratamentos-avancados'
-                                    },
-                                    {
-                                        title: 'Prevenção Diária',
-                                        thumbnail: 'https://img.youtube.com/vi/example3/maxresdefault.jpg',
-                                        slug: 'prevencao-diaria'
-                                    }
-                                ].map((video, index) => (
-                                    <Link
-                                        key={index}
-                                        href={`/videos/${video.slug}`}
-                                        className="group block bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow"
-                                    >
-                                        <div className="aspect-video bg-gray-200 relative">
-                                            <Image
-                                                src={video.thumbnail}
-                                                alt={video.title}
-                                                fill
-                                                className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                                unoptimized
-                                            />
-                                        </div>
-                                        <div className="p-4">
-                                            <h3 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
-                                                {video.title}
-                                            </h3>
-                                        </div>
-                                    </Link>
-                                ))}
+                            <div className="prose prose-slate max-w-none">
+                                <p className="text-lg text-slate-700 leading-relaxed">
+                                    {video.description}
+                                </p>
                             </div>
                         </section>
 
                         {/* CTA Section */}
-                        <section className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-8 text-white text-center">
-                            <h2 className="text-3xl font-bold mb-4">
-                                Precisa de avaliação especializada?
+                        <section className="bg-primary-600 rounded-2xl p-8 text-white text-center shadow-lg shadow-primary-900/20">
+                            <h2 className="text-2xl font-bold mb-4">
+                                Gostou do conteúdo?
                             </h2>
-                            <p className="text-xl mb-6 text-blue-100">
-                                Agende uma consulta com o Dr. Philipe Saraiva Cruz para diagnóstico completo
+                            <p className="text-primary-100 mb-8 max-w-2xl mx-auto">
+                                Se você se identificou com os sintomas ou quer saber mais sobre o tratamento, agende uma avaliação especializada.
                             </p>
                             <a
                                 href="https://saraivavision.com.br/agendamento"
-                                className="inline-block px-8 py-4 bg-white text-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition-colors text-lg"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex h-12 items-center justify-center rounded-lg bg-white px-8 font-bold text-primary-700 transition-all hover:bg-slate-50 hover:scale-105"
                             >
-                                Agendar Consulta
+                                Agendar Avaliação
                             </a>
                         </section>
 
                         {/* Disclaimer */}
-                        <section className="mt-12 p-6 bg-amber-50 border-l-4 border-amber-400 rounded-r-lg">
-                            <p className="text-amber-800 font-medium">
-                                {MEDICAL_DISCLAIMER}
+                        <section className="mt-8 p-6 bg-amber-50 border border-amber-100 rounded-xl">
+                            <p className="text-sm text-amber-800">
+                                <strong>Aviso Legal:</strong> {MEDICAL_DISCLAIMER}
                             </p>
                         </section>
                     </div>
                 </main>
-
-                {/* Contact Information */}
-                <section className="bg-gray-900 text-white py-12">
-                    <div className="container mx-auto px-4">
-                        <div className="max-w-4xl mx-auto text-center">
-                            <h2 className="text-2xl font-bold mb-6">
-                                Saraiva Vision Care LTDA
-                            </h2>
-                            <div className="grid md:grid-cols-3 gap-8">
-                                <div>
-                                    <h3 className="font-semibold mb-2">Endereço</h3>
-                                    <p className="text-gray-300">
-                                        Rua Catarina Maria Passos, 97<br />
-                                        Santa Zita, Caratinga - MG<br />
-                                        CEP: 35300-000
-                                    </p>
-                                </div>
-                                <div>
-                                    <h3 className="font-semibold mb-2">Contato</h3>
-                                    <p className="text-gray-300">
-                                        Telefone: +55 33 99860-1427<br />
-                                        Website: saraivavision.com.br
-                                    </p>
-                                </div>
-                                <div>
-                                    <h3 className="font-semibold mb-2">Horários</h3>
-                                    <p className="text-gray-300">
-                                        Segunda a Sexta: 08:00 - 18:00<br />
-                                        Sábado: 08:00 - 12:00<br />
-                                        Domingo: Fechado
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="mt-8 pt-8 border-t border-gray-700">
-                                <p className="text-sm text-gray-400">
-                                    Responsável Técnico: Dr. Philipe Saraiva Cruz - CRM-MG 69.870
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
             </div>
         </>
     )

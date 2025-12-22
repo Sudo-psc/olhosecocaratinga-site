@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+import { cyan, blue } from 'tailwindcss/colors'
 
 const config: Config = {
     content: [
@@ -9,17 +10,11 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                primary: {
-                    DEFAULT: '#0891b2', // cyan-600
-                    hover: '#0e7490',   // cyan-700
-                },
-                secondary: {
-                    DEFAULT: '#0e7490', // cyan-700
-                    border: '#06b6d4',  // cyan-500
-                },
+                primary: cyan,
+                secondary: blue,
                 slate: {
-                    850: '#1d283a', // Custom dark slate
-                }
+                    850: '#1d283a',
+                },
             },
             fontFamily: {
                 sans: ['var(--font-inter)', 'sans-serif'],
