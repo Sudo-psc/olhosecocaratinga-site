@@ -8,7 +8,7 @@ export const SITE_CONFIG = {
     url: 'https://olhosecocaratinga.com.br',
     locale: 'pt_BR',
     language: 'pt-BR',
-    
+
     // Business Info
     business: {
         name: 'Saraiva Vision Care LTDA',
@@ -34,7 +34,7 @@ export const SITE_CONFIG = {
             lng: -42.1347,
         },
     },
-    
+
     // Doctor Info
     doctor: {
         name: 'Dr. Philipe Saraiva Cruz',
@@ -42,7 +42,7 @@ export const SITE_CONFIG = {
         crm: 'CRM-MG 69.870',
         specialties: ['Oftalmologia', 'Olho Seco', 'Cirurgia Ocular'],
     },
-    
+
     // Social Media
     social: {
         instagram: 'https://instagram.com/saraivavision',
@@ -50,7 +50,7 @@ export const SITE_CONFIG = {
         youtube: 'https://youtube.com/@saraivavision',
         linkedin: 'https://linkedin.com/company/saraivavision',
     },
-    
+
     // SEO Defaults
     seo: {
         titleTemplate: '%s | Olho Seco Caratinga',
@@ -58,7 +58,7 @@ export const SITE_CONFIG = {
         defaultDescription: 'Especialista em tratamento de olho seco em Caratinga/MG. Dr. Philipe Saraiva Cruz - Oftalmologista CRM-MG 69.870. Diagnóstico preciso e tratamentos modernos.',
         defaultImage: '/og-image.jpg',
     },
-    
+
     // Navigation
     navigation: [
         { name: 'Início', href: '/' },
@@ -68,7 +68,7 @@ export const SITE_CONFIG = {
         { name: 'Sobre', href: '/sobre' },
         { name: 'Contato', href: '/contato' },
     ],
-    
+
     // Footer Links
     footerLinks: {
         quick: [

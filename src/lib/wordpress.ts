@@ -94,7 +94,7 @@ export interface WordPressTag {
 }
 
 // Configuração da API WordPress
-const WORDPRESS_URL = import.meta.env.WORDPRESS_URL || 'https://olhosecocaratinga.com/wp';
+const WORDPRESS_URL = import.meta.env.WORDPRESS_API_URL || 'https://olhosecocaratinga.com/wp';
 const API_PATH = '/wp-json/wp/v2';
 
 // Função para fazer requisições à API
@@ -275,7 +275,7 @@ export function stripHtml(html: string): string {
 
 export function truncateText(text: string, maxLength: number): string {
     if (text.length <= maxLength) return text;
-    return text.substr(0, maxLength).replace(/\s+\S*$/, '') + '...';
+    return text.slice(0, maxLength).replace(/\s+\S*$/, '') + '...';
 }
 
 export function getSEOImage(post: WordPressPost): string {
