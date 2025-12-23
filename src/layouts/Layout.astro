@@ -31,17 +31,17 @@ const structuredData = {
         {
             "@type": "LocalBusiness",
             "@id": "https://olhosecocaratinga.com/#clinic",
-            name: "Clínica Oftalmológica Caratinga",
+            name: "Saraiva Vision",
             description: "Clínica especializada em tratamento de olho seco e doenças oculares em Caratinga, MG",
             url: "https://olhosecocaratinga.com",
-            telephone: "(33) 98765-4321",
-            email: "contato@olhosecocaratinga.com",
+            telephone: "(33) 99860-1427",
+            email: "contato@saraivavision.com.br",
             address: {
                 "@type": "PostalAddress",
-                streetAddress: "Rua Principal, 123",
-                addressLocality: "Caratinga",
+                streetAddress: "Rua Catarina Maria Passos, 97",
+                addressLocality: "Caratinga (Amor e Saúde - Bairro Santa Zita)",
                 addressRegion: "MG",
-                postalCode: "35300-000",
+                postalCode: "35300-299",
                 addressCountry: "BR"
             },
             openingHours: [
@@ -61,13 +61,13 @@ const structuredData = {
         {
             "@type": "Physician",
             "@id": "https://olhosecocaratinga.com/#doctor",
-            name: "Dr. João Silva",
+            name: "Dr. Philipe Saraiva Cruz",
             jobTitle: "Oftalmologista",
             specializesIn: "Oftalmologia",
             description: "Médico oftalmologista especialista em tratamento de olho seco",
             worksFor: {
                 "@type": "Organization",
-                name: "Clínica Oftalmológica Caratinga"
+                name: "Saraiva Vision"
             },
             medicalSpecialty: "Oftalmologia",
             knowsAbout: ["Olho Seco", "Doenças Oculares", "Cirurgia Ocular"],
@@ -102,7 +102,7 @@ const structuredData = {
             description: "Clínica oftalmológica especializada em tratamento de olho seco em Caratinga, MG",
             publisher: {
                 "@type": "Organization",
-                name: "Clínica Oftalmológica Caratinga"
+                name: "Saraiva Vision"
             },
             inLanguage: "pt-BR",
             potentialAction: {
@@ -168,8 +168,10 @@ const structuredData = {
     <link rel="dns-prefetch" href="//fonts.googleapis.com" />
     <link rel="dns-prefetch" href="//www.googletagmanager.com" />
     
-    <!-- Preconnect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <!-- Structured Data -->
     <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
@@ -180,17 +182,21 @@ const structuredData = {
     <!-- Styles -->
     <style is:global>
         :root {
-            --primary-color: #2563eb;
-            --secondary-color: #1e40af;
-            --accent-color: #3b82f6;
-            --text-primary: #1f2937;
-            --text-secondary: #6b7280;
-            --background: #ffffff;
-            --background-secondary: #f9fafb;
-            --border-color: #e5e7eb;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --error-color: #ef4444;
+            --primary: #003D7A;
+            --primary-light: #005FB8;
+            --secondary: #64748b;
+            --accent: #E7F5FF;
+            --text-main: #0F172A;
+            --text-muted: #475569;
+            --bg-body: #FFFFFF;
+            --bg-alt: #F8FAFC;
+            --border: #E2E8F0;
+            --radius-sm: 0.5rem;
+            --radius-md: 0.75rem;
+            --radius-lg: 1rem;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
         }
         
         * {
@@ -199,128 +205,86 @@ const structuredData = {
             padding: 0;
         }
         
+        html {
+            scroll-behavior: smooth;
+        }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-size: 16px;
             line-height: 1.6;
-            color: var(--text-primary);
-            background-color: var(--background);
+            color: var(--text-main);
+            background-color: var(--bg-body);
+            -webkit-font-smoothing: antialiased;
         }
         
-        img {
-            max-width: 100%;
-            height: auto;
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
         }
-        
-        a {
-            color: var(--primary-color);
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-        
-        a:hover {
-            color: var(--secondary-color);
-        }
-        
+
         .container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
         }
-        
-        .btn {
+
+        /* Responsive spacing utilities */
+        .section-padding {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+        @media (max-width: 768px) {
+            .section-padding {
+                padding-top: 3.5rem;
+                padding-bottom: 3.5rem;
+            }
+        }
+
+        .btn-premium {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
+            padding: 0.875rem 2rem;
             font-weight: 600;
-            text-decoration: none;
+            border-radius: var(--radius-md);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
-            transition: all 0.2s ease;
-            white-space: nowrap;
+            gap: 0.5rem;
         }
-        
-        .btn-primary {
-            background-color: var(--primary-color);
+
+        .btn-premium-primary {
+            background-color: var(--primary);
             color: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 61, 122, 0.2);
         }
-        
-        .btn-primary:hover {
-            background-color: var(--secondary-color);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-        }
-        
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-        }
-        
-        .btn-secondary:hover {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        
-        .card {
-            background: white;
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        
-        .card:hover {
+
+        .btn-premium-primary:hover {
+            background-color: var(--primary-light);
             transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 20px 25px -5px rgba(0, 61, 122, 0.25);
         }
-        
-        .section {
-            padding: 80px 0;
+
+        .btn-premium-secondary {
+            background-color: white;
+            color: var(--primary);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
         }
-        
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            text-align: center;
-            margin-bottom: 3rem;
+
+        .btn-premium-secondary:hover {
+            border-color: var(--primary);
+            background-color: var(--bg-alt);
+            transform: translateY(-2px);
         }
-        
-        .text-center {
-            text-align: center;
-        }
-        
-        .mb-2 { margin-bottom: 0.5rem; }
-        .mb-4 { margin-bottom: 1rem; }
-        .mb-6 { margin-bottom: 1.5rem; }
-        .mb-8 { margin-bottom: 2rem; }
-        
-        .mt-2 { margin-top: 0.5rem; }
-        .mt-4 { margin-top: 1rem; }
-        .mt-6 { margin-top: 1.5rem; }
-        .mt-8 { margin-top: 2rem; }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 16px;
-            }
-            
-            .section {
-                padding: 60px 0;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-                margin-bottom: 2rem;
-            }
-            
-            .btn {
-                padding: 10px 20px;
-                font-size: 14px;
-            }
+
+        /* Glassmorphism utility */
+        .glass {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
     </style>
 </head>

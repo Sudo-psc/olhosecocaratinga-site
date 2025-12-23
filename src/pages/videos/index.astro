@@ -1,0 +1,73 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import VideoCard from '../../components/VideoCard.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+// Directory containing videos
+const videosDir = path.join(process.cwd(), 'public', 'videos');
+let videos: { filename: string; title: string }[] = [];
+
+try {
+  if (fs.existsSync(videosDir)) {
+    videos = fs.readdirSync(videosDir)
+      .filter(file => file.endsWith('.mp4'))
+      .map(file => {
+        // Clean up filename for title
+        // Remove extension
+        let title = file.replace(/\.mp4$/, '');
+        // Remove YouTube IDs in parens (e.g. "Title (ID)")
+        title = title.replace(/\s*\([^)]+\)$/, '');
+        // Replace underscores/hyphens with spaces if needed
+        // title = title.replace(/[_-]/g, ' '); 
+        
+        return {
+          filename: file,
+          title: title
+        };
+      });
+  }
+} catch (e) {
+  console.error("Error reading videos directory:", e);
+}
+---
+
+<Layout 
+  title="Vídeos | Olho Seco Caratinga"
+  description="Assista a vídeos educativos sobre tratamento de olho seco e saúde ocular."
+>
+  <main class="pt-24">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-blue-900 to-blue-700 text-white py-20">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="text-4xl md:text-5xl font-bold mb-6">Vídeos Educativos</h1>
+          <p class="text-xl text-blue-100">
+            Aprenda mais sobre saúde ocular e tratamentos com nosso conteúdo audiovisual.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Videos Grid -->
+    <section class="py-20 bg-gray-50">
+      <div class="container mx-auto px-6">
+        {videos.length > 0 ? (
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {videos.map((video) => (
+              <VideoCard 
+                title={video.title} 
+                src={`/videos/${video.filename}`}
+                poster="/video-placeholder.svg"
+              />
+            ))}
+          </div>
+        ) : (
+          <div class="text-center py-12">
+            <p class="text-gray-500 text-lg">Nenhum vídeo disponível no momento.</p>
+          </div>
+        )}
+      </div>
+    </section>
+  </main>
+</Layout>

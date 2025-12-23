@@ -94,12 +94,11 @@ export interface WordPressTag {
 }
 
 // Configuração da API WordPress
-const WORDPRESS_URL = import.meta.env.WORDPRESS_API_URL || 'https://olhosecocaratinga.com/wp';
-const API_PATH = '/wp-json/wp/v2';
+const API_URL = import.meta.env.WORDPRESS_API_URL || 'https://olhosecocaratinga.com/wp-json/wp/v2';
 
 // Função para fazer requisições à API
 async function fetchWordPressAPI<T>(endpoint: string, params: Record<string, string> = {}): Promise<T[]> {
-    const url = new URL(`${WORDPRESS_URL}${API_PATH}${endpoint}`);
+    const url = new URL(`${API_URL}${endpoint}`);
 
     // Adicionar parâmetros à URL
     Object.entries(params).forEach(([key, value]) => {
@@ -114,19 +113,22 @@ async function fetchWordPressAPI<T>(endpoint: string, params: Record<string, str
         });
 
         if (!response.ok) {
-            throw new Error(`WordPress API error: ${response.status} ${response.statusText}`);
+            console.error(`WordPress API error: ${response.status} ${response.statusText}`);
+            // Return empty array instead of throwing to prevent page crash
+            return [] as unknown as T[];
         }
 
         return await response.json();
     } catch (error) {
         console.error('Error fetching from WordPress API:', error);
-        throw error;
+        // Fail gracefully by returning empty array
+        return [] as unknown as T[];
     }
 }
 
 // Função para buscar um único item
 async function fetchWordPressSingle<T>(endpoint: string): Promise<T> {
-    const response = await fetch(`${WORDPRESS_URL}${API_PATH}${endpoint}`, {
+    const response = await fetch(`${API_URL}${endpoint}`, {
         headers: {
             'Content-Type': 'application/json',
         },

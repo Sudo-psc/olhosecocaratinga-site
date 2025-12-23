@@ -1,0 +1,108 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Exames para Olho Seco | Diagnóstico Avançado" description="Tecnologia de ponta para diagnóstico de olho seco. Meibografia, Meniscometria, NIBUT e análise da superfície ocular.">
+  <section class="relative bg-gradient-to-br from-[#003D7A] to-blue-900 py-20 text-white overflow-hidden">
+     <div class="absolute inset-0 bg-[url('/pattern.svg')] opacity-10"></div>
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <span class="inline-block py-1 px-3 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-200 text-sm font-semibold mb-6">Investigação Clínica</span>
+        <h1 class="text-4xl md:text-6xl font-bold font-heading mb-6 leading-tight">
+          Diagnóstico de <span class="text-blue-300">Precisão</span>
+        </h1>
+        <p class="text-xl text-blue-100 leading-relaxed max-w-3xl mx-auto">
+          Não adivinhamos. Medimos. Utilizamos tecnologia digital para visualizar o invisível e quantificar a saúde do seu filme lacrimal.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding bg-white">
+    <div class="container mx-auto px-6">
+      
+      <div class="grid lg:grid-cols-2 gap-16 items-center mb-24">
+        <div>
+            <h2 class="text-3xl md:text-4xl font-bold text-[#003D7A] mb-6">Por que exames específicos?</h2>
+            <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                O olho seco muitas vezes não é visível em um exame de rotina padrão (lâmpada de fenda) até que esteja em estágio avançado. O relatório TFOS DEWS II recomenda uma bateria de testes diagnósticos para confirmar a doença e classificá-la corretamente.
+            </p>
+            <p class="text-gray-600 text-lg leading-relaxed">
+                Na Saraiva Vision, realizamos uma análise completa para diferenciar se o seu olho seco é por falta de água (aquoso), falta de óleo (evaporativo) ou misto.
+            </p>
+        </div>
+        <div class="bg-blue-50 p-8 rounded-3xl border border-blue-100">
+            <h3 class="font-bold text-[#003D7A] mb-4 text-xl">O que avaliamos:</h3>
+            <ul class="space-y-4">
+                <li class="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm">
+                    <span class="text-2xl">📸</span>
+                    <span class="font-medium text-gray-700">Estrutura das Glândulas (Meibografia)</span>
+                </li>
+                <li class="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm">
+                    <span class="text-2xl">⏱️</span>
+                    <span class="font-medium text-gray-700">Estabilidade da Lágrima (BUT)</span>
+                </li>
+                <li class="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm">
+                    <span class="text-2xl">📏</span>
+                    <span class="font-medium text-gray-700">Volume de Lágrima (Menisco)</span>
+                </li>
+            </ul>
+        </div>
+      </div>
+
+      <!-- Detail Cards -->
+      <div class="space-y-24">
+        
+        <!-- Meibografia -->
+        <div id="meibografia" class="grid md:grid-cols-2 gap-12 items-center group">
+            <div class="order-2 md:order-1 relative">
+                 <div class="absolute inset-0 bg-blue-600/5 rounded-3xl transform -rotate-3 transition-transform group-hover:-rotate-6"></div>
+                 <div class="relative rounded-3xl overflow-hidden shadow-xl border border-gray-200 bg-white h-[400px] flex items-center justify-center p-8">
+                     <img src="/meibografia icon.png" alt="Exame de Meibografia" class="w-full h-full object-contain" />
+                 </div>
+            </div>
+            <div class="order-1 md:order-2">
+                <span class="text-blue-500 font-bold tracking-widest text-sm uppercase mb-2 block">O Gold Standard</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-[#003D7A] mb-6">Meibografia Infravermelha</h2>
+                <p class="text-gray-600 leading-relaxed mb-6">
+                    Este exame permite "radiografar" as pálpebras para visualizar as Glândulas de Meibomius. Em um olho saudável, elas parecem "teclas de piano". No olho seco evaporativo, vemos falhas, encurtamentos ou atrofia completa.
+                </p>
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4">
+                    <p class="text-sm text-blue-800 font-medium">
+                        <strong>Importante:</strong> Uma vez que a glândula atrofia (morre), ela não volta. Por isso o diagnóstico precoce via meibografia é crucial.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Meniscometria e BUT -->
+        <div id="meniscometria" class="grid md:grid-cols-2 gap-12 items-center group">
+            <div class="order-1 md:order-1">
+                <span class="text-blue-500 font-bold tracking-widest text-sm uppercase mb-2 block">Volume e Qualidade</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-[#003D7A] mb-6">Meniscometria e BUT</h2>
+                <p class="text-gray-600 leading-relaxed mb-6">
+                    <strong>Meniscometria:</strong> Medimos a altura do "lago lacrimal" que fica na borda da pálpebra inferior. Se estiver muito baixo, indica falta de produção de água (Deficiência Aquosa).
+                </p>
+                <p class="text-gray-600 leading-relaxed">
+                    <strong>N.I.B.U.T. (Non-Invasive Break Up Time):</strong> Medimos digitalmente quantos segundos a lágrima aguenta antes de "arrebentar" e deixar o olho seco. Um tempo curto (&lt; 10 segundos) indica instabilidade severa.
+                </p>
+            </div>
+            <div class="order-2 md:order-2 relative">
+                 <div class="absolute inset-0 bg-blue-600/5 rounded-3xl transform rotate-3 transition-transform group-hover:rotate-6"></div>
+                 <div class="relative rounded-3xl overflow-hidden shadow-xl border border-gray-200 bg-white h-[400px] flex items-center justify-center p-8">
+                     <img src="/Meniscometria-icon.png" alt="Exame de Meniscometria" class="w-full h-full object-contain" />
+                 </div>
+            </div>
+        </div>
+
+      </div>
+
+      <div class="mt-24 text-center">
+          <a href="/contato" class="btn-premium btn-premium-primary text-xl px-12 py-4 shadow-xl hover:shadow-2xl hover:-translate-y-1">
+              Agendar Meus Exames
+          </a>
+      </div>
+
+    </div>
+  </section>
+</Layout>

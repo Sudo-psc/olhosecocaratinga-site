@@ -1,29 +1,32 @@
 ---
 const links = [
   { name: "Início", href: "/" },
-  { name: "Blog", href: "/blog" },
-  { name: "Sobre", href: "/sobre" },
+  { name: "Olho Seco", href: "/olho-seco" },
+  { name: "Exames", href: "/exames" },
+  { name: "Tratamentos", href: "/tratamentos" },
+  { name: "Vídeos", href: "/videos" },
   { name: "Contato", href: "/contato" },
 ];
 ---
 
-<header class="fixed w-full z-50 transition-all duration-300 bg-white/80 backdrop-blur-md border-b border-gray-100">
-  <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-    <a href="/" class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
-      Olho Seco Caratinga
+<header class="fixed w-full z-50 transition-all duration-300 glass border-b border-gray-100 shadow-sm">
+  <div class="container py-4 flex justify-between items-center">
+    <a href="/" class="flex flex-col group transition-transform hover:scale-[1.02]">
+      <span class="text-2xl font-bold font-heading text-[var(--primary)]">Saraiva Vision</span>
+      <span class="text-[10px] uppercase tracking-[0.2em] text-[var(--primary-light)] font-bold">Olho Seco Caratinga</span>
     </a>
 
-    <nav class="hidden md:flex items-center gap-8">
+    <nav class="hidden md:flex items-center gap-10">
       {links.map((link) => (
         <a 
           href={link.href} 
-          class="text-gray-600 hover:text-blue-600 font-medium transition-colors relative group"
+          class="text-[var(--text-muted)] hover:text-[var(--primary)] font-semibold text-sm transition-all relative group"
         >
           {link.name}
-          <span class="absolute inset-x-0 -bottom-1 h-0.5 bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+          <span class="absolute inset-x-0 -bottom-1 h-0.5 bg-[var(--primary)] scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
         </a>
       ))}
-      <a href="/agendar" class="px-5 py-2.5 rounded-full bg-blue-600 text-white font-medium hover:bg-blue-700 transition-all transform hover:-translate-y-0.5 shadow-lg shadow-blue-200">
+      <a href="#contato" class="btn-premium btn-premium-primary !py-2.5 !px-6 text-sm shadow-md">
         Agendar Consulta
       </a>
     </nav>
@@ -37,12 +40,17 @@ const links = [
   </div>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white border-b border-gray-100 shadow-xl">
-    <div class="flex flex-col p-4 space-y-4">
+  <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white border-b border-gray-100 shadow-xl overflow-hidden">
+    <div class="flex flex-col p-6 space-y-3">
       {links.map((link) => (
-        <a href={link.href} class="text-gray-600 hover:text-blue-600 font-medium p-2 block border-b border-gray-50 bg-gray-50/50 rounded">{link.name}</a>
+        <a 
+          href={link.href} 
+          class="text-[var(--text-main)] font-semibold p-4 block rounded-xl hover:bg-[var(--accent)] transition-all"
+        >
+          {link.name}
+        </a>
       ))}
-      <a href="/agendar" class="block w-full text-center px-5 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700">
+      <a href="#contato" class="btn-premium btn-premium-primary w-full mt-4">
         Agendar Consulta
       </a>
     </div>

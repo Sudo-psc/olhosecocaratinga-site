@@ -2,15 +2,15 @@
 import Layout from '../layouts/Layout.astro';
 
 const doctor = {
-    name: "Dr. João da Silva",
+    name: "Dr. Philipe Saraiva Cruz",
     crm: "CRM-MG 69.870",
     specialty: "Oftalmologia",
     subspecialty: "Especialista em Córnea e Superfície Ocular",
     experience: "10+ anos de experiência",
     education: [
-        "Graduação em Medicina - UFMG",
-        "Residência em Oftalmologia - Hospital São Geraldo",
-        "Fellowship em Córnea e Doenças Externas - USP",
+        "Graduação em Medicina",
+        "Residência em Oftalmologia",
+        "Especialização em Córnea e Doenças Externas", 
         "Membro da Sociedade Brasileira de Oftalmologia"
     ],
     expertise: [
@@ -48,9 +48,9 @@ const doctor = {
                     <div class="relative">
                         <div class="bg-gradient-to-br from-blue-100 to-blue-50 rounded-2xl p-8 relative">
                             <img 
-                                src="/doctor-photo.jpg" 
+                                src="/professional_portrait_doctor.JPG" 
                                 alt={doctor.name}
-                                class="rounded-xl shadow-xl w-full h-auto"
+                                class="rounded-xl shadow-xl w-full h-auto object-cover"
                                 loading="lazy"
                             />
                             <div class="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-lg p-4">

@@ -4,21 +4,21 @@
 
 export const SITE_CONFIG = {
     name: 'Olho Seco Caratinga',
-    description: 'Clínica oftalmológica especializada em tratamento de olho seco em Caratinga, MG',
+    description: 'Referência em tratamento de olho seco em Caratinga. Tecnologia avançada e atendimento humanizado na Clínica Saraiva Vision.',
     url: 'https://olhosecocaratinga.com.br',
     locale: 'pt_BR',
     language: 'pt-BR',
 
     // Business Info
     business: {
-        name: 'Saraiva Vision Care LTDA',
+        name: 'Saraiva Vision',
         cnpj: '53.864.119/0001-79',
         address: {
             street: 'Rua Catarina Maria Passos, 97',
-            neighborhood: 'Santa Zita',
+            neighborhood: 'Bairro Santa Zita (Amor e Saúde)',
             city: 'Caratinga',
             state: 'MG',
-            zip: '35300-000',
+            zip: '35300-299',
             country: 'Brasil',
         },
         phone: '(33) 99860-1427',
@@ -30,8 +30,8 @@ export const SITE_CONFIG = {
             sunday: 'Fechado',
         },
         coordinates: {
-            lat: -19.7892,
-            lng: -42.1347,
+            lat: -19.7925,
+            lng: -42.1447,
         },
     },
 
@@ -45,7 +45,7 @@ export const SITE_CONFIG = {
 
     // Social Media
     social: {
-        instagram: 'https://instagram.com/saraivavision',
+        instagram: 'https://instagram.com/saraiva_vision',
         facebook: 'https://facebook.com/saraivavision',
         youtube: 'https://youtube.com/@saraivavision',
         linkedin: 'https://linkedin.com/company/saraivavision',
@@ -53,8 +53,8 @@ export const SITE_CONFIG = {
 
     // SEO Defaults
     seo: {
-        titleTemplate: '%s | Olho Seco Caratinga',
-        defaultTitle: 'Tratamento de Olho Seco em Caratinga | Dr. Philipe Saraiva',
+        titleTemplate: '%s | Saraiva Vision - Olho Seco Caratinga',
+        defaultTitle: 'Tratamento Especializado de Olho Seco | Saraiva Vision Caratinga',
         defaultDescription: 'Especialista em tratamento de olho seco em Caratinga/MG. Dr. Philipe Saraiva Cruz - Oftalmologista CRM-MG 69.870. Diagnóstico preciso e tratamentos modernos.',
         defaultImage: '/og-image.jpg',
     },
@@ -64,6 +64,7 @@ export const SITE_CONFIG = {
         { name: 'Início', href: '/' },
         { name: 'Olho Seco', href: '/olho-seco' },
         { name: 'Tratamentos', href: '/tratamentos' },
+        { name: 'Vídeos', href: '/videos' },
         { name: 'Blog', href: '/blog' },
         { name: 'Sobre', href: '/sobre' },
         { name: 'Contato', href: '/contato' },
