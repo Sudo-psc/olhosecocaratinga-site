@@ -6,24 +6,61 @@ import path from 'node:path';
 
 // Directory containing videos
 const videosDir = path.join(process.cwd(), 'public', 'videos');
-let videos: { filename: string; title: string }[] = [];
+let videos: { filename: string; title: string; description: string }[] = [];
 
 try {
   if (fs.existsSync(videosDir)) {
     videos = fs.readdirSync(videosDir)
       .filter(file => file.endsWith('.mp4'))
       .map(file => {
-        // Clean up filename for title
-        // Remove extension
-        let title = file.replace(/\.mp4$/, '');
-        // Remove YouTube IDs in parens (e.g. "Title (ID)")
-        title = title.replace(/\s*\([^)]+\)$/, '');
-        // Replace underscores/hyphens with spaces if needed
-        // title = title.replace(/[_-]/g, ' '); 
+        const videoData: Record<string, { title: string; description: string }> = {
+          "Dry Eye Causes and Treatment.mp4": {
+            title: "Causas e Tratamentos do Olho Seco",
+            description: "Entenda as principais causas da síndrome do olho seco e descubra as opções de tratamento mais eficazes disponíveis atualmente."
+          },
+          "E-EYE IRPL® - For the Treatment of Dry Eyes due to Meibomian Gland Dysfunction (MGD).mp4": {
+            title: "Tratamento E-EYE IRPL® para DGM",
+            description: "Conheça a tecnologia IRPL® e como ela trata eficazmente a disfunção das glândulas de Meibomius, uma das principais causas de olho seco."
+          },
+          "E-EYE treatment.mp4": {
+            title: "Como funciona o tratamento E-Eye",
+            description: "Veja passo a passo como o tratamento com E-Eye IRPL® é realizado e seus benefícios para a saúde ocular."
+          },
+          "E-Eye tratamento DGM.mp4": {
+            title: "Tratamento DGM com E-Eye",
+            description: "Demonstração completa do tratamento da disfunção das glândulas de Meibomius utilizando a tecnologia E-Eye IRPL®."
+          },
+          "Meibomian Gland Dysfunction - Dry Eye Treatment.mp4": {
+            title: "Disfunção das Glândulas de Meibomius (DGM)",
+            description: "Aprenda sobre a disfunção das glândulas de Meibomius, sua relação com o olho seco e as abordagens terapêuticas modernas."
+          },
+          "Meibomian Gland Dysfunction And Dry Eye (imr8ZOpU_a8).mp4": {
+            title: "Entenda a Relação entre DGM e Olho Seco",
+            description: "Explicação detalhada sobre como a disfunção das glândulas de Meibomius afeta a produção lacrimal e causa olho seco."
+          },
+          "Meibomian Gland Expression for MGD | The Dry Eye Clinic at Peter Ivins Eye Care.mp4": {
+            title: "Expressão das Glândulas de Meibomius",
+            description: "Técnica de expressão das glândulas de Meibomius para desobstrução e melhora da qualidade do filme lacrimal."
+          },
+          "Probing to Open Blocked Tear Ducts (lCj0RrBbzts).mp4": {
+            title: "Sondagem das Vias Lacrimais",
+            description: "Procedimento de sondagem para desobstrução das vias lacrimais, essencial para pacientes com epífora (excesso de lágrimas)."
+          },
+          "Punctal Plugs (878yyEfBVaM).mp4": {
+            title: "Como funcionam os Plugs Lacrimais",
+            description: "Entenda o funcionamento dos plugs lacrimais, pequenos dispositivos que ajudam a reter as lágrimas e aliviar os sintomas do olho seco."
+          }
+        };
+
+        const videoInfo = videoData[file] || {
+          title: file.replace(/\.mp4$/, '').replace(/\s*\([^)]+\)$/, ''),
+          description: "Vídeo educativo sobre saúde ocular e tratamentos disponíveis."
+        };
         
         return {
           filename: file,
-          title: title
+          title: videoInfo.title,
+          description: videoInfo.description
         };
       });
   }
@@ -57,6 +94,7 @@ try {
             {videos.map((video) => (
               <VideoCard 
                 title={video.title} 
+                description={video.description}
                 src={`/videos/${video.filename}`}
                 poster="/video-placeholder.svg"
               />

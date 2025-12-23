@@ -31,7 +31,9 @@ const diagnostics = [
 const faqs = [
   { q: "O que causa o olho seco?", a: "Pode ser causado por fatores ambientais, uso excessivo de telas, envelhecimento ou disfunção das glândulas lacrimais." },
   { q: "Como é feito o diagnóstico?", a: "Através de exames como Meibografia e Meniscometria, que analisam a qualidade e quantidade da lágrima." },
-  { q: "O tratamento com E-Eye dói?", a: "Não, é um procedimento indolor, rápido e não invasivo realizado em consultório." }
+  { q: "O tratamento com E-Eye dói?", a: "Não, é um procedimento indolor, rápido e não invasivo realizado em consultório." },
+  { q: "O tratamento tem cobertura de convênio?", a: "Consultas podem ser reembolsadas. Tratamentos específicos como E-Eye geralmente são particulares. Entre em contato para detalhes." },
+  { q: "Quanto tempo dura o efeito?", a: "O protocolo inicial dura cerca de 45 dias (3 sessões), com efeitos duradouros. Uma manutenção anual (1 sessão) é recomendada." }
 ];
 ---
 
@@ -61,7 +63,7 @@ const faqs = [
             </div>
             
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-[#003D7A] mb-6 leading-tight">
-                Cansado da sensação de <span class="text-blue-600">areia nos olhos?</span>
+                Chega de sentir <span class="text-blue-600">areia nos olhos:</span><br/>Recupere seu Conforto
             </h1>
             
             <p class="text-lg md:text-xl text-gray-600 mb-10 leading-relaxed max-w-xl font-medium">
@@ -70,7 +72,7 @@ const faqs = [
 
             <div class="flex flex-col sm:flex-row gap-4">
                 <a href="#contato" class="btn-premium btn-premium-primary text-lg shadow-lg hover:shadow-blue-500/30">
-                    Quero Aliviar Meus Sintomas
+                    Quero Agendar Minha Avaliação Agora
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 </a>
                 <a href="https://wa.me/5533998601427" class="btn-premium btn-premium-secondary text-lg">
@@ -230,74 +232,117 @@ const faqs = [
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             <!-- E-EYE IRPL -->
-             <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all group">
+             <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all group">
                 <div class="flex items-center gap-4 mb-4">
-                    <div class="w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center">
-                        <img src="/irpl-machine.png" class="w-8 h-8 object-contain brightness-0 invert" />
+                    <div class="w-16 h-16 rounded-xl bg-blue-50 flex items-center justify-center p-2 border border-blue-100">
+                        <img src="/irpl-machine.png" alt="E-Eye IRPL" class="w-12 h-12 object-contain" />
                     </div>
-                    <h3 class="font-bold text-lg">Luz Pulsada (IRPL)</h3>
+                    <h3 class="font-bold text-lg text-[#003D7A]">Luz Pulsada (IRPL)</h3>
                 </div>
-                <p class="text-blue-100 text-sm leading-relaxed mb-4">Estimula as glândulas a voltarem a funcionar naturalmente, tratando a causa raiz da evaporação.</p>
-                <span class="text-xs font-semibold bg-blue-500/20 px-2 py-1 rounded text-blue-200 border border-blue-500/30">Tecnologia Estímulo</span>
+                <p class="text-gray-600 text-sm leading-relaxed mb-4">Estimula as glândulas a voltarem a funcionar naturalmente, tratando a causa raiz da evaporação.</p>
+                <span class="text-xs font-semibold bg-blue-100 px-3 py-1 rounded-full text-blue-700">Tecnologia Estímulo</span>
             </div>
 
             <!-- Plasmaporação -->
-             <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all group">
+             <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all group">
                 <div class="flex items-center gap-4 mb-4">
-                    <div class="w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center p-2">
-                         <img src="/icon-plasma.png" class="w-full h-full object-contain brightness-0 invert" />
+                    <div class="w-16 h-16 rounded-xl bg-purple-50 flex items-center justify-center p-1 border border-purple-100 overflow-hidden">
+                         <img src="/icons/01_plasmaporacao.png" alt="Plasmaporação" class="w-full h-full object-cover rounded-lg" />
                     </div>
-                    <h3 class="font-bold text-lg">Plasmaporação</h3>
+                    <h3 class="font-bold text-lg text-[#003D7A]">Plasmaporação</h3>
                 </div>
-                <p class="text-blue-100 text-sm leading-relaxed mb-4">Regeneração tecidual e tratamento da flacidez palpebral para melhorar o fechamento dos olhos.</p>
-                <span class="text-xs font-semibold bg-purple-500/20 px-2 py-1 rounded text-purple-200 border border-purple-500/30">Regenerativo</span>
+                <p class="text-gray-600 text-sm leading-relaxed mb-4">Regeneração tecidual e tratamento da flacidez palpebral para melhorar o fechamento dos olhos.</p>
+                <span class="text-xs font-semibold bg-purple-100 px-3 py-1 rounded-full text-purple-700">Regenerativo</span>
             </div>
 
             <!-- Plugs -->
-             <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all group">
+             <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all group">
                 <div class="flex items-center gap-4 mb-4">
-                    <div class="w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center p-2">
-                        <img src="/icon-plugs.png" class="w-full h-full object-contain brightness-0 invert" />
+                    <div class="w-16 h-16 rounded-xl bg-green-50 flex items-center justify-center p-1 border border-green-100 overflow-hidden">
+                        <img src="/icons/02_plugs_lacrimais.png" alt="Plugs Lacrimais" class="w-full h-full object-cover rounded-lg" />
                     </div>
-                    <h3 class="font-bold text-lg">Plugs Lacrimais</h3>
+                    <h3 class="font-bold text-lg text-[#003D7A]">Plugs Lacrimais</h3>
                 </div>
-                <p class="text-blue-100 text-sm leading-relaxed mb-4">Micro-dispositivos que mantêm sua lágrima natural por mais tempo no olho. Alívio imediato.</p>
-                 <span class="text-xs font-semibold bg-green-500/20 px-2 py-1 rounded text-green-200 border border-green-500/30">Retenção</span>
+                <p class="text-gray-600 text-sm leading-relaxed mb-4">Micro-dispositivos que mantêm sua lágrima natural por mais tempo no olho. Alívio imediato.</p>
+                 <span class="text-xs font-semibold bg-green-100 px-3 py-1 rounded-full text-green-700">Retenção</span>
             </div>
             
              <!-- Máscaras -->
-             <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all group">
+             <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all group">
                 <div class="flex items-center gap-4 mb-4">
-                    <div class="w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center p-2">
-                        <img src="/icon-mask.png" class="w-full h-full object-contain brightness-0 invert" />
+                    <div class="w-16 h-16 rounded-xl bg-orange-50 flex items-center justify-center p-2 border border-orange-100">
+                        <img src="/icon-mask.png" alt="Terapia Térmica" class="w-12 h-12 object-contain" />
                     </div>
-                    <h3 class="font-bold text-lg">Terapia Térmica</h3>
+                    <h3 class="font-bold text-lg text-[#003D7A]">Terapia Térmica</h3>
                 </div>
-                <p class="text-blue-100 text-sm leading-relaxed mb-4">Máscaras de calor controlado para derreter a gordura solidificada nas glândulas.</p>
+                <p class="text-gray-600 text-sm leading-relaxed mb-4">Máscaras de calor controlado para derreter a gordura solidificada nas glândulas.</p>
+                <span class="text-xs font-semibold bg-orange-100 px-3 py-1 rounded-full text-orange-700">Aquecimento</span>
             </div>
 
              <!-- Microesfoliação -->
-             <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all group">
+             <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all group">
                 <div class="flex items-center gap-4 mb-4">
-                    <div class="w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center text-xl">🧼</div>
-                    <h3 class="font-bold text-lg">Microesfoliação</h3>
+                    <div class="w-16 h-16 rounded-xl bg-teal-50 flex items-center justify-center p-1 border border-teal-100 overflow-hidden">
+                        <img src="/icons/05_microesfoliacao.png" alt="Microesfoliação" class="w-full h-full object-cover rounded-lg" />
+                    </div>
+                    <h3 class="font-bold text-lg text-[#003D7A]">Microesfoliação</h3>
                 </div>
-                <p class="text-blue-100 text-sm leading-relaxed mb-4">Limpeza profunda da margem das pálpebras, removendo biofilme e bactérias nocivas.</p>
+                <p class="text-gray-600 text-sm leading-relaxed mb-4">Limpeza profunda da margem das pálpebras, removendo biofilme e bactérias nocivas.</p>
+                <span class="text-xs font-semibold bg-teal-100 px-3 py-1 rounded-full text-teal-700">Limpeza</span>
+            </div>
+
+             <!-- Colírios Especializados -->
+             <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all group">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-16 h-16 rounded-xl bg-cyan-50 flex items-center justify-center p-1 border border-cyan-100 overflow-hidden">
+                        <img src="/icons/04_colirios_especializados.png" alt="Colírios Especializados" class="w-full h-full object-cover rounded-lg" />
+                    </div>
+                    <h3 class="font-bold text-lg text-[#003D7A]">Colírios Especializados</h3>
+                </div>
+                <p class="text-gray-600 text-sm leading-relaxed mb-4">Formulações específicas para cada tipo de olho seco, incluindo lágrimas artificiais premium e anti-inflamatórios.</p>
+                <span class="text-xs font-semibold bg-cyan-100 px-3 py-1 rounded-full text-cyan-700">Lubrificação</span>
+            </div>
+
+             <!-- Ácido Hipocloroso -->
+             <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all group">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-16 h-16 rounded-xl bg-amber-50 flex items-center justify-center p-1 border border-amber-100 overflow-hidden">
+                        <img src="/icons/08_acido_hipocloroso.png" alt="Ácido Hipocloroso" class="w-full h-full object-cover rounded-lg" />
+                    </div>
+                    <h3 class="font-bold text-lg text-[#003D7A]">Ácido Hipocloroso</h3>
+                </div>
+                <p class="text-gray-600 text-sm leading-relaxed mb-4">Solução antimicrobiana natural para higiene palpebral, combatendo infecções e blefarites.</p>
+                <span class="text-xs font-semibold bg-amber-100 px-3 py-1 rounded-full text-amber-700">Higiene</span>
             </div>
 
              <!-- Lentes -->
-             <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all group">
+             <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all group">
                 <div class="flex items-center gap-4 mb-4">
-                    <div class="w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center text-xl">🧿</div>
-                    <h3 class="font-bold text-lg">Lentes Esclerais</h3>
+                    <div class="w-16 h-16 rounded-xl bg-indigo-50 flex items-center justify-center border border-indigo-100">
+                        <span class="text-3xl">🧿</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-[#003D7A]">Lentes Esclerais</h3>
                 </div>
-                <p class="text-blue-100 text-sm leading-relaxed mb-4">Proteção total da córnea, mantendo um reservatório líquido constante. Ideal para casos severos.</p>
+                <p class="text-gray-600 text-sm leading-relaxed mb-4">Proteção total da córnea, mantendo um reservatório líquido constante. Ideal para casos severos.</p>
+                <span class="text-xs font-semibold bg-indigo-100 px-3 py-1 rounded-full text-indigo-700">Proteção</span>
+            </div>
+
+             <!-- Oclusão Pontos Lacrimais -->
+             <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all group">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-16 h-16 rounded-xl bg-rose-50 flex items-center justify-center p-1 border border-rose-100 overflow-hidden">
+                        <img src="/icons/03_oclusao_pontos_lacrimais.png" alt="Oclusão de Pontos Lacrimais" class="w-full h-full object-cover rounded-lg" />
+                    </div>
+                    <h3 class="font-bold text-lg text-[#003D7A]">Oclusão Permanente</h3>
+                </div>
+                <p class="text-gray-600 text-sm leading-relaxed mb-4">Procedimento definitivo para fechar os pontos lacrimais, maximizando a retenção da lágrima natural.</p>
+                <span class="text-xs font-semibold bg-rose-100 px-3 py-1 rounded-full text-rose-700">Definitivo</span>
             </div>
         </div>
         
         <div class="text-center">
              <a href="#contato" class="inline-flex items-center gap-2 bg-white text-[#003D7A] px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-50 transition-colors shadow-lg hover:scale-105 transform duration-200">
-                Agendar Minha Avaliação Especializada
+                Agendar Minha Avaliação Agora
              </a>
         </div>
 
