@@ -4,36 +4,33 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Next.js 15 website for "Olhos Secos Caratinga" (Dry Eye Clinic) with Sanity CMS integration. The site features a blog, video library, and embedded Sanity Studio for content management.
+Astro 4 website for "Olhos Secos Caratinga" (Dry Eye Clinic) with Sanity CMS integration. The site features a blog, video library, and informational pages about dry eye treatment.
 
 ## Technology Stack
 
-- **Framework**: Next.js 15.1.3 (App Router)
-- **React**: 19.0.0
-- **CMS**: Sanity 3.72.1 with next-sanity integration
-- **Styling**: Tailwind CSS 3.4.17
-- **Language**: TypeScript 5.7.2
-- **Package Manager**: pnpm 9.15.2
+- **Framework**: Astro 4.16 (File-based routing with hybrid rendering)
+- **CMS**: Sanity v7 (Headless CMS)
+- **Styling**: Tailwind CSS 3.4
+- **Language**: TypeScript 5.9
+- **Package Manager**: pnpm 9.15
 
 ## Development Commands
 
 ```bash
-# Development server (runs on http://localhost:3000)
+# Development server (runs on http://localhost:4321)
 pnpm dev
 
-# Production build
+# Production build (includes type checking)
 pnpm build
 
-# Production server
-pnpm start
+# Preview production build
+pnpm preview
 
 # Linting
-pnpm lint         # Check for issues
-pnpm lint:fix     # Auto-fix issues
+pnpm lint
 
 # Code formatting
-pnpm format       # Format all files
-pnpm format:check # Check formatting without changes
+pnpm format
 ```
 
 ## Architecture
@@ -42,103 +39,79 @@ pnpm format:check # Check formatting without changes
 
 ```
 src/
-├── app/                    # Next.js App Router
-│   ├── api/               # API routes
-│   │   ├── draft/         # Draft mode enable/disable
-│   │   └── revalidate/    # Webhook for cache revalidation
-│   ├── blog/              # Blog listing and posts
-│   │   └── [slug]/        # Dynamic blog post routes
-│   ├── videos/            # Video listing and pages
-│   │   └── [slug]/        # Dynamic video routes
-│   ├── studio/            # Embedded Sanity Studio
-│   │   └── [[...tool]]/   # Studio catch-all route
-│   ├── layout.tsx         # Root layout with header/footer
-│   └── page.tsx           # Homepage
-├── components/            # React components (inline in app dir)
-│   ├── draft-mode-banner.tsx
-│   ├── portable-text.tsx
-│   ├── post-card.tsx
-│   └── video-card.tsx
-└── sanity/                # Sanity configuration
-    ├── client.ts          # Sanity clients (client, previewClient, writeClient)
-    ├── config.ts          # Environment configuration
-    ├── queries.ts         # GROQ queries
-    ├── types.ts           # TypeScript types
-    └── schemas/           # Content schemas
-        ├── author.ts
-        ├── category.ts
-        ├── post.ts
-        ├── video.ts
-        └── site-settings.ts
+├── pages/                  # Astro file-based routing
+│   ├── index.astro        # Homepage
+│   ├── olho-seco.astro    # Dry eye information page
+│   ├── sobre.astro        # About page
+│   ├── contato.astro      # Contact page
+│   ├── tratamentos.astro  # Treatments page
+│   ├── exames.astro       # Exams page
+│   ├── blog/              # Blog routes
+│   │   ├── index.astro    # Blog listing
+│   │   └── [slug].astro   # Dynamic blog post routes
+│   └── videos/            # Video routes
+│       ├── index.astro    # Video listing
+│       └── [slug].astro   # Dynamic video routes
+├── components/            # Reusable Astro components
+│   ├── Header.astro
+│   ├── Footer.astro
+│   └── VideoCard.astro
+├── layouts/               # Layout components
+│   └── Layout.astro       # Base layout with SEO
+└── lib/                   # Utilities and configuration
+    ├── sanity.ts          # Sanity client and helpers
+    └── config.ts          # Site configuration
 ```
 
 ### Sanity Client Architecture
 
-The codebase uses three distinct Sanity clients with different purposes:
+The codebase uses a single Sanity client for fetching content:
 
-1. **`client`** (src/sanity/client.ts:12) - Standard client for published content, uses CDN in production
-2. **`previewClient`** (src/sanity/client.ts:40) - For draft/preview mode, bypasses CDN
-3. **`writeClient`** (src/sanity/client.ts:28) - Authenticated client for mutations (never exposed to browser)
+- **`client`** (src/lib/sanity.ts:4) - Standard client for published content, uses CDN
 
-**Critical**: Never expose `writeClient` or any client with tokens to the browser. Use `getClient(preview)` helper for automatic client selection.
+**Helper Functions**:
+- `urlFor(source)` (src/lib/sanity.ts:13) - Image URL builder for Sanity images
 
 ### Data Fetching Pattern
 
-Use the `sanityFetch()` helper (src/sanity/client.ts:59) instead of calling client.fetch() directly:
+Use the Sanity client with GROQ queries:
 
 ```typescript
-// GOOD - Uses cache tags and Next.js revalidation
-const posts = await sanityFetch<PostSummary[]>({
-  query: postsQuery,
-  tags: ['posts'],
-  revalidate: 3600,
-  preview: false
-})
+import { client } from '../lib/sanity';
+import groq from 'groq';
 
-// AVOID - No cache tag support
-const posts = await client.fetch(postsQuery)
+const posts = await client.fetch(groq`*[_type == "post" && defined(slug.current)] | order(publishedAt desc) {
+  _id,
+  title,
+  slug,
+  mainImage,
+  publishedAt,
+  excerpt
+}`);
 ```
 
-**Cache Tags**: All content types have associated tags for granular revalidation:
-- Posts: `'posts'`, `'post:${slug}'`
-- Videos: `'videos'`, `'video:${slug}'`
-- Authors/Categories: `'posts'` (they affect posts)
-- Site Settings: `'siteSettings'`
+### Content Types
 
-### Revalidation System
+The project uses these Sanity schemas:
 
-The `/api/revalidate` webhook (src/app/api/revalidate/route.ts) receives Sanity webhooks and revalidates Next.js cache tags based on document type.
-
-**Setup in Sanity**:
-1. Create webhook at sanity.io/manage → API → Webhooks
-2. URL: `https://yourdomain.com/api/revalidate`
-3. Secret: Match `SANITY_REVALIDATE_SECRET` env var
-4. Dataset: Your dataset (usually "production")
-5. Trigger on: Create, Update, Delete
-
-### Draft/Preview Mode
-
-Draft mode allows previewing unpublished content:
-
-- **Enable**: `/api/draft/enable?slug=<slug>&type=<post|video>`
-- **Disable**: `/api/draft/disable`
-- **Client Selection**: Automatically uses `previewClient` when draft mode is active
+1. **Post** - Blog articles with Portable Text body
+2. **Video** - Educational videos with transcripts
+3. **Author** - Content authors
+4. **Category** - Post categories
+5. **pageOlhoSeco** - CMS-managed content for the dry eye page
 
 ### Image Handling
 
-For Sanity images, use the `urlFor()` helper (src/sanity/client.ts:87):
+For Sanity images, use the `urlFor()` helper (src/lib/sanity.ts:13):
 
-```typescript
-import { urlFor } from '@/sanity/client'
-
-const imageUrl = urlFor(image)
-  .width(800)
-  .height(600)
-  .format('webp')
-  .url()
+```astro
+---
+import { urlFor } from '../lib/sanity';
+---
+{post.mainImage && (
+  <img src={urlFor(post.mainImage).width(800).url()} alt={post.title} />
+)}
 ```
-
-For YouTube thumbnails, use `getYouTubeThumbnail()` (src/sanity/client.ts:94).
 
 ### Environment Variables
 
@@ -146,77 +119,125 @@ Required environment variables (see .env.example):
 
 ```bash
 # Sanity Configuration (REQUIRED)
-NEXT_PUBLIC_SANITY_PROJECT_ID=     # From sanity.io/manage
-NEXT_PUBLIC_SANITY_DATASET=        # Usually "production"
-NEXT_PUBLIC_SANITY_API_VERSION=    # Format: YYYY-MM-DD
+PUBLIC_SANITY_PROJECT_ID=      # From sanity.io/manage
+PUBLIC_SANITY_DATASET=         # Usually "production"
+PUBLIC_SANITY_API_VERSION=     # Format: YYYY-MM-DD (e.g., "2024-01-01")
 
-# Tokens (REQUIRED for preview/webhooks)
-SANITY_API_READ_TOKEN=             # For preview mode
-SANITY_API_WRITE_TOKEN=            # For mutations/webhooks
-SANITY_REVALIDATE_SECRET=          # Webhook validation
-
-# URLs
-NEXT_PUBLIC_SITE_URL=              # Base URL (for OpenGraph, etc.)
+# Site Configuration
+SITE_URL=                      # Base URL (for OpenGraph, etc.)
+SITE_NAME=                     # Site name
 ```
 
-**Critical**: Token environment variables must NEVER be prefixed with `NEXT_PUBLIC_` as this exposes them to the browser.
+**Important**: Variables prefixed with `PUBLIC_` are exposed to the browser. Never prefix sensitive tokens with `PUBLIC_`.
 
 ### Path Aliases
 
-Use `@/` for imports (configured in tsconfig.json):
+Use `@/` for imports when needed, but relative imports are common in Astro:
 
 ```typescript
-// GOOD
-import { client } from '@/sanity/client'
-import { Post } from '@/sanity/types'
-
-// AVOID
-import { client } from '../../../sanity/client'
+// Relative imports (preferred in Astro)
+import Layout from '../layouts/Layout.astro';
+import { client } from '../lib/sanity';
 ```
 
-### Sanity Studio
+### Rendering Modes
 
-The Studio is embedded at `/studio` route (src/app/studio/[[...tool]]/page.tsx). It uses the configuration from `sanity.config.ts` which includes:
+The project uses hybrid rendering (`output: 'hybrid'` in astro.config.mjs):
 
-- Structure tool for document management
-- Vision tool for GROQ query testing
-- Production URL preview for posts and videos
+- **SSG** (Static Site Generation) by default
+- **SSR** (Server Side Rendering) for pages with `export const prerender = false`
+
+Example SSR page:
+```astro
+---
+export const prerender = false;
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Dynamic Page">
+  <!-- Content -->
+</Layout>
+```
 
 ### Styling Conventions
 
 - Tailwind CSS utility classes
-- Dark mode support via `dark:` prefix
 - Mobile-first responsive design
-- Color palette: slate (grays), white, and theme colors
-- Fonts: Inter (loaded via next/font/google)
+- Color palette: Custom blues (#003D7A primary), slate (grays), white
+- Utility classes defined in tailwind.config.mjs
 
-## Content Types
+## Content Management
 
-1. **Post** - Blog articles with Portable Text body, categories, author, SEO
-2. **Video** - YouTube videos with transcript, thumbnail, duration
-3. **Author** - Content authors with photo, bio, social links
-4. **Category** - Post categorization
-5. **Site Settings** - Global site configuration (singleton)
+### Sanity CMS
+
+Content is managed through Sanity Studio:
+
+1. Access at [sanity.io/manage](https://www.sanity.io/manage)
+2. Content types are defined in Sanity schemas (managed separately)
+3. Content is fetched via GROQ queries using the Sanity client
+
+### Fallback Content
+
+Pages with Sanity integration include fallback static content when CMS is not configured:
+
+```astro
+---
+let cmsData = null;
+try {
+  if (import.meta.env.PUBLIC_SANITY_PROJECT_ID) {
+    cmsData = await client.fetch(query);
+  }
+} catch (e) {
+  console.warn("Sanity fetch failed, using fallback content");
+}
+---
+{cmsData?.body ? (
+  <PortableText value={cmsData.body} />
+) : (
+  <!-- Static fallback content -->
+)}
+```
 
 ## Adding New Features
 
-When adding new content types:
+When adding new pages or features:
 
-1. Create schema in `src/sanity/schemas/`
-2. Add to `schemaTypes` array in `src/sanity/schemas/index.ts`
-3. Add GROQ queries to `src/sanity/queries.ts`
-4. Add TypeScript types to `src/sanity/types.ts`
-5. Update revalidation logic in `src/app/api/revalidate/route.ts`
-6. Create App Router pages if needed
+1. Create `.astro` files in `src/pages/` for new routes
+2. Use GROQ queries to fetch Sanity content if needed
+3. Add TypeScript types in component/page frontmatter
+4. Update `src/lib/config.ts` for navigation or site settings
+5. Use Tailwind CSS for styling
 
-## kluster.ai Verification
+## Site Configuration
 
-This project uses kluster.ai for automated code review. The workflow (configured in .agent/rules/kluster-code-verify.md) is:
+Global site configuration is in `src/lib/config.ts`:
 
-1. `kluster_open_snapshot_session` - Before any code changes
-2. Make code changes
-3. `kluster_code_review_auto` - After all changes
-4. Complete any items from `agent_todo_list`
-5. Re-verify if needed
+- Business information
+- Doctor information
+- Social media links
+- Navigation menus
+- SEO defaults
+- Structured data helpers
 
-**Never skip verification** - even for small changes.
+Use these helpers for structured data:
+- `getClinicStructuredData()`
+- `getDoctorStructuredData()`
+- `getBreadcrumbStructuredData(items)`
+- `getFAQStructuredData(faqs)`
+- `getArticleStructuredData(article)`
+
+## Important Notes
+
+- Always wrap Astro component logic in frontmatter delimiters (`---`)
+- Use `export const prerender = false` for server-side rendering
+- Sanity images should use `urlFor()` helper
+- Portable Text content uses `astro-portabletext` component
+- The deprecated `imageUrlBuilder` warning can be ignored (library issue)
+
+## Best Practices
+
+1. **Frontmatter**: Always include opening and closing `---` delimiters
+2. **Type Safety**: Define TypeScript interfaces for Sanity content
+3. **Error Handling**: Wrap Sanity fetches in try-catch with fallbacks
+4. **Image Optimization**: Use `urlFor()` with width/height parameters
+5. **SEO**: Use the Layout component and pass title/description props
+6. **Performance**: Prefer SSG over SSR when possible

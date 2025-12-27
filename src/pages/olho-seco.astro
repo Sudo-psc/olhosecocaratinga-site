@@ -1,5 +1,6 @@
+---
 import Layout from '../layouts/Layout.astro';
-import { client, urlFor } from '../lib/sanity';
+import { client } from '../lib/sanity';
 import { PortableText } from "astro-portabletext";
 import groq from 'groq';
 
@@ -17,7 +18,7 @@ try {
 } catch (e) {
   console.warn("Sanity fetch failed or no document found:", e);
 }
-
+---
 
 <Layout title="Síndrome do Olho Seco: Diagnóstico e Tratamento | Saraiva Vision" description="Entenda a Síndrome do Olho Seco (TFOS DEWS III) e conheça o tratamento especializado da Saraiva Vision com IRPL E-Eye e diagnóstico avançado.">
   <section class="relative bg-gradient-to-br from-[#003D7A] to-blue-900 py-20 text-white overflow-hidden">

@@ -2,7 +2,7 @@
     "name": "olhosecocaratinga-astro",
     "type": "module",
     "version": "1.0.0",
-    "description": "Site especializado em tratamento de olho seco - Astro + WordPress Headless CMS",
+    "description": "Site especializado em tratamento de olho seco - Astro + Sanity CMS",
     "scripts": {
         "dev": "astro dev",
         "start": "astro dev",
