@@ -1,5 +1,6 @@
+---
 import Layout from '../layouts/Layout.astro';
-import { client, urlFor } from '../lib/sanity';
+import { client } from '../lib/sanity';
 import { PortableText } from "astro-portabletext";
 import groq from 'groq';
 
@@ -17,6 +18,7 @@ try {
 } catch (e) {
   console.warn("Sanity fetch failed or no document found:", e);
 }
+---
 
 
 <Layout title="Síndrome do Olho Seco: Diagnóstico e Tratamento | Saraiva Vision" description="Entenda a Síndrome do Olho Seco (TFOS DEWS III) e conheça o tratamento especializado da Saraiva Vision com IRPL E-Eye e diagnóstico avançado.">
@@ -61,6 +63,18 @@ try {
                   Quando o filme lacrimal se rompe precocemente, a superfície do olho fica exposta e sofre pequenas lesões. Isso gera inflamação, que por sua vez piora a qualidade da lágrima, criando um ciclo contínuo de desconforto e dano ocular se não for tratado adequadamente.
                 </p>
               </div>
+
+              <!-- DIAGRAMA CICLO VICIOSO -->
+              <figure class="my-10 text-center not-prose">
+                  <img 
+                      src="/Ciclo-vicioso-DOS.png" 
+                      alt="Diagrama do Ciclo Vicioso da Doença do Olho Seco (TFOS DEWS II)" 
+                      class="w-full max-w-2xl mx-auto rounded-xl shadow-lg border border-gray-100"
+                  />
+                  <figcaption class="text-sm text-gray-500 mt-3 italic">
+                      O ciclo autoperpetuante da doença, conforme descrito pelo TFOS DEWS II.
+                  </figcaption>
+              </figure>
 
               <h2 class="text-3xl font-bold text-[#003D7A] mt-12 mb-6">Causas e tipos de Olho Seco</h2>
               <p>

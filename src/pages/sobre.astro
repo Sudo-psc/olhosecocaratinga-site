@@ -6,19 +6,20 @@ const doctor = {
     crm: "CRM-MG 69.870",
     specialty: "Oftalmologia",
     subspecialty: "Especialista em Córnea e Superfície Ocular",
-    experience: "10+ anos de experiência",
+    experience: "15+ anos de experiência",
     education: [
-        "Graduação em Medicina",
-        "Residência em Oftalmologia",
-        "Especialização em Córnea e Doenças Externas", 
-        "Membro da Sociedade Brasileira de Oftalmologia"
+        "Graduação em Medicina pela UFMG",
+        "Residência em Oftalmologia pelo Hospital São Geraldo (HC-UFMG)",
+        "Especialização em Córnea, Doenças Externas e Superfície Ocular",
+        "Membro Titular do Conselho Brasileiro de Oftalmologia (CBO)",
+        "Membro da ASCRS (American Society of Cataract and Refractive Surgery)"
     ],
     expertise: [
-        "Síndrome do Olho Seco",
-        "Doenças da Córnea",
-        "Cirurgia Refrativa",
-        "Blefarite e Meibomite",
-        "Alergias Oculares"
+        "Olho Seco e Disfunção do Filme Lacrimal",
+        "Cirurgia de Catarata Premium",
+        "Cirurgia Refrativa (Laser)",
+        "Ceratocone e Lentes Especiais",
+        "Blefaroplastia"
     ]
 };
 
@@ -48,14 +49,14 @@ const doctor = {
                     <div class="relative">
                         <div class="bg-gradient-to-br from-blue-100 to-blue-50 rounded-2xl p-8 relative">
                             <img 
-                                src="/professional_portrait_doctor.JPG" 
+                                src="/doctor-portrait.jpg" 
                                 alt={doctor.name}
-                                class="rounded-xl shadow-xl w-full h-auto object-cover"
+                                class="rounded-xl shadow-xl w-full h-auto object-cover transform transition-transform hover:scale-[1.02] duration-500"
                                 loading="lazy"
                             />
-                            <div class="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-lg p-4">
+                            <div class="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-lg p-4 border border-blue-50">
                                 <p class="text-blue-600 font-bold">{doctor.crm}</p>
-                                <p class="text-sm text-gray-600">{doctor.specialty}</p>
+                                <p class="text-xs text-gray-500 uppercase tracking-widest">{doctor.specialty}</p>
                             </div>
                         </div>
                     </div>
@@ -63,9 +64,11 @@ const doctor = {
                     <div>
                         <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider">Conheça o Especialista</span>
                         <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-6">{doctor.name}</h2>
-                        <p class="text-lg text-gray-600 mb-6">
-                            {doctor.subspecialty} com {doctor.experience} dedicados ao tratamento de doenças oculares, 
-                            especialmente a Síndrome do Olho Seco.
+                        <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                            O Dr. Philipe Saraiva Cruz dedica-se a devolver qualidade de vida a pacientes que sofrem com o desconforto ocular crônico. Com formação de excelência no <strong>Hospital São Geraldo (UFMG)</strong>, um dos maiores centros oftalmológicos da América Latina, ele combina rigor técnico com um atendimento profundamente humano.
+                        </p>
+                        <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                            "Entendo que o Olho Seco não é apenas um incômodo, mas uma condição que afeta o trabalho, o sono e a alegria de viver. Por isso, trouxe para Caratinga as tecnologias mais avançadas do mundo para diagnóstico e tratamento."
                         </p>
                         
                         <div class="space-y-6">

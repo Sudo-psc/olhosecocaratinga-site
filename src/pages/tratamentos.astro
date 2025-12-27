@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Tratamentos para Olho Seco | Protocolos Avançados" description="Conheça os tratamentos modernos para olho seco disponíveis em Caratinga. E-Eye IRPL, Higiene palpebral e protocolos personalizados.">
+  <!-- Header Section -->
   <section class="relative bg-gradient-to-br from-[#003D7A] to-blue-900 py-20 text-white overflow-hidden">
      <div class="absolute inset-0 bg-[url('/pattern.svg')] opacity-10"></div>
     <div class="container mx-auto px-6 relative z-10">
@@ -13,13 +14,10 @@ import Layout from '../layouts/Layout.astro';
         </h1>
         <div class="inline-flex items-center gap-2 bg-blue-500/20 rounded-full px-4 py-1 mb-6 border border-blue-400/30">
             <img src="/DEWSIII.jpeg" class="w-6 h-6 rounded-full" />
-            <span class="text-xs font-semibold text-blue-100">Diretrizes TFOS DEWS II (2017)</span>
+            <span class="text-xs font-semibold text-blue-100">Diretrizes TFOS DEWS II</span>
         </div>
         <p class="text-xl text-blue-100 leading-relaxed max-w-3xl mx-auto mb-8">
           Oferecemos um arsenal terapêutico completo, seguindo as diretrizes mundiais mais recentes (TFOS DEWS II), para trazer alívio real e duradouro.
-        </p>
-        <p class="text-xl text-blue-100 leading-relaxed max-w-3xl mx-auto">
-          Abordagem estagiada baseada na gravidade da doença, conforme preconizado pelo TFOS DEWS II.
         </p>
       </div>
     </div>
@@ -28,115 +26,84 @@ import Layout from '../layouts/Layout.astro';
   <section class="section-padding bg-white">
     <div class="container mx-auto px-6">
       
-      <!-- Intro -->
-      <div class="max-w-4xl mx-auto mb-16">
-        <p class="text-lg text-gray-600 leading-relaxed">
-          O tratamento do olho seco não é "tamanho único". Na Saraiva Vision, seguimos um algoritmo de tratamento em etapas, começando com medidas conservadoras e avançando para tecnologias de ponta como a Luz Pulsada (IRPL) quando necessário para restaurar a função das glândulas.
-        </p>
-      </div>
+      <!-- Flagship: IRPL -->
+      <a href="/tratamentos/luz-pulsada-irpl" class="block group mb-16">
+          <div class="bg-[#003D7A] rounded-[2.5rem] overflow-hidden text-white shadow-2xl relative transition-transform duration-300 hover:scale-[1.01]">
+            <div class="absolute top-0 right-0 w-1/2 h-full bg-blue-500/10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+            
+            <div class="grid lg:grid-cols-2 gap-0 items-center">
+                <div class="p-10 lg:p-14 relative z-10">
+                    <div class="flex items-center gap-3 mb-4">
+                         <span class="bg-green-400 text-[#003D7A] font-bold text-xs px-2 py-1 rounded">EXCLUSIVO NO INTERIOR DE MG</span>
+                         <span class="text-blue-300 text-sm">Tecnologia Francesa</span>
+                    </div>
+                   
+                    <h2 class="text-3xl md:text-5xl font-bold mb-4 font-heading group-hover:text-blue-200 transition-colors">E-Eye IRPL®</h2>
+                    <h3 class="text-xl text-blue-200 mb-6 font-light">Padrão Ouro no Tratamento da DGM</h3>
+                    
+                    <p class="text-gray-300 mb-8 leading-relaxed max-w-md">
+                        O único equipamento de Luz Pulsada Intensa regulada do mundo com certificação específica para Olho Seco. Indolor, rápido e com 90% de satisfação.
+                    </p>
 
-      <!-- Featured Technology: E-EYE -->
-      <div id="e-eye" class="bg-[#003D7A] rounded-[2.5rem] overflow-hidden text-white shadow-2xl mb-20 relative">
-        <div class="absolute top-0 right-0 w-1/2 h-full bg-blue-500/10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-        
-        <div class="grid lg:grid-cols-2 gap-0 items-center">
-            <div class="p-12 lg:p-16 relative z-10">
-                <span class="text-green-400 font-bold tracking-widest text-sm uppercase mb-2 block">Destaque Tecnológico</span>
-                <h2 class="text-3xl md:text-5xl font-bold mb-6 font-heading">E-Eye IRPL</h2>
-                <h3 class="text-xl text-blue-200 mb-8 font-light">Luz Pulsada Regulada de Alta Intensidade</h3>
-                
-                <p class="text-gray-300 mb-8 leading-relaxed">
-                    Uma tecnologia revolucionária desenvolvida na França especificamente para o tratamento da Disfunção das Glândulas de Meibomius (DGM), a causa de 80% dos casos de olho seco.
-                </p>
-
-                <ul class="space-y-4 mb-10">
-                    <li class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-green-400">✓</div>
-                        <span>Estimula os nervos parassimpáticos</span>
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-green-400">✓</div>
-                        <span>Recupera a secreção de lipídios (óleo)</span>
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-green-400">✓</div>
-                        <span>Sessões rápidas, indolores e não invasivas</span>
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-green-400">✓</div>
-                        <span>Protocolo Padrão: 3 a 4 sessões (Intervalos: Dia 0, 15, 45)</span>
-                    </li>
-                </ul>
-
-                <a href="/contato" class="btn-premium bg-white text-[#003D7A] hover:bg-gray-100 border-none">
-                    Verificar Disponibilidade
-                </a>
+                    <span class="inline-flex items-center gap-2 text-white font-bold border-b-2 border-green-400 pb-1">
+                        Saiba mais sobre o IRPL
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </span>
+                </div>
+                <div class="h-[300px] lg:h-[400px] bg-white/5 relative flex items-center justify-center p-8">
+                    <img src="/irpl-machine.png" alt="Máquina E-Eye IRPL" class="h-full object-contain drop-shadow-2xl group-hover:scale-105 transition-transform duration-500" />
+                </div>
             </div>
-            <div class="h-full min-h-[400px] bg-white relative p-12 flex items-center justify-center">
-                <!-- Replace with E-Eye Machine Image -->
-                <img src="/irpl-machine.png" alt="Máquina E-Eye IRPL" class="max-w-full max-h-[350px] object-contain drop-shadow-2xl transform hover:scale-105 transition-transform duration-500" />
-            </div>
-        </div>
-      </div>
+          </div>
+      </a>
 
       <!-- Other Treatments Grid -->
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl font-bold text-[#003D7A] mb-12 text-center">Protocolo Clínico Completo</h2>
+      <h2 class="text-3xl font-bold text-[#003D7A] mb-10 text-center">Nossas Soluções Terapêuticas</h2>
+      
+      <div class="grid md:grid-cols-3 gap-6">
         
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Card 1 -->
-            <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-all">
-                <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center text-3xl mb-6">💧</div>
-                <h3 class="font-bold text-[#003D7A] text-xl mb-3">Lubrificantes Sem Conservantes</h3>
-                <p class="text-gray-600 text-sm leading-relaxed">
-                    Essenciais para repor a umidade sem causar a toxicidade associada aos conservantes (como o cloreto de benzalcônio) encontrados em colírios comuns.
-                </p>
+        <!-- Higiene -->
+        <a href="/tratamentos/higiene-palpebral" class="block bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-xl hover:border-blue-200 transition-all group">
+            <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:scale-110 transition-transform p-2">
+                <img src="/icons/08_acido_hipocloroso.png" alt="Higiene Palpebral" class="w-full h-full object-contain" />
             </div>
+            <h3 class="font-bold text-[#003D7A] text-xl mb-3">Higiene Palpebral</h3>
+            <p class="text-gray-600 text-sm mb-4">
+                O passo fundamental. Limpeza térmica e mecânica para desobstruir as glândulas e remover o biofilme.
+            </p>
+            <span class="text-blue-600 text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
+                Ver detalhes →
+            </span>
+        </a>
 
-            <!-- Card 2 -->
-            <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-all">
-                <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center text-3xl mb-6">🧼</div>
-                <h3 class="font-bold text-[#003D7A] text-xl mb-3">Higiene Palpebral</h3>
-                <p class="text-gray-600 text-sm leading-relaxed">
-                    Uso de espumas ou géis específicos para remover crostas, bactérias e ácaros (Demodex) que habitam a base dos cílios e causam blefarite.
-                </p>
-            </div>
+        <!-- Medicamentos -->
+        <a href="/tratamentos/medicamentos" class="block bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-xl hover:border-blue-200 transition-all group">
+            <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">💊</div>
+            <h3 class="font-bold text-[#003D7A] text-xl mb-3">Medicamentos & Suplementos</h3>
+            <p class="text-gray-600 text-sm mb-4">
+                Lágrimas artificiais sem conservantes, imunomoduladores e ômega 3 de alta potência para controle inflamatório.
+            </p>
+            <span class="text-blue-600 text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
+                Ver detalhes →
+            </span>
+        </a>
 
-            <!-- Card 3 -->
-            <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-all">
-                <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center text-3xl mb-6">🐟</div>
-                <h3 class="font-bold text-[#003D7A] text-xl mb-3">Suplementação Oral</h3>
-                <p class="text-gray-600 text-sm leading-relaxed">
-                    Ácidos graxos essenciais (Ômega 3) de alta qualidade e com bioatividade comprovada ajudam a reduzir a inflamação sistêmica e melhoram a qualidade do óleo da lágrima.
-                </p>
+        <!-- Lentes Esclerais -->
+        <a href="/tratamentos/lentes-esclerais" class="block bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-xl hover:border-blue-200 transition-all group">
+            <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:scale-110 transition-transform p-2">
+                <img src="/icons/06_lentes_terapeuticas_v3.png" alt="Lentes Esclerais" class="w-full h-full object-contain" />
             </div>
-             <!-- Card 4 -->
-            <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-all">
-                <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center text-3xl mb-6">🌡️</div>
-                <h3 class="font-bold text-[#003D7A] text-xl mb-3">Compressas Mornas</h3>
-                <p class="text-gray-600 text-sm leading-relaxed">
-                    Quando realizadas corretamente (temperatura e tempo constantes), ajudam a liquefazer o meibum obstruído dentro das glândulas.
-                </p>
-            </div>
+            <h3 class="font-bold text-[#003D7A] text-xl mb-3">Lentes Esclerais</h3>
+            <p class="text-gray-600 text-sm mb-4">
+                Proteção líquida contínua e recuperação visual para casos de olho seco severo e doenças da superfície.
+            </p>
+            <span class="text-blue-600 text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
+                Ver detalhes →
+            </span>
+        </a>
 
-            <!-- Card 5 -->
-            <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-all">
-                <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center text-3xl mb-6">👁️</div>
-                <h3 class="font-bold text-[#003D7A] text-xl mb-3">Lentes Esclerais</h3>
-                <p class="text-gray-600 text-sm leading-relaxed">
-                    Para casos severos, criam um reservatório de fluido constante sobre a córnea, protegendo a superfície e restaurando a visão.
-                </p>
-            </div>
-            
-             <!-- Card 6 -->
-             <div class="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-all">
-                <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center text-3xl mb-6">💊</div>
-                <h3 class="font-bold text-[#003D7A] text-xl mb-3">Anti-inflamatórios</h3>
-                <p class="text-gray-600 text-sm leading-relaxed">
-                    Ciclos curtos de corticoides ou imunomoduladores tópicos podem ser prescritos para controlar a inflamação aguda e quebrar o ciclo vicioso.
-                </p>
-            </div>
-        </div>
       </div>
 
     </div>

@@ -1,22 +1,22 @@
-# Olhos Secos Caratinga
+# Olho Seco Caratinga
 
 Site informativo especializado em tratamento de olho seco em Caratinga/MG, desenvolvido pela Clínica Saraiva Vision.
 
 ## 🎯 Visão Geral
 
-Este projeto foi refatorado para utilizar **Astro** como framework frontend de alta performance e **WordPress Headless** como sistema de gerenciamento de conteúdo (CMS). O objetivo é garantir velocidade extrema (Core Web Vitals), excelente SEO e facilidade de edição de conteúdo.
+Este projeto utiliza **Astro** como framework frontend de alta performance e **Sanity.io** como sistema de gerenciamento de conteúdo (CMS Headless). O objetivo é garantir velocidade extrema (Core Web Vitals), excelente SEO e flexibilidade de conteúdo.
 
 ## 🚀 Tecnologias
 
 - **Framework**: [Astro](https://astro.build) (v4)
-- **CMS**: WordPress (Headless via REST API)
+- **CMS**: [Sanity.io](https://www.sanity.io) (Headless)
 - **Styling**: Tailwind CSS
-- **Deploy**: Cloudflare Pages / Vercel / Netlify (Suporte a SSR/Hybrid)
+- **Deploy**: Vercel / Netlify / Cloudflare Pages
 
 ## 📋 Pré-requisitos
 
 - Node.js 18.x ou superior
-- Instância WordPress (pode ser local, hospedada ou WordPress.com)
+- Acesso ao projeto no Sanity.io (Project ID e Dataset)
 
 ## 🛠️ Instalação
 
@@ -41,11 +41,15 @@ Copie o arquivo de exemplo:
 cp .env.example .env
 ```
 
-Edite o arquivo `.env` e defina a URL da sua API WordPress:
+Edite o arquivo `.env` com as credenciais do Sanity:
 
 ```env
-WORDPRESS_API_URL=https://seu-wordpress.com/wp-json/wp/v2
+PUBLIC_SANITY_PROJECT_ID=seu_project_id
+PUBLIC_SANITY_DATASET=production
+# PUBLIC_SANITY_API_VERSION=2024-01-01 (Opcional, padrão no código)
 ```
+
+> **Nota:** Você pode encontrar o `Project ID` no dashboard do Sanity em gerenciamento do projeto.
 
 ### 4. Iniciar Servidor de Desenvolvimento
 
@@ -57,16 +61,24 @@ Abra [http://localhost:4321](http://localhost:4321) no navegador.
 
 ## 🏗️ Estrutura do Projeto
 
-- `src/pages`: Rotas do site (Início, Blog, Postagem única).
-- `src/components`: Componentes reutilizáveis (Header, Cards).
-- `src/layouts`: Layout principal (HTML structure, SEO tags).
-- `src/lib/wordpress.ts`: Cliente de conexão com a API do WordPress.
+- `src/pages`: Rotas do site (Início, Blog, Páginas de conteúdo).
+- `src/components`: Componentes reutilizáveis (Header, Footer, Cards).
+- `src/layouts`: Layouts base (HTML structure, SEO tags).
+- `src/lib/sanity.ts`: Cliente de conexão com a API do Sanity.
 
 ## 📝 Scripts
 
 - `npm run dev`: Inicia o servidor local.
-- `npm run build`: Gera o build de produção (SSR/Hybrid).
+- `npm run build`: Gera o build de produção (Static/SSR).
 - `npm run preview`: Visualiza o build localmente.
+- `npm run astro`: CLI do Astro.
+
+## 🔌 Sanity Integration
+
+O conteúdo dinâmico (como o Blog e textos da página 'Olho Seco') é gerenciado pelo Sanity.
+
+- **Schemas**: Os tipos de conteúdo (schemas) geralmente ficam no diretório do Studio (se monorepo) ou em um repositório separado, dependendo da configuração. Neste projeto, o cliente consome os dados via GROQ.
+- **Fetching**: Veja `src/lib/sanity.ts` para configuração do cliente e exemplos de queries em `src/pages/blog/[slug].astro`.
 
 ## 📄 Licença
 

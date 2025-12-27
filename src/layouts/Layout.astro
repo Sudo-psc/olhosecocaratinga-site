@@ -182,15 +182,15 @@ const structuredData = {
     <!-- Styles -->
     <style is:global>
         :root {
-            --primary: #003D7A;
-            --primary-light: #005FB8;
-            --secondary: #64748b;
-            --accent: #E7F5FF;
-            --text-main: #0F172A;
-            --text-muted: #475569;
-            --bg-body: #FFFFFF;
-            --bg-alt: #F8FAFC;
-            --border: #E2E8F0;
+            --primary: #003D7A; /* Deep Blue retained for strong contrast/headings */
+            --primary-light: #22d3ee; /* Cyan-400 for accents/hover */
+            --secondary: #64748b; /* Slate-500 for secondary text */
+            --accent: #ecfeff; /* Cyan-50 for backgrounds */
+            --text-main: #1e293b; /* Slate-800 for main text */
+            --text-muted: #475569; /* Slate-600 */
+            --bg-body: #f8fafc; /* Slate-50 for global background (Silver-ish) */
+            --bg-alt: #ffffff; /* White for cards */
+            --border: #e2e8f0; /* Slate-200 */
             --radius-sm: 0.5rem;
             --radius-md: 0.75rem;
             --radius-lg: 1rem;
@@ -256,15 +256,16 @@ const structuredData = {
         }
 
         .btn-premium-primary {
-            background-color: var(--primary);
+            background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%); /* Cyan to Blue Gradient */
             color: white;
-            box-shadow: 0 10px 15px -3px rgba(0, 61, 122, 0.2);
+            box-shadow: 0 10px 15px -3px rgba(6, 182, 212, 0.3); /* Cyan shadow */
+            border: none;
         }
 
         .btn-premium-primary:hover {
-            background-color: var(--primary-light);
             transform: translateY(-2px);
-            box-shadow: 0 20px 25px -5px rgba(0, 61, 122, 0.25);
+            box-shadow: 0 20px 25px -5px rgba(6, 182, 212, 0.4);
+            filter: brightness(1.1);
         }
 
         .btn-premium-secondary {
