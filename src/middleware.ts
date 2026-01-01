@@ -88,7 +88,7 @@ export const onRequest = defineMiddleware(async (_context, next) => {
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
         "img-src 'self' data: https: blob:",
         "font-src 'self' https://fonts.gstatic.com",
-        "connect-src 'self' https://olhosecocaratinga.com https://cdn.sanity.io https://*.google-analytics.com",
+        "connect-src 'self' https://olhosecocaratinga.com.br https://olhosecocaratinga.com https://cdn.sanity.io https://*.google-analytics.com",
         "frame-src 'none'",
         "object-src 'none'",
         "base-uri 'self'",

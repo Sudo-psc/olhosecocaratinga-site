@@ -94,7 +94,7 @@ export interface WordPressTag {
 }
 
 // Configuração da API WordPress
-const API_URL = import.meta.env.WORDPRESS_API_URL || 'https://olhosecocaratinga.com/wp-json/wp/v2';
+const API_URL = import.meta.env.WORDPRESS_API_URL || 'https://olhosecocaratinga.com.br/wp-json/wp/v2';
 
 // Função para fazer requisições à API
 async function fetchWordPressAPI<T>(endpoint: string, params: Record<string, string> = {}): Promise<T[]> {

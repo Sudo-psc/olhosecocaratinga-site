@@ -11,7 +11,7 @@ Disallow: /api/*
 Disallow: /_next/*
 
 # Sitemap
-Sitemap: https://olhosecocaratinga.com.br/sitemap.xml
+Sitemap: https://olhosecocaratinga.com.br/sitemap-index.xml
 
 # Crawl-delay sugerido (em segundos)
 Crawl-delay: 1
