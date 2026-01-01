@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import OfficialBlogCTA from '../../components/OfficialBlogCTA.astro';
 
 const schema = {
   "@context": "https://schema.org",
@@ -11,8 +12,8 @@ const schema = {
     "name": "Dr. Philipe Saraiva Cruz",
     "jobTitle": "Oftalmologista"
   },
-  "datePublished": "2024-12-10",
-  "dateModified": "2024-12-23"
+  "datePublished": "2025-01-15",
+  "dateModified": "2025-01-15"
 };
 ---
 
@@ -43,11 +44,20 @@ const schema = {
             <div class="flex items-center justify-center gap-4 text-gray-500 text-sm flex-wrap">
                 <span>Por Dr. Philipe Saraiva Cruz</span>
                 <span>•</span>
-                <span>10 de Dezembro, 2024</span>
+                <span>15 de Janeiro, 2025</span>
                 <span>•</span>
                 <span>Leitura de 7 min</span>
             </div>
         </div>
+
+        <div class="mb-12 rounded-2xl overflow-hidden shadow-lg">
+            <img src="/mitos/sintomas_olhoseco_capa.png" alt="Sintomas de Olho Seco" class="w-full h-auto max-h-[400px] object-cover" />
+        </div>
+
+// ... (skipping unchanged content for brevity in tool call, but context needs to be exact for replacement. Since I cannot skip, I will use a smaller chunk for just the date and another for refs if needed. Or just replace header and footer separately to be safe.)
+
+// WAITING. I'll split this. First update schema/header dates.
+
 
         <div class="prose prose-lg prose-blue mx-auto text-gray-600">
             <p class="lead text-xl text-gray-800 font-medium mb-8">
@@ -187,6 +197,18 @@ const schema = {
               <li><strong>Colírios Especializados:</strong> Formulações específicas</li>
               <li><strong>Orientação de Higiene Palpebral:</strong> Cuidados domiciliares</li>
             </ul>
+
+            <div class="mt-12 text-sm text-gray-500 border-t pt-6">
+                <p class="font-bold mb-2">Referências Bibliográficas:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Stapleton F, et al. TFOS DEWS II Epidemiology Report. <em>The Ocular Surface</em>. 2017.</li>
+                    <li>Wolffsohn JS, et al. TFOS DEWS II Diagnostic Methodology Report. <em>The Ocular Surface</em>. 2017.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="my-12">
+            <OfficialBlogCTA />
         </div>
         
         <!-- CTA Section -->

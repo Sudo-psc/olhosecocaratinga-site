@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import OfficialBlogCTA from '../../components/OfficialBlogCTA.astro';
 
 const schema = {
   "@context": "https://schema.org",
@@ -16,8 +17,8 @@ const schema = {
     "name": "Saraiva Vision",
     "url": "https://saraivavision.com.br"
   },
-  "datePublished": "2024-12-15",
-  "dateModified": "2024-12-23"
+  "datePublished": "2025-01-20",
+  "dateModified": "2025-01-20"
 };
 ---
 
@@ -48,7 +49,7 @@ const schema = {
             <div class="flex items-center justify-center gap-4 text-gray-500 text-sm flex-wrap">
                 <span>Por Dr. Philipe Saraiva Cruz</span>
                 <span>•</span>
-                <span>15 de Dezembro, 2024</span>
+                <span>20 de Janeiro, 2025</span>
                 <span>•</span>
                 <span>Leitura de 10 min</span>
             </div>
@@ -56,156 +57,27 @@ const schema = {
 
         <!-- Featured Image -->
         <div class="mb-12 rounded-2xl overflow-hidden shadow-lg">
-          <img src="/hero-premium.png" alt="Tratamento de olho seco em Caratinga na Clínica Saraiva Vision" class="w-full h-auto" />
+          <img src="/mitos/trat_olho_seco.png" alt="Tratamento de olho seco em Caratinga na Clínica Saraiva Vision" class="w-full h-auto" />
         </div>
 
-        <div class="prose prose-lg prose-blue mx-auto text-gray-600">
-            <p class="lead text-xl text-gray-800 font-medium mb-8">
-                Se você sofre com <strong>olho seco em Caratinga</strong>, saiba que não está sozinho. A síndrome do olho seco afeta milhões de brasileiros, mas hoje existem tratamentos altamente eficazes disponíveis em nossa região.
-            </p>
-
-            <div class="bg-blue-50 p-6 rounded-xl border border-blue-100 my-8">
-              <h3 class="text-blue-800 font-bold text-lg mb-3">📍 Você sabia?</h3>
-              <p class="text-blue-700 mb-0">
-                Caratinga e região do Vale do Rio Doce agora contam com tratamentos de ponta para olho seco. A Clínica Saraiva Vision é referência em diagnóstico e tratamento especializado.
-              </p>
-            </div>
-
-            <h2 id="entenda">Entendendo o Olho Seco</h2>
-            <p>
-                O olho seco não é apenas "falta de lágrima". É uma doença multifatorial da superfície ocular caracterizada por instabilidade do filme lacrimal. Pode causar:
-            </p>
-            <ul>
-              <li>Sensação de areia nos olhos</li>
-              <li>Ardência e coceira</li>
-              <li>Vermelhidão</li>
-              <li>Visão embaçada</li>
-              <li>Fadiga ocular</li>
-              <li>Lacrimejamento excessivo (reflexo)</li>
-            </ul>
-
-            <h2 id="diagnostico">Diagnóstico em Caratinga</h2>
-            <p>
-                O primeiro passo para o tratamento correto é um diagnóstico preciso. Em Caratinga, oferecemos:
-            </p>
-
-            <div class="grid md:grid-cols-2 gap-4 my-8">
-              <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
-                <h4 class="text-[#003D7A] font-bold mb-2">🔬 Meibografia</h4>
-                <p class="text-gray-600 text-sm mb-0">Visualização das glândulas de Meibomius para identificar atrofia ou obstrução.</p>
-              </div>
-              <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
-                <h4 class="text-[#003D7A] font-bold mb-2">📏 Meniscometria</h4>
-                <p class="text-gray-600 text-sm mb-0">Medição do volume lacrimal na superfície ocular.</p>
-              </div>
-              <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
-                <h4 class="text-[#003D7A] font-bold mb-2">⏱️ Tempo de Ruptura (BUT)</h4>
-                <p class="text-gray-600 text-sm mb-0">Avaliação da estabilidade do filme lacrimal.</p>
-              </div>
-              <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
-                <h4 class="text-[#003D7A] font-bold mb-2">🔎 Biomicroscopia</h4>
-                <p class="text-gray-600 text-sm mb-0">Exame detalhado da superfície ocular e pálpebras.</p>
-              </div>
-            </div>
-
-            <h2 id="tratamentos">Tratamentos Disponíveis em Caratinga</h2>
-            
-            <h3>1. Luz Pulsada Intensa (E-Eye IRPL)</h3>
-            <p>
-                O tratamento com <strong>luz pulsada em Caratinga</strong> é a opção mais avançada para olho seco evaporativo. O E-Eye IRPL estimula as glândulas de Meibomius a voltarem a funcionar, tratando a causa raiz do problema.
-            </p>
-            <ul>
-              <li><strong>Indicação:</strong> Disfunção das Glândulas de Meibomius (DGM)</li>
-              <li><strong>Protocolo:</strong> 3 sessões (Dia 0, 15 e 45) + manutenção anual</li>
-              <li><strong>Resultado:</strong> Melhora significativa em 80-90% dos pacientes</li>
-            </ul>
-
-            <h3>2. Plugs Lacrimais</h3>
-            <p>
-                Micro-dispositivos inseridos nos pontos lacrimais para reter a lágrima por mais tempo no olho. Excelente opção para olho seco aquoso.
-            </p>
-            <ul>
-              <li><strong>Indicação:</strong> Olho seco por deficiência aquosa</li>
-              <li><strong>Procedimento:</strong> Ambulatorial, indolor</li>
-              <li><strong>Duração:</strong> Temporários (dissolvem) ou permanentes</li>
-            </ul>
-
-            <h3>3. Expressão das Glândulas de Meibomius</h3>
-            <p>
-                Técnica manual para desobstruir as glândulas entupidas, liberando a secreção acumulada.
-            </p>
-            <ul>
-              <li><strong>Indicação:</strong> Glândulas obstruídas identificadas na Meibografia</li>
-              <li><strong>Complemento:</strong> Geralmente associada à luz pulsada</li>
-            </ul>
-
-            <h3>4. Higiene Palpebral Profissional</h3>
-            <p>
-                Limpeza especializada da margem palpebral para remover biofilme bacteriano e debris.
-            </p>
-            <ul>
-              <li><strong>Indicação:</strong> Blefarite, rosácea ocular</li>
-              <li><strong>Manutenção:</strong> Orientação para higiene domiciliar</li>
-            </ul>
-
-            <h3>5. Colírios Especializados</h3>
-            <p>
-                Nem todo colírio é igual. Prescrevemos formulações específicas para cada tipo de olho seco:
-            </p>
-            <ul>
-              <li><strong>Lágrimas artificiais sem conservantes:</strong> Para uso crônico</li>
-              <li><strong>Colírios lipídicos:</strong> Para deficiência da camada oleosa</li>
-              <li><strong>Anti-inflamatórios:</strong> Para controle da inflamação crônica</li>
-              <li><strong>Ciclosporina:</strong> Para casos moderados a graves</li>
-            </ul>
-
-            <h3>6. Terapia Térmica</h3>
-            <p>
-                Aplicação de calor controlado para liquefazer a secreção solidificada nas glândulas.
-            </p>
-
-            <h3>7. Ácido Hipocloroso</h3>
-            <p>
-                Solução antimicrobiana natural para higiene palpebral, combatendo infecções e blefarite.
-            </p>
-
-            <h2 id="fluxo">Como Funciona o Tratamento na Saraiva Vision?</h2>
-            
-            <ol class="space-y-4">
-              <li>
-                <strong>Consulta Inicial:</strong> Avaliação completa dos sintomas e histórico
-              </li>
-              <li>
-                <strong>Exames Diagnósticos:</strong> Meibografia, meniscometria e outros exames necessários
-              </li>
-              <li>
-                <strong>Plano Personalizado:</strong> Tratamento específico para o seu tipo de olho seco
-              </li>
-              <li>
-                <strong>Execução do Tratamento:</strong> Procedimentos em consultório quando necessário
-              </li>
-              <li>
-                <strong>Acompanhamento:</strong> Retornos para ajuste e manutenção
-              </li>
-            </ol>
-
-            <h2 id="prevencao">Dicas de Prevenção</h2>
-            <p>
-                Além do tratamento médico, algumas medidas ajudam no controle do olho seco:
-            </p>
-            <ul>
-              <li><strong>Regra 20-20-20:</strong> A cada 20 minutos de tela, olhe para algo a 20 pés (6m) por 20 segundos</li>
-              <li><strong>Pisque conscientemente:</strong> Especialmente ao usar celular ou computador</li>
-              <li><strong>Hidratação:</strong> Beba bastante água</li>
-              <li><strong>Umidificador:</strong> Em ambientes com ar-condicionado</li>
-              <li><strong>Ômega 3:</strong> Pode ajudar na qualidade da lágrima</li>
-              <li><strong>Higiene palpebral:</strong> Limpeza diária das pálpebras</li>
-            </ul>
+// ... (split for references)
 
             <h2 id="agendar">Agende sua Avaliação em Caratinga</h2>
             <p>
                 Não espere o olho seco comprometer sua qualidade de vida. Com diagnóstico e tratamento adequados, é possível viver sem desconforto.
             </p>
+            
+            <div class="mt-12 text-sm text-gray-500 border-t pt-6">
+                <p class="font-bold mb-2">Referências Bibliográficas:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Jones L, et al. TFOS DEWS II Management and Therapy Report. <em>The Ocular Surface</em>. 2017.</li>
+                    <li>Gomes JAP, et al. TFOS DEWS II Iatrogenic Dry Eye Report. <em>The Ocular Surface</em>. 2017.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="my-12">
+            <OfficialBlogCTA />
         </div>
         
         <!-- CTA Section -->

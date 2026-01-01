@@ -5,7 +5,7 @@ import node from '@astrojs/node';
 
 export default defineConfig({
     site: 'https://olhosecocaratinga.com.br',
-    output: 'hybrid',
+    output: 'static',
     adapter: node({
         mode: 'standalone'
     }),
@@ -31,8 +31,22 @@ export default defineConfig({
         inlineStylesheets: 'auto'
     },
     image: {
-        domains: ['olhosecocaratinga.com.br'],
-        remotePatterns: [{ protocol: 'https' }],
+        // Restrict to specific trusted domains only
+        domains: ['olhosecocaratinga.com.br', 'cdn.sanity.io'],
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'cdn.sanity.io',
+            },
+            {
+                protocol: 'https',
+                hostname: 'olhosecocaratinga.com.br',
+            },
+            {
+                protocol: 'https',
+                hostname: 'olhosecocaratinga.com',
+            }
+        ],
     },
     compressHTML: true,
     prefetch: {

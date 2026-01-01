@@ -1,8 +1,29 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import OfficialBlogCTA from '../../components/OfficialBlogCTA.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Mitos e Verdades sobre o Olho Seco",
+  "description": "Desvendando mitos comuns sobre a doença do olho seco com base na ciência. Oftalmologista em Caratinga.",
+  "author": {
+    "@type": "Person",
+    "name": "Dr. Philipe Saraiva Cruz",
+    "jobTitle": "Oftalmologista"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Saraiva Vision",
+    "url": "https://saraivavision.com.br"
+  },
+  "datePublished": "2025-01-10",
+  "dateModified": "2025-01-10"
+};
 ---
 
 <Layout title="Mitos e Verdades sobre Olho Seco | Blog Saraiva Vision" description="Desvendando mitos comuns sobre a doença do olho seco com base na ciência.">
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   <article class="pt-24 pb-16 bg-white">
     <div class="container mx-auto px-6 max-w-4xl">
         <div class="text-center mb-12">
@@ -15,6 +36,10 @@ import Layout from '../../layouts/Layout.astro';
             </div>
         </div>
 
+        <div class="mb-12 rounded-2xl overflow-hidden shadow-lg">
+            <img src="/mitos/verdades_olho_seco.png" alt="Mitos e Verdades sobre Olho Seco" class="w-full h-auto max-h-[400px] object-cover" />
+        </div>
+
         <div class="prose prose-lg prose-blue mx-auto text-gray-600">
             <p class="lead text-xl text-gray-800 font-medium mb-8">
                 Muitos pacientes chegam ao consultório acreditando que o olho seco é apenas uma "falta de água" temporária. O relatório TFOS DEWS II esclarece essas questões.
@@ -24,36 +49,48 @@ import Layout from '../../layouts/Layout.astro';
                 <div class="bg-red-50 p-6 rounded-xl border-l-4 border-red-500">
                     <h3 class="text-red-700 font-bold text-lg mb-2">❌ Mito: Se meu olho lacrimeja, não tenho olho seco.</h3>
                     <p>
-                        <strong>Verdade:</strong> O lacrimejamento excessivo é muitas vezes um <em>sintoma</em> de olho seco. É uma lágrima reflexa, de má qualidade, que o corpo produz em uma tentativa desesperada de aliviar a irritação causada pela secura.
+                        <strong>Verdade:</strong> O lacrimejamento excessivo é muitas vezes um <em>sintoma</em> de olho seco. É uma lágrima reflexa, de má qualidade, que o corpo produz em uma tentativa de aliviar a irritação.
                     </p>
                 </div>
 
                 <div class="bg-green-50 p-6 rounded-xl border-l-4 border-green-500">
                     <h3 class="text-green-800 font-bold text-lg mb-2">✅ Verdade: O uso de telas piora a condição.</h3>
                     <p>
-                        Absolutamente. Quando focamos em telas, piscamos até 60% menos. Isso impede que a pálpebra "espalhe" o óleo necessário para prender a lágrima no olho, causando evaporação rápida.
+                        Quando focamos em telas, piscamos significativamente menos. Isso impede que a pálpebra "espalhe" a camada lipídica necessária para evitar a evaporação da lágrima.
                     </p>
                 </div>
 
                 <div class="bg-red-50 p-6 rounded-xl border-l-4 border-red-500">
                     <h3 class="text-red-700 font-bold text-lg mb-2">❌ Mito: Qualquer colírio resolve.</h3>
                     <p>
-                        <strong>Verdade:</strong> Colírios com conservantes (como o cloreto de benzalcônio) podem ser tóxicos para a superfície ocular se usados cronicamente. Além disso, colírios "clareadores" (vasoconstritores) mascaram a vermelhidão mas agravam o ressecamento a longo prazo.
+                        <strong>Verdade:</strong> Colírios com conservantes podem ser tóxicos para a superfície ocular se usados cronicamente. Vasoconstritores ("clareadores") apenas mascaram a vermelhidão e não tratam a causa.
                     </p>
                 </div>
 
                  <div class="bg-green-50 p-6 rounded-xl border-l-4 border-green-500">
-                    <h3 class="text-green-800 font-bold text-lg mb-2">✅ Verdade: É uma doença crônica.</h3>
+                    <h3 class="text-green-800 font-bold text-lg mb-2">✅ Verdade: É uma condição crônica e gerenciável.</h3>
                     <p>
-                        O olho seco não tem "cura" definitiva no sentido de desaparecer para sempre com um comprimido, mas tem <strong>controle</strong>. Com o tratamento correto (Luz Pulsada, higiene, lubrificação), é possível viver sem sintomas e com conforto.
+                        O olho seco geralmente é uma condição crônica. O objetivo do tratamento é o <strong>controle</strong> eficaz dos sintomas e a prevenção de danos à superfície ocular, proporcionando qualidade de vida ao paciente.
                     </p>
                 </div>
             </div>
 
-            <h3>A Importância do Diagnóstico</h3>
+            <h3>A Importância do Diagnóstico Médico</h3>
             <p>
-                Tratar olho seco com colírios genéricos sem saber a causa (falta de água ou falta de óleo) é ineficaz. Agende sua avaliação com Meibografia para saber exatamente o que seus olhos precisam.
+                Tratar olho seco sem identificar a causa (aquosa, evaporativa ou mista) pode ser ineficaz. Agende sua avaliação oftalmológica com o <strong>Dr. Philipe Saraiva Cruz (CRM-MG 69.870)</strong> para um diagnóstico preciso.
             </p>
+
+            <div class="mt-12 text-sm text-gray-500 border-t pt-6">
+                <p class="font-bold mb-2">Referências Bibliográficas:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Craig JP, et al. TFOS DEWS II Report Executive Summary. <em>The Ocular Surface</em>. 2017.</li>
+                    <li>Bron AJ, et al. TFOS DEWS II Pathophysiology Report. <em>The Ocular Surface</em>. 2017.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="my-12">
+            <OfficialBlogCTA />
         </div>
         
         <div class="mt-12 text-center">
