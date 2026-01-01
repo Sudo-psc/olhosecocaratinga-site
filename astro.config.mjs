@@ -5,7 +5,7 @@ import node from '@astrojs/node';
 
 export default defineConfig({
     site: 'https://olhosecocaratinga.com.br',
-    output: 'hybrid',
+    output: 'server',
     adapter: node({
         mode: 'standalone'
     }),
