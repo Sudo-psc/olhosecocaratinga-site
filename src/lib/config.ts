@@ -38,9 +38,9 @@ export const SITE_CONFIG = {
     // Doctor Info
     doctor: {
         name: 'Dr. Philipe Saraiva Cruz',
-        title: 'Médico Oftalmologista',
+        title: 'Médico pós-graduado em oftalmologia área de atuação oftalmologia clínica, procedimentos cirurgícos minimamente invasivos e olho seco',
         crm: 'CRM-MG 69.870',
-        specialties: ['Oftalmologia', 'Olho Seco', 'Cirurgia Ocular'],
+        specialties: ['médico pós-graduado em oftalmologia área de atuação oftalmologia clínica, procedimentos cirurgícos minimamente invasivos e olho seco', 'Olho Seco', 'Cirurgia Ocular'],
     },
 
     // Social Media
@@ -55,7 +55,7 @@ export const SITE_CONFIG = {
     seo: {
         titleTemplate: '%s | Saraiva Vision - Olho Seco Caratinga',
         defaultTitle: 'Tratamento Especializado de Olho Seco | Saraiva Vision Caratinga',
-        defaultDescription: 'Especialista em tratamento de olho seco em Caratinga/MG. Dr. Philipe Saraiva Cruz - Oftalmologista CRM-MG 69.870. Diagnóstico preciso e tratamentos modernos.',
+        defaultDescription: 'Especialista em tratamento de olho seco em Caratinga/MG. Dr. Philipe Saraiva Cruz - médico pós-graduado em oftalmologia área de atuação oftalmologia clínica, procedimentos cirurgícos minimamente invasivos e olho seco - CRM-MG 69.870. Diagnóstico preciso e tratamentos modernos.',
         defaultImage: '/og-image.jpg',
     },
 
