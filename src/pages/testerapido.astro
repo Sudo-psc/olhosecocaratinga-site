@@ -315,6 +315,9 @@
                 
                 // Show Hero Content
                 document.getElementById('hero-content').classList.remove('opacity-0', 'hidden');
+                
+                // Show Character
+                document.getElementById('doctor-svg').classList.remove('opacity-0');
             }
 
             function finishTest(success, timeElapsed) {
@@ -324,6 +327,9 @@
                 // Hide Active UI
                 document.getElementById('hero-content').classList.add('hidden');
                 progressRing.classList.add('opacity-0');
+                
+                // Show Character
+                document.getElementById('doctor-svg').classList.remove('opacity-0');
                 
                 // Show Result
                 resultCard.classList.remove('hidden');
@@ -377,6 +383,9 @@
 
                 // SVG Animation: Wide Eyes
                 lids.forEach(lid => lid.classList.add('wide'));
+                
+                // Hide Character for Timer visibility
+                document.getElementById('doctor-svg').classList.add('opacity-0');
 
 
                 
