@@ -47,8 +47,18 @@
             animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
 
-
-    </style>
+        .eye-lid {
+            transition: transform 0.1s ease-in-out;
+            transform-origin: center;
+        }
+        
+        .eye-lid.blink {
+            transform: scaleY(0.1);
+        }
+        
+        .eye-lid.wide {
+            transform: scaleY(1.2);
+        }
 </head>
 <body class="min-h-screen flex flex-col">
 
@@ -103,7 +113,47 @@
                         <circle cx="96" cy="96" r="90" stroke="currentColor" stroke-width="4" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="565.48" class="text-cyan-400 transition-all duration-100 ease-linear" id="progress-circle" />
                     </svg>
 
-                    <img src="/icons/icon_desafio10s.png" alt="Desafio 10s Olho Seco" class="w-full h-full object-contain drop-shadow-2xl transition-transform duration-300 group-hover:scale-105" id="doctor-img" />
+                    <!-- Doctor SVG Character -->
+                    <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-2xl transition-transform duration-300 group-hover:scale-105" id="doctor-svg">
+                        <!-- Head -->
+                        <circle cx="100" cy="100" r="80" fill="#f1f5f9" />
+                        <!-- Face -->
+                        <circle cx="100" cy="105" r="70" fill="#ffedd5" />
+                        <!-- Hair -->
+                        <path d="M40,90 Q50,20 100,20 T160,90 L160,70 Q100,10 40,70 Z" fill="#1e293b" />
+                        
+                        <!-- Eyes Container -->
+                        <g id="eyes">
+                            <!-- Left Eye -->
+                            <g transform="translate(70, 100)">
+                                <ellipse cx="0" cy="0" rx="12" ry="8" fill="white" />
+                                <circle cx="0" cy="0" r="4" fill="#0f172a" />
+                                <!-- Lid Upper -->
+                                <path d="M-14,-10 Q0,0 14,-10 L14,-12 Q0,-2 -14,-12 Z" fill="#ffedd5" class="eye-lid upper" />
+                                <!-- Lid Lower -->
+                                <path d="M-14,10 Q0,0 14,10 L14,12 Q0,2 -14,12 Z" fill="#ffedd5" class="eye-lid lower" />
+                            </g>
+                            <!-- Right Eye -->
+                            <g transform="translate(130, 100)">
+                                <ellipse cx="0" cy="0" rx="12" ry="8" fill="white" />
+                                <circle cx="0" cy="0" r="4" fill="#0f172a" />
+                                <!-- Lid Upper -->
+                                <path d="M-14,-10 Q0,0 14,-10 L14,-12 Q0,-2 -14,-12 Z" fill="#ffedd5" class="eye-lid upper" />
+                                <!-- Lid Lower -->
+                                <path d="M-14,10 Q0,0 14,10 L14,12 Q0,2 -14,12 Z" fill="#ffedd5" class="eye-lid lower" />
+                            </g>
+                        </g>
+                        
+                        <!-- Glasses -->
+                        <g stroke="#003D7A" stroke-width="3" fill="none" opacity="0.8">
+                           <circle cx="70" cy="100" r="20" />
+                           <line x1="90" y1="100" x2="110" y2="100" />
+                           <circle cx="130" cy="100" r="20" />
+                        </g>
+
+                        <!-- Smile -->
+                        <path d="M85,140 Q100,150 115,140" stroke="#d97706" stroke-width="3" fill="none" stroke-linecap="round" />
+                    </svg>
                 </div>
 
                 <!-- Text Content (Dynamic) -->
@@ -227,7 +277,7 @@
             const progressCircle = document.getElementById('progress-circle');
             const resultCard = document.getElementById('result-card');
             const testStatus = document.getElementById('test-status');
-            const testStatus = document.getElementById('test-status');
+            const lids = document.querySelectorAll('.eye-lid');
             
             let startTime = 0;
             let timerInterval;
@@ -251,6 +301,13 @@
                 startBtn.className = "bg-[#06b6d4] hover:bg-cyan-600 text-white font-bold py-4 px-10 rounded-full text-lg shadow-lg shadow-cyan-500/40 transition-all hover:scale-105 active:scale-95 animate-pulse-ring";
 
                 progressRing.classList.add('opacity-0');
+                
+                // Reset SVG eyes
+                if (lids) {
+                    lids.forEach(lid => {
+                        lid.classList.remove('wide', 'blink');
+                    });
+                }
                 
                 // Hide Result
                 resultCard.classList.add('hidden', 'scale-95', 'opacity-0');
@@ -317,6 +374,9 @@
 
                 mainTitle.innerHTML = 'Segure... <span id="timer-display" class="tabular-nums text-cyan-300">0.0</span>s';
                 subTitle.textContent = 'Olhos bem abertos! Não pisque!';
+
+                // SVG Animation: Wide Eyes
+                lids.forEach(lid => lid.classList.add('wide'));
 
 
                 
