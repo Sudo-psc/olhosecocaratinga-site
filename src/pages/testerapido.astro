@@ -1,5 +1,7 @@
 ---
 // src/pages/testerapido.astro
+import Header from '../components/Header.astro';
+
 // Standalone Landing Page for "Teste Rápido de Olho Seco"
 // Context: Medical Tech / Minimalist / Mobile-First
 ---
@@ -55,29 +57,8 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
-    <!-- A. HEADER SIMPLIFICADO -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-4 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <!-- Logo Compacto/Texto -->
-                <div class="leading-tight">
-                    <h1 class="text-[#003D7A] font-bold text-lg md:text-xl font-heading tracking-tight">Saraiva Vision</h1>
-                    <p class="text-xs text-gray-500 font-medium">Olho Seco Caratinga</p>
-                </div>
-            </div>
-
-            <!-- Identificação Médica (Desktop only) -->
-            <div class="hidden md:block text-right">
-                <p class="text-sm font-bold text-gray-700">Dr. Philipe Saraiva Cruz</p>
-                <p class="text-xs text-gray-400 uppercase tracking-wider">CRM-MG 69.870</p>
-            </div>
-
-            <!-- Botão Mobile -->
-            <a href="https://saraivavision.com.br/agendamento" target="_blank" class="md:hidden bg-[#06b6d4] text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg shadow-cyan-500/30 hover:bg-cyan-600 transition-colors">
-                Agendar
-            </a>
-        </div>
-    </header>
+    <!-- A. HEADER (Imported) -->
+    <Header />
 
     <!-- B. HERO SECTION INTERATIVA -->
     <main class="flex-grow">
