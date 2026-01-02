@@ -1,6 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import OfficialBlogCTA from '../../components/OfficialBlogCTA.astro';
 
 const schema = {
   "@context": "https://schema.org",
@@ -10,10 +9,10 @@ const schema = {
   "author": {
     "@type": "Person",
     "name": "Dr. Philipe Saraiva Cruz",
-    "jobTitle": "Oftalmologista"
+    "jobTitle": "Médico pós-graduado em oftalmologia área de atuação oftalmologia clínica, procedimentos cirúrgicos minimamente invasivos e olho seco"
   },
-  "datePublished": "2025-01-05",
-  "dateModified": "2025-01-05"
+  "datePublished": "2025-12-05",
+  "dateModified": "2025-12-23"
 };
 ---
 
@@ -21,7 +20,7 @@ const schema = {
   title="Disfunção das Glândulas de Meibomius (DGM) | Causa de Olho Seco | Caratinga" 
   description="DGM é a principal causa de olho seco. Entenda o que é, como diagnosticar e tratar em Caratinga. Meibografia e Luz Pulsada disponíveis."
 >
-  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
   
   <article class="pt-24 pb-16 bg-white">
     <div class="container mx-auto px-6 max-w-4xl">
@@ -44,16 +43,15 @@ const schema = {
             <div class="flex items-center justify-center gap-4 text-gray-500 text-sm flex-wrap">
                 <span>Por Dr. Philipe Saraiva Cruz</span>
                 <span>•</span>
-                <span>05 de Janeiro, 2025</span>
+                <span>05 de Dezembro, 2025</span>
                 <span>•</span>
                 <span>Leitura de 8 min</span>
             </div>
         </div>
 
         <!-- Featured Image -->
-        <div class="mb-12 rounded-2xl overflow-hidden shadow-lg bg-amber-50 p-8">
-          <img src="/mitos/capa_dgm.png" alt="Meibografia mostrando glândulas de Meibomius afetadas por DGM" class="w-full h-auto max-h-[400px] object-cover mx-auto" />
-          <p class="text-center text-sm text-gray-500 mt-4">Imagem de Meibografia: visualização das glândulas de Meibomius</p>
+        <div class="mb-10 rounded-2xl overflow-hidden shadow-xl bg-gray-50 p-8">
+          <img src="/Capas/dgm-85-causas.png" alt="Meibografia mostrando glândulas de Meibomius afetadas por DGM" class="w-full h-auto max-h-[400px] object-contain mx-auto" />
         </div>
 
         <div class="prose prose-lg prose-blue mx-auto text-gray-600">
@@ -213,18 +211,6 @@ const schema = {
               <li><strong>Remova maquiagem:</strong> Nunca durma de maquiagem</li>
               <li><strong>Hidratação:</strong> Beba água suficiente</li>
             </ul>
-
-            <div class="mt-12 text-sm text-gray-500 border-t pt-6">
-                <p class="font-bold mb-2">Referências Bibliográficas:</p>
-                <ul class="list-disc pl-5 space-y-1">
-                    <li>Nichols KK, et al. The International Workshop on Meibomian Gland Dysfunction: Executive Summary. <em>Investigative Ophthalmology & Visual Science</em>. 2011.</li>
-                    <li>Stapleton F, et al. TFOS DEWS II Epidemiology Report. <em>The Ocular Surface</em>. 2017.</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="my-12">
-            <OfficialBlogCTA />
         </div>
         
         <!-- CTA Section -->

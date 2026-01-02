@@ -9,24 +9,35 @@ interface Props {
 const { title, src, poster = "/video-placeholder.svg", description } = Astro.props;
 ---
 
-<div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden group border border-gray-100">
-  <div class="relative aspect-video bg-gray-100 overflow-hidden">
+<div class="group relative bg-[#0f172a]/80 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/10 hover:border-cyan-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-cyan-500/10">
+  <!-- Poster/Thumbnail Container -->
+  <div class="relative aspect-video bg-black overflow-hidden">
     <video
       controls
       preload="none"
       poster={poster}
-      class="w-full h-full object-cover"
+      class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300"
     >
       <source src={src} type="video/mp4" />
       Seu navegador não suporta o elemento de vídeo.
     </video>
+    
+    <!-- Play Icon Overlay (Hidden when controls active, but nice for initial state) -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none group-hover:scale-110 transition-transform duration-300">
+      <div class="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-lg group-hover:bg-cyan-500/20 group-hover:border-cyan-400/50">
+        <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </div>
+    </div>
   </div>
+
   <div class="p-6">
-    <h3 class="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 mb-3">
+    <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors line-clamp-2 mb-3">
       {title}
     </h3>
     {description && (
-      <p class="text-gray-600 text-sm leading-relaxed line-clamp-3">
+      <p class="text-gray-400 text-sm leading-relaxed line-clamp-2 group-hover:text-gray-300 transition-colors">
         {description}
       </p>
     )}

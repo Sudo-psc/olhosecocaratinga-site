@@ -49,6 +49,14 @@ try {
           "Punctal Plugs (878yyEfBVaM).mp4": {
             title: "Como funcionam os Plugs Lacrimais",
             description: "Entenda o funcionamento dos plugs lacrimais, pequenos dispositivos que ajudam a reter as lágrimas e aliviar os sintomas do olho seco."
+          },
+          "e-eye-cynthia-falabella.mp4": {
+            title: "Tratamento com Cynthia Falabella",
+            description: "Assista Cynthia Falabella realizando o tratamento do Olho Seco com o E-EYE IRPL® tratamento para Olho Seco."
+          },
+          "e-eye-irpl-sintomas.mp4": {
+            title: "Sintomas e Conheça o E-Eye",
+            description: "Confira o sintomas de olho seco e conheça o e-eye."
           }
         };
 
@@ -73,35 +81,73 @@ try {
   title="Vídeos | Olho Seco Caratinga"
   description="Assista a vídeos educativos sobre tratamento de olho seco e saúde ocular."
 >
-  <main class="pt-24">
+  <main class="min-h-screen bg-[#020617]"> <!-- Dark Background for Cinema Feel -->
+    
     <!-- Hero Section -->
-    <section class="bg-gradient-to-br from-blue-900 to-blue-700 text-white py-20">
-      <div class="container mx-auto px-6">
-        <div class="max-w-4xl mx-auto text-center">
-          <h1 class="text-4xl md:text-5xl font-bold mb-6">Vídeos Educativos</h1>
-          <p class="text-xl text-blue-100">
-            Aprenda mais sobre saúde ocular e tratamentos com nosso conteúdo audiovisual.
+    <section class="relative pt-32 pb-20 overflow-hidden">
+        <!-- Background Glow effects -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-900/20 blur-[120px] rounded-full pointer-events-none"></div>
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-900/10 to-transparent pointer-events-none"></div>
+
+      <div class="container mx-auto px-6 relative z-10 text-center">
+          <span class="inline-block py-1 px-3 rounded-full bg-blue-900/50 border border-blue-700/50 text-blue-300 text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-sm">
+            Portal Audiovisual
+          </span>
+          <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
+            Educação em <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Alta Definição</span>
+          </h1>
+          <p class="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            Entenda seu diagnóstico e descubra como a tecnologia pode transformar sua saúde ocular.
           </p>
-        </div>
       </div>
     </section>
 
+    <!-- Featured Video Section -->
+    {videos.length > 0 && (
+      <section class="pb-16">
+        <div class="container mx-auto px-6">
+            <div class="bg-[#0f172a] rounded-3xl p-1 border border-white/5 shadow-2xl shadow-blue-900/20 max-w-5xl mx-auto">
+                <div class="bg-black rounded-[1.25rem] overflow-hidden relative aspect-video group">
+                    <video
+                        controls
+                        class="w-full h-full object-cover"
+                        poster="/video-placeholders/featured_cover.png" 
+                    >
+                        <source src={`/videos/${videos.find(v => v.filename.includes("cynthia"))?.filename || videos[0].filename}`} type="video/mp4" />
+                        Seu navegador não suporta vídeos.
+                    </video>
+                    <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/90 via-black/60 to-transparent pointer-events-none">
+                        <span class="text-cyan-400 font-bold text-sm uppercase tracking-wide mb-2 block">Vídeo Destaque</span>
+                        <h2 class="text-2xl md:text-3xl font-bold text-white mb-2">{videos.find(v => v.filename.includes("cynthia"))?.title || videos[0].title}</h2>
+                        <p class="text-gray-300 line-clamp-2 max-w-2xl">{videos.find(v => v.filename.includes("cynthia"))?.description || videos[0].description}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </section>
+    )}
+
     <!-- Videos Grid -->
-    <section class="py-20 bg-gray-50">
+    <section class="py-20 bg-[#020617] border-t border-white/5">
       <div class="container mx-auto px-6">
+        <div class="flex items-center justify-between mb-12">
+            <h2 class="text-2xl font-bold text-white">Todos os Vídeos</h2>
+            <div class="h-px bg-white/10 flex-1 ml-8"></div>
+        </div>
+
         {videos.length > 0 ? (
           <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {videos.map((video) => (
+            {videos.filter(v => v.filename !== (videos.find(v => v.filename.includes("cynthia"))?.filename || videos[0].filename)).map((video) => (
               <VideoCard 
                 title={video.title} 
                 description={video.description}
                 src={`/videos/${video.filename}`}
-                poster="/video-placeholder.svg"
+                poster="/video-placeholders/generic.png"
               />
             ))}
           </div>
         ) : (
-          <div class="text-center py-12">
+          <div class="text-center py-24 bg-[#0f172a] rounded-3xl border border-dashed border-gray-800">
             <p class="text-gray-500 text-lg">Nenhum vídeo disponível no momento.</p>
           </div>
         )}

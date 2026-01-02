@@ -38,9 +38,15 @@ export const SITE_CONFIG = {
     // Doctor Info
     doctor: {
         name: 'Dr. Philipe Saraiva Cruz',
-        title: 'Médico Oftalmologista',
+        // Título formal completo (CFM compliance) - usado em schemas e contextos legais
+        titleFormal: 'Médico pós-graduado em oftalmologia área de atuação oftalmologia clínica, procedimentos cirúrgicos minimamente invasivos e olho seco',
+        // Título para exibição (UX-friendly) - usado em interfaces visuais
+        title: 'Médico pós-graduado em Oftalmologia',
         crm: 'CRM-MG 69.870',
-        specialties: ['Oftalmologia', 'Olho Seco', 'Cirurgia Ocular'],
+        // Área de atuação principal (para exibição)
+        specialty: 'Olho Seco e Superfície Ocular',
+        // Lista completa de especialidades
+        specialties: ['Olho Seco', 'Superfície Ocular', 'Cirurgia Ocular Minimamente Invasiva'],
     },
 
     // Social Media
@@ -55,7 +61,7 @@ export const SITE_CONFIG = {
     seo: {
         titleTemplate: '%s | Saraiva Vision - Olho Seco Caratinga',
         defaultTitle: 'Tratamento Especializado de Olho Seco | Saraiva Vision Caratinga',
-        defaultDescription: 'Especialista em tratamento de olho seco em Caratinga/MG. Dr. Philipe Saraiva Cruz - Oftalmologista CRM-MG 69.870. Diagnóstico preciso e tratamentos modernos.',
+        defaultDescription: 'Especialista em olho seco em Caratinga/MG. Dr. Philipe Saraiva Cruz, médico pós-graduado em oftalmologia (CRM-MG 69.870). Diagnóstico preciso e tratamentos modernos.',
         defaultImage: '/og-image.jpg',
     },
 
@@ -148,9 +154,10 @@ export function getDoctorStructuredData() {
         '@type': 'Physician',
         '@id': `${SITE_CONFIG.url}/#doctor`,
         name: SITE_CONFIG.doctor.name,
-        jobTitle: SITE_CONFIG.doctor.title,
+        // Usa título formal para conformidade com CFM em structured data
+        jobTitle: SITE_CONFIG.doctor.titleFormal,
         medicalSpecialty: 'Ophthalmology',
-        description: `${SITE_CONFIG.doctor.title} especializado em tratamento de olho seco`,
+        description: `${SITE_CONFIG.doctor.title} especialista em ${SITE_CONFIG.doctor.specialty}`,
         identifier: {
             '@type': 'PropertyValue',
             name: 'CRM',
