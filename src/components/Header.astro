@@ -6,12 +6,10 @@ const links = [
   { name: "Vídeos", href: "/videos" },
   { name: "Blog", href: "/blog" },
 ];
-  { name: "Blog", href: "/blog" },
-];
 
 const currentPath = Astro.url.pathname;
 const isTestPage = currentPath === '/testerapido';
-
+---
 
 <header class="fixed w-full z-50 transition-all duration-300 glass border-b border-slate-200 shadow-sm bg-white/90 backdrop-blur-md">
   <div class="container py-3 flex justify-between items-center">
