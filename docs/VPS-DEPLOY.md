@@ -253,6 +253,22 @@ docker compose -f docker-compose.prod.yml logs certbot
 docker compose -f docker-compose.prod.yml run --rm certbot renew --force-renewal
 ```
 
+### Erro: Certificado de Staging (Inválido)
+
+Se o navegador mostrar erro de certificado "Let's Encrypt Staging", execute:
+
+```bash
+# Forçar renovação com servidor de produção
+certbot --nginx \
+  -d olhosecocaratinga.com.br \
+  -d www.olhosecocaratinga.com.br \
+  --force-renewal \
+  --server https://acme-v02.api.letsencrypt.org/directory \
+  --agree-tos \
+  --register-unsafely-without-email \
+  --non-interactive
+```
+
 ### Container não inicia
 
 ```bash
