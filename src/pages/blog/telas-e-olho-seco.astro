@@ -1,8 +1,23 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Telas e Olho Seco: Síndrome da Visão de Computador",
+  "description": "Como o uso de celulares e computadores afeta seus olhos e o que fazer para prevenir o ressecamento.",
+  "author": {
+    "@type": "Person",
+    "name": "Dr. Philipe Saraiva Cruz",
+    "jobTitle": "Médico pós-graduado em oftalmologia com área de atuação em oftalmologia clínica geral, procedimentos minimamente invasivos e olho seco"
+  },
+  "datePublished": "2025-12-27",
+  "dateModified": "2026-01-02"
+};
 ---
 
 <Layout title="Telas e Olho Seco: Síndrome da Visão de Computador" description="Como o uso de celulares e computadores afeta seus olhos e o que fazer para prevenir o ressecamento.">
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
   <article class="pt-24 pb-16 bg-white">
     <div class="container mx-auto px-6 max-w-4xl">
         <div class="text-center mb-12">

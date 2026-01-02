@@ -16,11 +16,11 @@ const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).href;
 // Meta tags básicas
 const meta = {
     title,
-    description: description || "Clínica Oftalmológica em Caratinga - Tratamento especializado para olho seco e outras condições oculares",
+    description: description || "Saraiva Vision Clínica Especializada em Olho Seco - Caratinga/MG",
     image: image || "/og-image.jpg",
     url: canonicalUrl,
     type,
-    siteName: "Olho Seco Caratinga",
+    siteName: "Saraiva Vision Clínica Especializada em Olho Seco",
     locale: "pt_BR"
 };
 
@@ -65,7 +65,7 @@ const structuredData = {
             // Título formal completo para conformidade CFM em structured data
             jobTitle: "Médico pós-graduado em oftalmologia área de atuação oftalmologia clínica, procedimentos cirúrgicos minimamente invasivos e olho seco",
             specializesIn: "Olho Seco e Superfície Ocular",
-            description: "Médico pós-graduado em oftalmologia especialista em tratamento de olho seco e superfície ocular",
+            description: "Médico pós-graduado em oftalmologia com área de atuação em oftalmologia clínica geral, procedimentos minimamente invasivos e olho seco",
             worksFor: {
                 "@type": "Organization",
                 name: "Saraiva Vision"
@@ -99,8 +99,7 @@ const structuredData = {
             "@type": "WebSite",
             "@id": "https://olhosecocaratinga.com/#website",
             url: "https://olhosecocaratinga.com",
-            name: "Olho Seco Caratinga",
-            description: "Clínica oftalmológica especializada em tratamento de olho seco em Caratinga, MG",
+            description: "Clínica especializada em tratamento de olho seco em Caratinga, MG",
             publisher: {
                 "@type": "Organization",
                 name: "Saraiva Vision"

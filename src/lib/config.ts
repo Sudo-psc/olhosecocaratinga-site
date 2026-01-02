@@ -3,7 +3,7 @@
  */
 
 export const SITE_CONFIG = {
-    name: 'Olho Seco Caratinga',
+    name: 'Saraiva Vision Clínica Especializada em Olho Seco',
     description: 'Referência em tratamento de olho seco em Caratinga. Tecnologia avançada e atendimento humanizado na Clínica Saraiva Vision.',
     url: 'https://olhosecocaratinga.com.br',
     locale: 'pt_BR',
@@ -11,7 +11,7 @@ export const SITE_CONFIG = {
 
     // Business Info
     business: {
-        name: 'Saraiva Vision',
+        name: 'Saraiva Vision Clínica Especializada em Olho Seco',
         cnpj: '53.864.119/0001-79',
         address: {
             street: 'Rua Catarina Maria Passos, 97',
@@ -39,12 +39,14 @@ export const SITE_CONFIG = {
     doctor: {
         name: 'Dr. Philipe Saraiva Cruz',
         // Título formal completo (CFM compliance) - usado em schemas e contextos legais
-        titleFormal: 'Médico pós-graduado em oftalmologia área de atuação oftalmologia clínica, procedimentos cirúrgicos minimamente invasivos e olho seco',
+        titleFormal: 'Médico pós-graduado em oftalmologia com área de atuação em oftalmologia clínica geral, procedimentos minimamente invasivos e olho seco',
         // Título para exibição (UX-friendly) - usado em interfaces visuais
         title: 'Médico pós-graduado em Oftalmologia',
         crm: 'CRM-MG 69.870',
         // Área de atuação principal (para exibição)
         specialty: 'Olho Seco e Superfície Ocular',
+        // Bio longa para uso consistente
+        longBio: 'Médico pós-graduado em oftalmologia com área de atuação em oftalmologia clínica geral, procedimentos minimamente invasivos e olho seco',
         // Lista completa de especialidades
         specialties: ['Olho Seco', 'Superfície Ocular', 'Cirurgia Ocular Minimamente Invasiva'],
     },
@@ -60,8 +62,8 @@ export const SITE_CONFIG = {
     // SEO Defaults
     seo: {
         titleTemplate: '%s | Saraiva Vision - Olho Seco Caratinga',
-        defaultTitle: 'Tratamento Especializado de Olho Seco | Saraiva Vision Caratinga',
-        defaultDescription: 'Especialista em olho seco em Caratinga/MG. Dr. Philipe Saraiva Cruz, médico pós-graduado em oftalmologia (CRM-MG 69.870). Diagnóstico preciso e tratamentos modernos.',
+        defaultTitle: 'Saraiva Vision Clínica Especializada em Olho Seco | Dr. Philipe Saraiva Cruz',
+        defaultDescription: 'Saraiva Vision - Clínica Especializada em Olho Seco em Caratinga/MG. Dr. Philipe Saraiva Cruz, médico pós-graduado em oftalmologia com área de atuação em oftalmologia clínica geral, procedimentos minimamente invasivos e olho seco.',
         defaultImage: '/og-image.jpg',
     },
 
@@ -157,7 +159,7 @@ export function getDoctorStructuredData() {
         // Usa título formal para conformidade com CFM em structured data
         jobTitle: SITE_CONFIG.doctor.titleFormal,
         medicalSpecialty: 'Ophthalmology',
-        description: `${SITE_CONFIG.doctor.title} especialista em ${SITE_CONFIG.doctor.specialty}`,
+        description: SITE_CONFIG.doctor.longBio,
         identifier: {
             '@type': 'PropertyValue',
             name: 'CRM',

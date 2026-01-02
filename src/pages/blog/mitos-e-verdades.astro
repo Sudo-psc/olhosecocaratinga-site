@@ -1,8 +1,23 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Mitos e Verdades sobre Olho Seco",
+  "description": "Desvendando mitos comuns sobre a doença do olho seco com base na ciência. Saiba o que é verdade e o que é mito.",
+  "author": {
+    "@type": "Person",
+    "name": "Dr. Philipe Saraiva Cruz",
+    "jobTitle": "Médico pós-graduado em oftalmologia com área de atuação em oftalmologia clínica geral, procedimentos minimamente invasivos e olho seco"
+  },
+  "datePublished": "2025-12-26",
+  "dateModified": "2026-01-02"
+};
 ---
 
 <Layout title="Mitos e Verdades sobre Olho Seco | Blog Saraiva Vision" description="Desvendando mitos comuns sobre a doença do olho seco com base na ciência.">
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
   <article class="pt-24 pb-16 bg-white">
     <div class="container mx-auto px-6 max-w-4xl">
         <div class="text-center mb-12">
