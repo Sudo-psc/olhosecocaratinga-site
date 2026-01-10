@@ -1,8 +1,20 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "MedicalDevice",
+  "name": "Lentes Esclerais",
+  "description": "Lentes de contato especiais de grande diâmetro que se apoiam na esclera e criam um reservatório líquido sobre a córnea.",
+  "purpose": "Tratamento de Olho Seco Severo, Ceratocone e Irregularidades de Córnea"
+};
 ---
 
-<Layout title="Lentes Esclerais | Olho Seco Severo" description="Lentes Esclerais: uma revolução para pacientes com olho seco severo e doenças da superfície ocular.">
+<Layout 
+  title="Lentes Esclerais | Olho Seco Severo" 
+  description="Lentes Esclerais: uma revolução para pacientes com olho seco severo e doenças da superfície ocular."
+  schema={schema}
+>
   <section class="bg-blue-50 py-16">
     <div class="container mx-auto px-6">
       <div class="max-w-3xl mx-auto text-center">

@@ -1,6 +1,8 @@
 ---
 
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import heroImage from '../assets/heroeye.png';
 
 const symptoms = [
   { icon: "/icons/Fundo de icon_ardencia Removido.png", title: "Ardência", desc: "Sensação de queimação constante nos olhos.", type: "image", isSpecial: false },
@@ -50,10 +52,12 @@ const faqs = [
     <div class="absolute top-0 right-0 w-1/2 h-full hidden lg:block opacity-100">
         <div class="w-full h-full relative">
             <div class="absolute inset-0 bg-gradient-to-r from-[#f0f7ff] via-[#f0f7ff]/50 to-transparent z-10"></div>
-            <img 
-                src="/heroeye.png"  
+            <Image 
+                src={heroImage}  
                 alt="Cuidado Oftalmológico Humanizado" 
                 class="w-full h-full object-cover object-left-top"
+                loading="eager"
+                format="webp"
             />
         </div>
     </div>

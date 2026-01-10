@@ -1,8 +1,25 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "MedicalProcedure",
+  "name": "Tratamento de Olho Seco com Luz Pulsada (IRPL)",
+  "procedureType": "Non-surgical",
+  "bodyLocation": "Eyes",
+  "description": "Tratamento com tecnologia E-Eye IRPL para disfunção das glândulas de Meibomius.",
+  "performer": {
+    "@type": "Physician",
+    "name": "Dr. Philipe Saraiva Cruz"
+  }
+};
 ---
 
-<Layout title="E-Eye IRPL em Caratinga | Tratamento para Olho Seco" description="O único IRPL do interior de MG. Tecnologia francesa, resultados duradouros e procedimento indolor para olho seco evaporativo.">
+<Layout 
+  title="E-Eye IRPL em Caratinga | Tratamento para Olho Seco" 
+  description="O único IRPL do interior de MG. Tecnologia francesa, resultados duradouros e procedimento indolor para olho seco evaporativo."
+  schema={schema}
+>
   <!-- Hero Section -->
   <section class="relative bg-gradient-to-r from-[#003D7A] to-blue-900 py-24 text-white overflow-hidden">
     <div class="absolute inset-0 bg-[url('/pattern.svg')] opacity-10"></div>
