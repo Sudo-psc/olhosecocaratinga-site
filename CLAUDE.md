@@ -4,36 +4,40 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Next.js 15 website for "Olhos Secos Caratinga" (Dry Eye Clinic) with Sanity CMS integration. The site features a blog, video library, and embedded Sanity Studio for content management.
+**Olhos Secos Caratinga** (Dry Eye Clinic) website built with Astro and Sanity CMS. This is a static-first marketing site for Saraiva Vision clinic in Caratinga, MG, Brazil, specializing in dry eye treatment. The site features informational pages, blog content, and video library.
+
+**Business Context:**
+- Medical clinic: Saraiva Vision (CNPJ: 53.864.119/0001-79)
+- Physician: Dr. Philipe Saraiva Cruz (CRM-MG 69.870)
+- Location: Caratinga, Minas Gerais, Brazil
+- Specialty: Dry eye treatment and ocular surface disorders
 
 ## Technology Stack
 
-- **Framework**: Next.js 15.1.3 (App Router)
-- **React**: 19.0.0
-- **CMS**: Sanity 3.72.1 with next-sanity integration
-- **Styling**: Tailwind CSS 3.4.17
-- **Language**: TypeScript 5.7.2
-- **Package Manager**: pnpm 9.15.2
+- **Framework**: Astro 5.16.6 (static site generation)
+- **CMS**: Sanity.io (headless CMS for blog/video content)
+- **Styling**: Tailwind CSS 3.4.10
+- **Language**: TypeScript 5.5.2
+- **Package Manager**: npm (use `npm` commands, not pnpm/yarn)
+- **Output**: Static site (configured in astro.config.mjs)
 
 ## Development Commands
 
 ```bash
-# Development server (runs on http://localhost:3000)
-pnpm dev
+# Development server (http://localhost:4321)
+npm run dev
 
-# Production build
-pnpm build
+# Type checking + production build
+npm run build
 
-# Production server
-pnpm start
+# Preview production build locally
+npm run preview
 
 # Linting
-pnpm lint         # Check for issues
-pnpm lint:fix     # Auto-fix issues
+npm run lint
 
 # Code formatting
-pnpm format       # Format all files
-pnpm format:check # Check formatting without changes
+npm run format        # Format all files with Prettier
 ```
 
 ## Architecture
@@ -42,181 +46,242 @@ pnpm format:check # Check formatting without changes
 
 ```
 src/
-├── app/                    # Next.js App Router
-│   ├── api/               # API routes
-│   │   ├── draft/         # Draft mode enable/disable
-│   │   └── revalidate/    # Webhook for cache revalidation
-│   ├── blog/              # Blog listing and posts
-│   │   └── [slug]/        # Dynamic blog post routes
-│   ├── videos/            # Video listing and pages
-│   │   └── [slug]/        # Dynamic video routes
-│   ├── studio/            # Embedded Sanity Studio
-│   │   └── [[...tool]]/   # Studio catch-all route
-│   ├── layout.tsx         # Root layout with header/footer
-│   └── page.tsx           # Homepage
-├── components/            # React components (inline in app dir)
-│   ├── draft-mode-banner.tsx
-│   ├── portable-text.tsx
-│   ├── post-card.tsx
-│   └── video-card.tsx
-└── sanity/                # Sanity configuration
-    ├── client.ts          # Sanity clients (client, previewClient, writeClient)
-    ├── config.ts          # Environment configuration
-    ├── queries.ts         # GROQ queries
-    ├── types.ts           # TypeScript types
-    └── schemas/           # Content schemas
-        ├── author.ts
-        ├── category.ts
-        ├── post.ts
-        ├── video.ts
-        └── site-settings.ts
+├── components/           # Astro components
+│   ├── Header.astro     # Site header with navigation
+│   ├── Footer.astro     # Site footer
+│   ├── VideoCard.astro  # Video display component
+│   └── OfficialBlogCTA.astro
+├── layouts/
+│   └── Layout.astro     # Base layout with SEO, fonts, structured data
+├── lib/
+│   ├── sanity.ts        # Sanity client and types
+│   └── config.ts        # Site configuration and structured data helpers
+├── pages/               # File-based routing
+│   ├── index.astro      # Homepage (dry eye info, symptoms, treatments)
+│   ├── blog/            # Blog section
+│   │   ├── index.astro  # Blog listing (static posts)
+│   │   ├── [slug].astro # Dynamic blog posts (Sanity CMS)
+│   │   └── *.astro      # Static blog posts
+│   ├── videos/          # Video section
+│   │   └── index.astro  # Video listing
+│   ├── tratamentos/     # Treatment pages
+│   │   ├── luz-pulsada-irpl.astro
+│   │   ├── higiene-palpebral.astro
+│   │   ├── medicamentos.astro
+│   │   └── lentes-esclerais.astro
+│   ├── olho-seco.astro  # Dry eye information page
+│   ├── exames.astro     # Diagnostic exams page
+│   ├── contato.astro    # Contact page
+│   ├── testerapido.astro # Quick symptom test
+│   └── 404.astro        # Error page
+└── middleware.ts        # Astro middleware (if any)
 ```
 
-### Sanity Client Architecture
+### Key Files
 
-The codebase uses three distinct Sanity clients with different purposes:
+**src/lib/config.ts** - Central configuration file containing:
+- Site metadata (name, description, URL)
+- Business information (address, phone, hours, coordinates)
+- Doctor information (name, title, CRM, specialties)
+- Social media links
+- Navigation structure
+- Structured data helpers for Schema.org (clinic, doctor, breadcrumbs, FAQ, articles)
 
-1. **`client`** (src/sanity/client.ts:12) - Standard client for published content, uses CDN in production
-2. **`previewClient`** (src/sanity/client.ts:40) - For draft/preview mode, bypasses CDN
-3. **`writeClient`** (src/sanity/client.ts:28) - Authenticated client for mutations (never exposed to browser)
+**src/lib/sanity.ts** - Sanity CMS integration:
+- Client configuration (project ID: `qum5qhgj`, dataset: `production`)
+- Image URL builder helper (`urlFor()`)
+- TypeScript interfaces for Sanity content (`SanityPost`)
 
-**Critical**: Never expose `writeClient` or any client with tokens to the browser. Use `getClient(preview)` helper for automatic client selection.
+**src/layouts/Layout.astro** - Base layout providing:
+- SEO meta tags (OpenGraph, Twitter Cards)
+- Structured data for every page (clinic, doctor, webpage, breadcrumbs)
+- Font loading (Outfit for headings, Inter for body)
+- Global CSS variables and styles
+- Header and Footer components
 
-### Data Fetching Pattern
+### Sanity CMS Integration
 
-Use the `sanityFetch()` helper (src/sanity/client.ts:59) instead of calling client.fetch() directly:
+The site uses Sanity.io primarily for dynamic blog posts. Configuration:
 
 ```typescript
-// GOOD - Uses cache tags and Next.js revalidation
-const posts = await sanityFetch<PostSummary[]>({
-  query: postsQuery,
-  tags: ['posts'],
-  revalidate: 3600,
-  preview: false
-})
-
-// AVOID - No cache tag support
-const posts = await client.fetch(postsQuery)
+// src/lib/sanity.ts
+projectId: 'qum5qhgj'
+dataset: 'production'
+useCdn: true
+apiVersion: '2024-01-01'
 ```
 
-**Cache Tags**: All content types have associated tags for granular revalidation:
-- Posts: `'posts'`, `'post:${slug}'`
-- Videos: `'videos'`, `'video:${slug}'`
-- Authors/Categories: `'posts'` (they affect posts)
-- Site Settings: `'siteSettings'`
+**Environment Variables** (.env):
+```bash
+PUBLIC_SANITY_PROJECT_ID=qum5qhgj
+PUBLIC_SANITY_DATASET=production
+```
 
-### Revalidation System
-
-The `/api/revalidate` webhook (src/app/api/revalidate/route.ts) receives Sanity webhooks and revalidates Next.js cache tags based on document type.
-
-**Setup in Sanity**:
-1. Create webhook at sanity.io/manage → API → Webhooks
-2. URL: `https://yourdomain.com/api/revalidate`
-3. Secret: Match `SANITY_REVALIDATE_SECRET` env var
-4. Dataset: Your dataset (usually "production")
-5. Trigger on: Create, Update, Delete
-
-### Draft/Preview Mode
-
-Draft mode allows previewing unpublished content:
-
-- **Enable**: `/api/draft/enable?slug=<slug>&type=<post|video>`
-- **Disable**: `/api/draft/disable`
-- **Client Selection**: Automatically uses `previewClient` when draft mode is active
-
-### Image Handling
-
-For Sanity images, use the `urlFor()` helper (src/sanity/client.ts:87):
-
+**Image Handling**: Use the `urlFor()` helper for Sanity images:
 ```typescript
-import { urlFor } from '@/sanity/client'
-
-const imageUrl = urlFor(image)
-  .width(800)
-  .height(600)
-  .format('webp')
-  .url()
+import { urlFor } from '@/lib/sanity'
+const imageUrl = urlFor(image).width(800).url()
 ```
 
-For YouTube thumbnails, use `getYouTubeThumbnail()` (src/sanity/client.ts:94).
+**Dynamic Blog Posts**: The `[slug].astro` file fetches posts from Sanity using GROQ queries. Static blog posts are also available as individual `.astro` files in `/pages/blog/`.
 
-### Environment Variables
+### Styling System
 
-Required environment variables (see .env.example):
+**Tailwind CSS** with custom design tokens defined in Layout.astro:
+
+```css
+--primary: #003D7A       /* Deep blue for headings */
+--primary-light: #22d3ee /* Cyan-400 for accents */
+--secondary: #64748b     /* Slate-500 for secondary text */
+--accent: #ecfeff        /* Cyan-50 for backgrounds */
+--text-main: #1e293b     /* Slate-800 for main text */
+--bg-body: #f8fafc       /* Slate-50 for global background */
+--bg-alt: #ffffff        /* White for cards */
+```
+
+**Typography**:
+- Headings: `Outfit` (Google Fonts)
+- Body: `Inter` (Google Fonts)
+
+**Component Patterns**:
+- `.container` - Max-width container with horizontal padding
+- `.section-padding` - Responsive vertical padding (5rem desktop, 3.5rem mobile)
+- `.btn-premium` - Button base class with variants
+- `.glass` - Glassmorphism utility
+
+### SEO and Structured Data
+
+Every page includes comprehensive structured data via Layout.astro:
+
+1. **LocalBusiness** - Clinic information, address, hours, contact
+2. **Physician** - Doctor profile with medical specialty and credentials
+3. **WebPage** - Page-specific metadata and medical condition information
+4. **WebSite** - Site-level metadata with search action
+5. **BreadcrumbList** - Breadcrumb navigation
+
+Additional structured data helpers in `src/lib/config.ts`:
+- `getClinicStructuredData()` - Detailed clinic Schema.org
+- `getDoctorStructuredData()` - Physician Schema.org
+- `getBreadcrumbStructuredData(items)` - Custom breadcrumbs
+- `getFAQStructuredData(faqs)` - FAQ page Schema.org
+- `getArticleStructuredData(article)` - Blog post Schema.org
+
+### Static Site Generation
+
+Astro is configured for static output (`output: 'static'`) with:
+- Sitemap generation (excludes `/studio/` paths)
+- Image optimization (restricted to `cdn.sanity.io` and own domain)
+- HTML compression
+- Prefetch enabled for faster navigation
+
+## Common Development Tasks
+
+### Adding a New Page
+
+1. Create `.astro` file in `src/pages/` (e.g., `sobre.astro`)
+2. Use Layout component with proper SEO props:
+   ```astro
+   ---
+   import Layout from '../layouts/Layout.astro';
+   ---
+   <Layout
+     title="Sobre a Clínica"
+     description="História da Saraiva Vision..."
+     image="/og-sobre.jpg"
+   >
+     <!-- Content -->
+   </Layout>
+   ```
+3. Update navigation in `src/lib/config.ts` if needed
+
+### Adding a New Treatment Page
+
+1. Create file in `src/pages/tratamentos/` (e.g., `novo-tratamento.astro`)
+2. Follow existing treatment page structure
+3. Add treatment card to homepage (`src/pages/index.astro` in treatments section)
+4. Use appropriate icons from `/public/icons/`
+
+### Working with Sanity Content
+
+For dynamic blog posts:
+1. Content is managed in Sanity Studio (separate repo or hosted)
+2. Fetch content using `client.fetch()` with GROQ queries
+3. Example query pattern:
+   ```typescript
+   const posts = await client.fetch(`
+     *[_type == "post"] | order(publishedAt desc) {
+       title, slug, excerpt, mainImage, publishedAt
+     }
+   `)
+   ```
+
+### Updating Site Configuration
+
+All site-wide constants live in `src/lib/config.ts`:
+- Business hours, address, phone numbers
+- Doctor credentials and bio text
+- Navigation structure
+- Social media links
+
+**Important**: When updating doctor information, ensure compliance with CFM (Conselho Federal de Medicina) regulations:
+- Use `titleFormal` for structured data and legal contexts
+- Use `title` for user-facing UI
+- Always include CRM number
+
+### Image Optimization
+
+Images are restricted to trusted domains (configured in `astro.config.mjs`):
+- `cdn.sanity.io` - For Sanity CMS images
+- `olhosecocaratinga.com.br` - Own domain
+- `olhosecocaratinga.com` - Alternate domain
+
+Local images go in `/public/` directory and are referenced as `/image.png`.
+
+## Production Build
+
+The site is optimized for static hosting (Vercel, Netlify, Cloudflare Pages):
 
 ```bash
-# Sanity Configuration (REQUIRED)
-NEXT_PUBLIC_SANITY_PROJECT_ID=     # From sanity.io/manage
-NEXT_PUBLIC_SANITY_DATASET=        # Usually "production"
-NEXT_PUBLIC_SANITY_API_VERSION=    # Format: YYYY-MM-DD
-
-# Tokens (REQUIRED for preview/webhooks)
-SANITY_API_READ_TOKEN=             # For preview mode
-SANITY_API_WRITE_TOKEN=            # For mutations/webhooks
-SANITY_REVALIDATE_SECRET=          # Webhook validation
-
-# URLs
-NEXT_PUBLIC_SITE_URL=              # Base URL (for OpenGraph, etc.)
+npm run build  # Creates ./dist/ directory
 ```
 
-**Critical**: Token environment variables must NEVER be prefixed with `NEXT_PUBLIC_` as this exposes them to the browser.
+Build output is static HTML with:
+- Pre-rendered pages
+- Optimized images
+- Compressed HTML
+- Generated sitemap
+- Prefetch hints
 
-### Path Aliases
+## Medical and Legal Compliance
 
-Use `@/` for imports (configured in tsconfig.json):
+**CFM Compliance** (Brazilian medical advertising regulations):
+- Doctor titles must be accurate and complete in structured data
+- Use `titleFormal` from config for legal contexts: "Médico pós-graduado em oftalmologia com área de atuação em oftalmologia clínica geral, procedimentos minimamente invasivos e olho seco"
+- Always display CRM number: CRM-MG 69.870
+- No promises of guaranteed results in copy
 
-```typescript
-// GOOD
-import { client } from '@/sanity/client'
-import { Post } from '@/sanity/types'
+**LGPD Considerations** (Brazilian data protection):
+- Contact forms should link to privacy policy
+- Patient data handling follows clinic protocols
+- Privacy policy page expected at `/privacidade`
 
-// AVOID
-import { client } from '../../../sanity/client'
-```
+## Key Business Information
 
-### Sanity Studio
+**Clinic Details:**
+- Name: Saraiva Vision Clínica Especializada em Olho Seco
+- Address: Rua Catarina Maria Passos, 97, Bairro Santa Zita (Amor e Saúde), Caratinga/MG, CEP 35300-299
+- Phone/WhatsApp: (33) 99860-1427
+- Email: contato@saraivavision.com.br
+- Hours: Mon-Fri 08:00-18:00, Sat 08:00-12:00
 
-The Studio is embedded at `/studio` route (src/app/studio/[[...tool]]/page.tsx). It uses the configuration from `sanity.config.ts` which includes:
+**Primary Treatments Featured:**
+1. E-Eye IRPL (Intense Regulated Pulsed Light) - Featured treatment
+2. Higiene Palpebral (Eyelid hygiene)
+3. Medicamentos (Medications - preservative-free drops, omega-3, immunomodulators)
+4. Lentes Esclerais (Scleral lenses for severe cases)
 
-- Structure tool for document management
-- Vision tool for GROQ query testing
-- Production URL preview for posts and videos
-
-### Styling Conventions
-
-- Tailwind CSS utility classes
-- Dark mode support via `dark:` prefix
-- Mobile-first responsive design
-- Color palette: slate (grays), white, and theme colors
-- Fonts: Inter (loaded via next/font/google)
-
-## Content Types
-
-1. **Post** - Blog articles with Portable Text body, categories, author, SEO
-2. **Video** - YouTube videos with transcript, thumbnail, duration
-3. **Author** - Content authors with photo, bio, social links
-4. **Category** - Post categorization
-5. **Site Settings** - Global site configuration (singleton)
-
-## Adding New Features
-
-When adding new content types:
-
-1. Create schema in `src/sanity/schemas/`
-2. Add to `schemaTypes` array in `src/sanity/schemas/index.ts`
-3. Add GROQ queries to `src/sanity/queries.ts`
-4. Add TypeScript types to `src/sanity/types.ts`
-5. Update revalidation logic in `src/app/api/revalidate/route.ts`
-6. Create App Router pages if needed
-
-## kluster.ai Verification
-
-This project uses kluster.ai for automated code review. The workflow (configured in .agent/rules/kluster-code-verify.md) is:
-
-1. `kluster_open_snapshot_session` - Before any code changes
-2. Make code changes
-3. `kluster_code_review_auto` - After all changes
-4. Complete any items from `agent_todo_list`
-5. Re-verify if needed
-
-**Never skip verification** - even for small changes.
+**Target Conditions:**
+- Síndrome do Olho Seco (Dry Eye Syndrome)
+- Disfunção das Glândulas de Meibomius (Meibomian Gland Dysfunction)
+- Blefarites (Blepharitis)
+- Superfície Ocular (Ocular Surface disorders)
