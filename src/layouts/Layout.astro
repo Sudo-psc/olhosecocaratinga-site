@@ -16,12 +16,13 @@ const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).href;
 // Meta tags básicas
 const meta = {
     title,
-    description: description || "Saraiva Vision Clínica Especializada em Olho Seco - Caratinga/MG",
+    description: description || "Saraiva Vision Clínica Especializada em Olho Seco - Caratinga/MG. Tratamento com Luz Pulsada (IRPL), Lentes Esclerais e termoterapia.",
     image: image || "/icons/e_eye_machine_made_in_france_anvisa_logo.jpg",
     url: canonicalUrl,
     type,
     siteName: "Saraiva Vision Clínica Especializada em Olho Seco",
-    locale: "pt_BR"
+    locale: "pt_BR",
+    keywords: "olho seco, caratinga, oftalmologista, luz pulsada, irpl, e-eye, lentes esclerais, tratamento olho seco, minas gerais, saraiva vision"
 };
 
 // Structured Data para a clínica
@@ -142,6 +143,7 @@ const structuredData = {
 <head>
     <meta charset="UTF-8" />
     <meta name="description" content={meta.description} />
+    <meta name="keywords" content={meta.keywords} />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="generator" content={Astro.generator} />
