@@ -143,11 +143,11 @@ const faqs = [
         <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
             {symptoms.map(s => (
                 <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 text-center group cursor-default h-full">
-                    <div class="h-20 mb-6 transform group-hover:scale-110 transition-transform flex items-center justify-center">
+                    <div class="h-52 mb-6 transform group-hover:scale-110 transition-transform flex items-center justify-center">
                         {s.type === 'image' ? (
-                            <img src={s.icon} alt={s.title} class={`h-full object-contain ${s.isSpecial ? 'w-24' : 'w-16'} drop-shadow-md`} />
+                            <img src={s.icon} alt={s.title} class={`h-full object-contain ${s.isSpecial ? 'w-60' : 'w-40'} drop-shadow-md`} />
                         ) : (
-                            <span class="text-5xl">{s.icon}</span>
+                            <span class="text-[7.5rem]">{s.icon}</span>
                         )}
                     </div>
                     <h3 class="font-bold text-[#003D7A] text-lg mb-2">{s.title}</h3>

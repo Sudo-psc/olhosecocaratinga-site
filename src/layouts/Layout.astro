@@ -5,19 +5,35 @@ export interface Props {
     title: string;
     description?: string;
     image?: string;
+    imageAlt?: string;
+    imageWidth?: number;
+    imageHeight?: number;
     type?: string;
     canonical?: string;
+    noindex?: boolean;
 }
 
-const { title, description, image, type = "website", canonical } = Astro.props;
+const { title, description, image, imageAlt, imageWidth, imageHeight, type = "website", canonical, noindex } = Astro.props;
 
 const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).href;
+const defaultImage = {
+    src: "/heroeye.png",
+    width: 1376,
+    height: 768,
+    alt: "Saraiva Vision - Olho Seco Caratinga"
+};
+const resolvedImage = image
+    ? (image.startsWith("http") ? image : new URL(image, Astro.site).href)
+    : new URL(defaultImage.src, Astro.site).href;
+const resolvedImageAlt = imageAlt || defaultImage.alt;
+const resolvedImageWidth = imageWidth || (image ? undefined : defaultImage.width);
+const resolvedImageHeight = imageHeight || (image ? undefined : defaultImage.height);
 
 // Meta tags básicas
 const meta = {
     title,
     description: description || "Saraiva Vision Clínica Especializada em Olho Seco - Caratinga/MG",
-    image: image || "/icons/e_eye_machine_made_in_france_anvisa_logo.jpg",
+    image: resolvedImage,
     url: canonicalUrl,
     type,
     siteName: "Saraiva Vision Clínica Especializada em Olho Seco",
@@ -105,15 +121,7 @@ const structuredData = {
                 "@type": "Organization",
                 name: "Saraiva Vision"
             },
-            inLanguage: "pt-BR",
-            potentialAction: {
-                "@type": "SearchAction",
-                target: {
-                    "@type": "EntryPoint",
-                    urlTemplate: "https://olhosecocaratinga.com.br/search?q={search_term_string}"
-                },
-                "query-input": "required name=search_term_string"
-            }
+            inLanguage: "pt-BR"
         },
         {
             "@type": "BreadcrumbList",
@@ -142,7 +150,9 @@ const structuredData = {
 <head>
     <meta charset="UTF-8" />
     <meta name="description" content={meta.description} />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content={noindex ? "noindex,nofollow" : "index,follow"} />
+    <meta name="theme-color" content="#003D7A" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="generator" content={Astro.generator} />
     
@@ -152,6 +162,9 @@ const structuredData = {
     <meta property="og:title" content={meta.title} />
     <meta property="og:description" content={meta.description} />
     <meta property="og:image" content={meta.image} />
+    <meta property="og:image:alt" content={resolvedImageAlt} />
+    {resolvedImageWidth && <meta property="og:image:width" content={resolvedImageWidth} />}
+    {resolvedImageHeight && <meta property="og:image:height" content={resolvedImageHeight} />}
     <meta property="og:site_name" content={meta.siteName} />
     <meta property="og:locale" content={meta.locale} />
     
@@ -161,9 +174,11 @@ const structuredData = {
     <meta property="twitter:title" content={meta.title} />
     <meta property="twitter:description" content={meta.description} />
     <meta property="twitter:image" content={meta.image} />
+    <meta property="twitter:image:alt" content={resolvedImageAlt} />
     
     <!-- Canonical URL -->
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hrefLang="pt-BR" href={canonicalUrl} />
     
     <!-- DNS Prefetch -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com" />
@@ -216,7 +231,25 @@ const structuredData = {
             line-height: 1.6;
             color: var(--text-main);
             background-color: var(--bg-body);
+            background-image: radial-gradient(circle at top, rgba(34, 211, 238, 0.08), transparent 50%);
             -webkit-font-smoothing: antialiased;
+        }
+
+        .skip-link {
+            position: absolute;
+            left: 1rem;
+            top: -40px;
+            background: #0f172a;
+            color: #fff;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            z-index: 1000;
+            transition: top 0.2s ease;
+        }
+
+        .skip-link:focus {
+            top: 1rem;
         }
         
         h1, h2, h3, h4, .font-heading {
@@ -228,8 +261,8 @@ const structuredData = {
         .container {
             max-width: 1280px;
             margin: 0 auto;
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
+            padding-left: clamp(1rem, 3vw, 1.5rem);
+            padding-right: clamp(1rem, 3vw, 1.5rem);
         }
 
         /* Responsive spacing utilities */
@@ -291,8 +324,9 @@ const structuredData = {
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
     <Header />
-    <main class="pt-20"> <!-- Added padding-top to account for fixed header -->
+    <main id="main-content" class="pt-16 md:pt-20"> <!-- Added padding-top to account for fixed header -->
         <slot />
     </main>
     <Footer />

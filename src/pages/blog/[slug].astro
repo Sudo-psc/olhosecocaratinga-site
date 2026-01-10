@@ -13,6 +13,7 @@ try {
   if (import.meta.env.PUBLIC_SANITY_PROJECT_ID && slug) {
     post = await client.fetch(groq`*[_type == "post" && slug.current == $slug][0] {
       title,
+      excerpt,
       publishedAt,
       mainImage,
       body,
@@ -27,9 +28,13 @@ try {
 if (!post) {
   return Astro.redirect('/404');
 }
+
+const postImage = post?.mainImage
+  ? urlFor(post.mainImage)!.width(1200).height(630).url()
+  : undefined;
 ---
 
-<Layout title={`${post.title} | Blog Saraiva Vision`} description={post.excerpt || post.title}>
+<Layout title={`${post.title} | Blog Saraiva Vision`} description={post.excerpt || post.title} image={postImage} imageAlt={post.title} imageWidth={1200} imageHeight={630}>
   <article class="bg-white min-h-screen pb-20">
     <!-- Header com Imagem -->
     <div class="relative h-[400px] md:h-[500px] w-full bg-blue-900">
