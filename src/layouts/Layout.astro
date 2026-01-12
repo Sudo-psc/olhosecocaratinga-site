@@ -20,9 +20,9 @@ const { title, description, image, imageAlt, imageWidth, imageHeight, type = "we
 
 const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).href;
 const defaultImage = {
-    src: "/heroeye.png",
-    width: 1376,
-    height: 768,
+    src: "/og-image.jpg",
+    width: 1200,
+    height: 630,
     alt: "Saraiva Vision - Olho Seco Caratinga"
 };
 const resolvedImage = image
@@ -160,13 +160,13 @@ const structuredData = schema ? {
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={meta.description} />
-    <meta name="keywords" content={meta.keywords} />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content={noindex ? "noindex,nofollow" : "index,follow"} />
-    <meta name="theme-color" content="#003D7A" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <meta name="generator" content={Astro.generator} />
+    <!-- Google Tag Manager -->
+    <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P4NG7B7K');</script>
+    <!-- End Google Tag Manager -->
     
     <!-- Google tag (gtag.js) -->
     <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=AW-11120453144"></script>
@@ -177,6 +177,40 @@ const structuredData = schema ? {
 
       gtag('config', 'AW-11120453144');
     </script>
+
+    <script is:inline>
+      function gtag_report_conversion(url) {
+        var callback = function () {
+          if (typeof url === 'string') {
+            window.location = url;
+          }
+        };
+        gtag('event', 'conversion', {
+          'send_to': 'AW-11120453144/7gsNCMI2_4AbEJjMOrYp',
+          'event_callback': callback
+        });
+        return false;
+      }
+    </script>
+    
+    <meta name="description" content={meta.description} />
+    <meta name="keywords" content={meta.keywords} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content={noindex ? "noindex,nofollow" : "index,follow"} />
+    <meta name="theme-color" content="#003D7A" />
+
+    <!-- Favicons - Optimized for Google Search -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <meta name="generator" content={Astro.generator} />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={meta.type} />
@@ -346,6 +380,10 @@ const structuredData = schema ? {
     </style>
 </head>
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4NG7B7K"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <a href="#main-content" class="skip-link">Pular para o conteúdo</a>
     <Header />
     <main id="main-content" class="pt-16 md:pt-20"> <!-- Added padding-top to account for fixed header -->
