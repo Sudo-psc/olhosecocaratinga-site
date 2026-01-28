@@ -49,7 +49,7 @@ const baseStructuredData = {
     "@context": "https://schema.org",
     "@graph": [
         {
-            "@type": "LocalBusiness",
+            "@type": ["LocalBusiness", "MedicalBusiness"],
             "@id": "https://olhosecocaratinga.com.br/#clinic",
             name: "Saraiva Vision",
             description: "Clínica especializada em tratamento de olho seco e doenças oculares em Caratinga, MG",
@@ -237,13 +237,26 @@ const structuredData = schema ? {
     <link rel="alternate" hreflang="pt-BR" href={canonicalUrl} />
     
     <!-- DNS Prefetch -->
-    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
     <link rel="dns-prefetch" href="//www.googletagmanager.com" />
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="dns-prefetch" href="//www.google-analytics.com" />
+
+    <!-- Fonts (Local) -->
+    <link rel="preload" href="/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/QGYvz_MVcBeNP4NJtEtqUYLknw.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/fonts/fonts.css" />
+
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+
+    {Astro.url.pathname === "/" && (
+      <link
+        rel="preload"
+        as="image"
+        href="/optimized/heroeye-800.webp"
+        imagesrcset="/optimized/heroeye-637.webp 637w, /optimized/heroeye-800.webp 800w"
+        imagesizes="(min-width: 1024px) 50vw, 100vw"
+      />
+    )}
     
     <!-- Structured Data -->
     <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
@@ -325,6 +338,8 @@ const structuredData = schema ? {
         .section-padding {
             padding-top: 5rem;
             padding-bottom: 5rem;
+            content-visibility: auto;
+            contain-intrinsic-size: 1px 900px;
         }
         @media (max-width: 768px) {
             .section-padding {

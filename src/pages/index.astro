@@ -1,16 +1,14 @@
 ---
 
 import Layout from '../layouts/Layout.astro';
-import { Image } from 'astro:assets';
-import heroImage from '../assets/heroeye.png';
 
 const symptoms = [
-  { icon: "/icons/Fundo de icon_ardencia Removido.png", title: "Ardência", desc: "Sensação de queimação constante nos olhos.", type: "image", isSpecial: false },
-  { icon: "/icons/Fundo de icon_prurido Removido.png", title: "Coceira", desc: "Desejo frequente de esfregar os olhos.", type: "image", isSpecial: false },
-  { icon: "/icons/Fundo de icon_visao_turva Removido.png", title: "Visão Turva", desc: "Embaçamento que melhora ao piscar.", type: "image", isSpecial: true },
-  { icon: "/icons/Fundo de icon_vermelhidao Removido.png", title: "Vermelhidão", desc: "Olhos irritados e avermelhados no final do dia.", type: "image", isSpecial: false },
-  { icon: "/icons/Fundo de icon_corpo_estranho Removido.png", title: "Corpo Estranho", desc: "Sensação de areia ou cisco nos olhos.", type: "image", isSpecial: false },
-  { icon: "/icons/Fundo de icon_lacrimejamento Removido.png", title: "Lacrimejamento", desc: "Olhos que lacrimejam como resposta à irritação.", type: "image", isSpecial: false }
+  { iconBase: "/optimized/icons/symptom-ardencia", title: "Ardência", desc: "Sensação de queimação constante nos olhos.", isSpecial: false, width: 256, height: 140 },
+  { iconBase: "/optimized/icons/symptom-prurido", title: "Coceira", desc: "Desejo frequente de esfregar os olhos.", isSpecial: false, width: 256, height: 140 },
+  { iconBase: "/optimized/icons/symptom-visao-turva", title: "Visão Turva", desc: "Embaçamento que melhora ao piscar.", isSpecial: true, width: 256, height: 140 },
+  { iconBase: "/optimized/icons/symptom-vermelhidao", title: "Vermelhidão", desc: "Olhos irritados e avermelhados no final do dia.", isSpecial: false, width: 256, height: 140 },
+  { iconBase: "/optimized/icons/symptom-corpo-estranho", title: "Corpo Estranho", desc: "Sensação de areia ou cisco nos olhos.", isSpecial: false, width: 256, height: 140 },
+  { iconBase: "/optimized/icons/symptom-lacrimejamento", title: "Lacrimejamento", desc: "Olhos que lacrimejam como resposta à irritação.", isSpecial: false, width: 256, height: 140 }
 ];
 
 const diagnostics = [
@@ -18,13 +16,17 @@ const diagnostics = [
     id: "meibografia",
     title: "Meibografia", 
     desc: "Exame avançado que avalia a estrutura das glândulas de Meibomius.", 
-    icon: "/meibografia icon.png" 
+    iconBase: "/optimized/icons/diagnostic-meibografia",
+    width: 256,
+    height: 256
   },
   { 
     id: "meniscometria",
     title: "Meniscometria a BUT", 
     desc: "Mede o volume e a estabilidade da camada lacrimal.", 
-    icon: "/Meniscometria-icon.png" 
+    iconBase: "/optimized/icons/diagnostic-meniscometria",
+    width: 256,
+    height: 256
   }
 ];
 
@@ -52,13 +54,28 @@ const faqs = [
     <div class="absolute top-0 right-0 w-1/2 h-full hidden lg:block opacity-100">
         <div class="w-full h-full relative">
             <div class="absolute inset-0 bg-gradient-to-r from-[#f0f7ff] via-[#f0f7ff]/50 to-transparent z-10"></div>
-            <Image 
-                src={heroImage}  
-                alt="Cuidado Oftalmológico Humanizado" 
-                class="w-full h-full object-cover object-left-top"
-                loading="eager"
-                format="webp"
-            />
+            <picture>
+                <source
+                    type="image/avif"
+                    srcset="/optimized/heroeye-637.avif 637w, /optimized/heroeye-800.avif 800w"
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                />
+                <source
+                    type="image/webp"
+                    srcset="/optimized/heroeye-637.webp 637w, /optimized/heroeye-800.webp 800w"
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                />
+                <img
+                    src="/optimized/heroeye-800.webp"
+                    alt="Cuidado Oftalmológico Humanizado"
+                    width="800"
+                    height="446"
+                    class="w-full h-full object-cover object-left-top"
+                    loading="eager"
+                    decoding="async"
+                    fetchpriority="high"
+                />
+            </picture>
         </div>
     </div>
 
@@ -73,7 +90,7 @@ const faqs = [
             </div>
             
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-[#003D7A] mb-6 leading-tight">
-                Chega de sentir <span class="text-cyan-500">areia nos olhos:</span><br/>Recupere seu Conforto
+                Tratamento de Olho Seco em Caratinga:<br/>Chega de sentir <span class="text-cyan-500">areia nos olhos</span>
             </h1>
             
             <p class="text-lg md:text-xl text-gray-600 mb-10 leading-relaxed max-w-xl font-medium">
@@ -81,7 +98,7 @@ const faqs = [
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4">
-                <a href="https://wa.me/5533998601427" class="btn-premium btn-premium-primary text-lg shadow-lg hover:shadow-cyan-500/30 flex items-center justify-center gap-3">
+                <a href="https://wa.me/5533998601427" onclick="return gtag_report_conversion('https://wa.me/5533998601427')" class="btn-premium btn-premium-primary text-lg shadow-lg hover:shadow-cyan-500/30 flex items-center justify-center gap-3">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.411-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
                     Agendar Minha Avaliação
                 </a>
@@ -102,7 +119,27 @@ const faqs = [
         <div class="grid md:grid-cols-2 gap-16 items-center">
             <div class="relative">
                 <div class="aspect-square rounded-full border-[10px] border-blue-50 overflow-hidden shadow-2xl">
-                    <img src="/hero-premium.png" alt="O que é olho seco" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+                    <picture>
+                        <source
+                            type="image/avif"
+                            srcset="/optimized/hero-premium-512.avif 512w, /optimized/hero-premium-768.avif 768w"
+                            sizes="(min-width: 768px) 40vw, 80vw"
+                        />
+                        <source
+                            type="image/webp"
+                            srcset="/optimized/hero-premium-512.webp 512w, /optimized/hero-premium-768.webp 768w"
+                            sizes="(min-width: 768px) 40vw, 80vw"
+                        />
+                        <img
+                            src="/optimized/hero-premium-512.webp"
+                            alt="O que é olho seco"
+                            width="512"
+                            height="512"
+                            loading="lazy"
+                            decoding="async"
+                            class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                        />
+                    </picture>
                 </div>
                 <!-- Floating Card -->
                 <div class="absolute bottom-10 -right-6 bg-white p-6 rounded-2xl shadow-xl border-l-4 border-cyan-500 max-w-xs animate-float hidden md:block">
@@ -112,7 +149,7 @@ const faqs = [
             </div>
             <div>
                 <span class="text-cyan-500 font-bold tracking-widest text-sm uppercase mb-2 block"> Entenda a Doença </span>
-                <h2 class="text-3xl md:text-5xl font-bold text-[#003D7A] mb-6">Por que seus olhos incomodam tanto?</h2>
+                <h2 class="text-3xl md:text-5xl font-bold text-[#003D7A] mb-6">Tratamento de Olho Seco em Caratinga: por que seus olhos incomodam tanto?</h2>
                 <p class="text-gray-600 text-lg mb-6 leading-relaxed">
                     Muitos pacientes chegam ao consultório acreditando que a sensação de <strong>areia, ardor e visão embaçada</strong> é "normal" devido ao uso de telas ou idade. NÃO É.
                 </p>
@@ -148,11 +185,27 @@ const faqs = [
             {symptoms.map(s => (
                 <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 text-center group cursor-default h-full">
                     <div class="h-52 mb-6 transform group-hover:scale-110 transition-transform flex items-center justify-center">
-                        {s.type === 'image' ? (
-                            <img src={s.icon} alt={s.title} class={`h-full object-contain ${s.isSpecial ? 'w-60' : 'w-40'} drop-shadow-md`} />
-                        ) : (
-                            <span class="text-[7.5rem]">{s.icon}</span>
-                        )}
+                        <picture>
+                            <source
+                                type="image/avif"
+                                srcset={`${s.iconBase}-256.avif 256w, ${s.iconBase}-384.avif 384w`}
+                                sizes={s.isSpecial ? "(min-width: 768px) 240px, 200px" : "(min-width: 768px) 160px, 140px"}
+                            />
+                            <source
+                                type="image/webp"
+                                srcset={`${s.iconBase}-256.webp 256w, ${s.iconBase}-384.webp 384w`}
+                                sizes={s.isSpecial ? "(min-width: 768px) 240px, 200px" : "(min-width: 768px) 160px, 140px"}
+                            />
+                            <img
+                                src={`${s.iconBase}-256.webp`}
+                                alt={s.title}
+                                width={s.width}
+                                height={s.height}
+                                loading="lazy"
+                                decoding="async"
+                                class={`h-full object-contain ${s.isSpecial ? 'w-60' : 'w-40'} drop-shadow-md`}
+                            />
+                        </picture>
                     </div>
                     <h3 class="font-bold text-[#003D7A] text-lg mb-2">{s.title}</h3>
                     <p class="text-sm text-gray-500 leading-relaxed">{s.desc}</p>
@@ -191,7 +244,27 @@ const faqs = [
             <div class="relative hidden md:block text-center">
                  <div class="relative inline-block">
                      <div class="absolute inset-0 bg-blue-200 rounded-full blur-3xl opacity-30 animate-pulse"></div>
-                     <img src="/meibografia icon.png" alt="Glândulas de Meibomius" class="relative z-10 w-full max-w-md mx-auto drop-shadow-2xl hover:scale-105 transition-transform duration-500" />
+                     <picture>
+                        <source
+                            type="image/avif"
+                            srcset="/optimized/meibografia-640.avif 640w, /optimized/meibografia-896.avif 896w"
+                            sizes="(min-width: 1024px) 448px, 0px"
+                        />
+                        <source
+                            type="image/webp"
+                            srcset="/optimized/meibografia-640.webp 640w, /optimized/meibografia-896.webp 896w"
+                            sizes="(min-width: 1024px) 448px, 0px"
+                        />
+                        <img
+                            src="/optimized/meibografia-640.webp"
+                            alt="Glândulas de Meibomius"
+                            width="640"
+                            height="640"
+                            loading="lazy"
+                            decoding="async"
+                            class="relative z-10 w-full max-w-md mx-auto drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+                        />
+                     </picture>
                  </div>
                  <p class="text-center text-sm text-gray-400 mt-4">Imagem de Meibografia: visualizando a saúde das glândulas.</p>
             </div>
@@ -220,7 +293,27 @@ const faqs = [
                     </div>
                     <div class="flex flex-col md:flex-row gap-6 items-center relative z-10">
                         <div class="w-24 h-24 flex-shrink-0 rounded-2xl bg-blue-50 p-2 overflow-hidden border border-blue-100">
-                            <img src={d.icon} alt={d.title} class="w-full h-full object-contain mix-blend-multiply" />
+                            <picture>
+                                <source
+                                    type="image/avif"
+                                    srcset={`${d.iconBase}-192.avif 192w, ${d.iconBase}-256.avif 256w`}
+                                    sizes="96px"
+                                />
+                                <source
+                                    type="image/webp"
+                                    srcset={`${d.iconBase}-192.webp 192w, ${d.iconBase}-256.webp 256w`}
+                                    sizes="96px"
+                                />
+                                <img
+                                    src={`${d.iconBase}-192.webp`}
+                                    alt={d.title}
+                                    width={d.width}
+                                    height={d.height}
+                                    loading="lazy"
+                                    decoding="async"
+                                    class="w-full h-full object-contain mix-blend-multiply"
+                                />
+                            </picture>
                         </div>
                         <div>
                             <h3 class="text-2xl font-bold text-[#003D7A] mb-2">{d.title}</h3>
@@ -253,7 +346,27 @@ const faqs = [
              <a href="/tratamentos/luz-pulsada-irpl" class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all group border-l-4 border-cyan-500">
                 <div class="flex items-center gap-4 mb-4">
                     <div class="w-14 h-14 rounded-xl bg-cyan-50 flex items-center justify-center p-2 border border-cyan-100">
-                        <img src="/irpl-machine.png" alt="E-Eye IRPL" class="w-10 h-10 object-contain" />
+                        <picture>
+                            <source
+                                type="image/avif"
+                                srcset="/optimized/icons/irpl-machine-256.avif 256w, /optimized/icons/irpl-machine-384.avif 384w"
+                                sizes="40px"
+                            />
+                            <source
+                                type="image/webp"
+                                srcset="/optimized/icons/irpl-machine-256.webp 256w, /optimized/icons/irpl-machine-384.webp 384w"
+                                sizes="40px"
+                            />
+                            <img
+                                src="/optimized/icons/irpl-machine-256.webp"
+                                alt="E-Eye IRPL"
+                                width="256"
+                                height="249"
+                                loading="lazy"
+                                decoding="async"
+                                class="w-10 h-10 object-contain"
+                            />
+                        </picture>
                     </div>
                     <div>
                         <span class="text-[10px] font-bold uppercase tracking-wider text-cyan-600">Destaque</span>
@@ -268,7 +381,27 @@ const faqs = [
              <a href="/tratamentos/higiene-palpebral" class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all group">
                 <div class="flex items-center gap-4 mb-4">
                     <div class="w-14 h-14 rounded-xl bg-amber-50 flex items-center justify-center p-2 border border-amber-100">
-                        <img src="/icons/08_acido_hipocloroso.png" alt="Higiene" class="w-full h-full object-contain" />
+                        <picture>
+                            <source
+                                type="image/avif"
+                                srcset="/optimized/icons/acido-hipocloroso-256.avif 256w, /optimized/icons/acido-hipocloroso-512.avif 512w"
+                                sizes="56px"
+                            />
+                            <source
+                                type="image/webp"
+                                srcset="/optimized/icons/acido-hipocloroso-256.webp 256w, /optimized/icons/acido-hipocloroso-512.webp 512w"
+                                sizes="56px"
+                            />
+                            <img
+                                src="/optimized/icons/acido-hipocloroso-256.webp"
+                                alt="Higiene"
+                                width="256"
+                                height="256"
+                                loading="lazy"
+                                decoding="async"
+                                class="w-full h-full object-contain"
+                            />
+                        </picture>
                     </div>
                     <h3 class="font-bold text-lg text-[#003D7A]">Higiene Palpebral</h3>
                 </div>
@@ -292,7 +425,27 @@ const faqs = [
              <a href="/tratamentos/lentes-esclerais" class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all group">
                 <div class="flex items-center gap-4 mb-4">
                     <div class="w-14 h-14 rounded-xl bg-indigo-50 flex items-center justify-center p-2 border border-indigo-100">
-                         <img src="/icons/06_lentes_terapeuticas_v3.png" alt="Lentes Esclerais" class="w-full h-full object-contain" />
+                         <picture>
+                            <source
+                                type="image/avif"
+                                srcset="/optimized/icons/lentes-esclerais-256.avif 256w, /optimized/icons/lentes-esclerais-512.avif 512w"
+                                sizes="56px"
+                            />
+                            <source
+                                type="image/webp"
+                                srcset="/optimized/icons/lentes-esclerais-256.webp 256w, /optimized/icons/lentes-esclerais-512.webp 512w"
+                                sizes="56px"
+                            />
+                            <img
+                                src="/optimized/icons/lentes-esclerais-256.webp"
+                                alt="Lentes Esclerais"
+                                width="256"
+                                height="256"
+                                loading="lazy"
+                                decoding="async"
+                                class="w-full h-full object-contain"
+                            />
+                         </picture>
                     </div>
                     <h3 class="font-bold text-lg text-[#003D7A]">Lentes Esclerais</h3>
                 </div>
@@ -340,7 +493,11 @@ const faqs = [
                     <div class="absolute inset-0 bg-gradient-to-t from-blue-900 via-transparent to-transparent z-10"></div>
                     <img 
                         src="/professional_portrait_doctor.JPG" 
-                        alt="Dr. Philipe Saraiva Cruz" 
+                        alt="Dr. Philipe Saraiva Cruz"
+                        width="1024"
+                        height="1024"
+                        loading="lazy"
+                        decoding="async"
                         class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
                     />
                 </div>
@@ -461,21 +618,31 @@ const faqs = [
 
             <div class="bg-white p-10 rounded-[2.5rem] shadow-xl border border-gray-100">
                 <h3 class="text-2xl font-bold text-[#003D7A] mb-6">Envie uma Mensagem</h3>
-                <form class="space-y-5">
+                <form id="contact-form" class="space-y-5">
                     <div class="space-y-2">
-                        <label class="text-sm font-semibold text-gray-700">Nome Completo</label>
-                        <input type="text" class="w-full px-5 py-4 rounded-xl bg-alt border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all" placeholder="Seu nome" />
-                    </div>
-                     <div class="space-y-2">
-                        <label class="text-sm font-semibold text-gray-700">Celular (WhatsApp)</label>
-                        <input type="tel" class="w-full px-5 py-4 rounded-xl bg-alt border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all" placeholder="(33) 99999-9999" />
+                        <label for="contact-nome" class="text-sm font-semibold text-gray-700">Nome Completo *</label>
+                        <input type="text" id="contact-nome" name="nome" required minlength="2" class="w-full px-5 py-4 rounded-xl bg-alt border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all" placeholder="Seu nome" />
                     </div>
                     <div class="space-y-2">
-                        <label class="text-sm font-semibold text-gray-700">Mensagem</label>
-                        <textarea class="w-full px-5 py-4 rounded-xl bg-alt border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all min-h-[120px]" placeholder="Como podemos ajudar?"></textarea>
+                        <label for="contact-telefone" class="text-sm font-semibold text-gray-700">Celular (WhatsApp) *</label>
+                        <input type="tel" id="contact-telefone" name="telefone" required pattern="[\d\s\(\)\-]+" class="w-full px-5 py-4 rounded-xl bg-alt border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all" placeholder="(33) 99999-9999" />
                     </div>
-                    <button class="w-full py-4 bg-blue-600 text-white rounded-xl font-bold text-lg hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-500/30">
-                        Enviar Solicitação
+                    <div class="space-y-2">
+                        <label for="contact-email" class="text-sm font-semibold text-gray-700">E-mail (opcional)</label>
+                        <input type="email" id="contact-email" name="email" class="w-full px-5 py-4 rounded-xl bg-alt border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all" placeholder="seu@email.com" />
+                    </div>
+                    <div class="space-y-2">
+                        <label for="contact-mensagem" class="text-sm font-semibold text-gray-700">Mensagem *</label>
+                        <textarea id="contact-mensagem" name="mensagem" required minlength="5" class="w-full px-5 py-4 rounded-xl bg-alt border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all min-h-[120px]" placeholder="Como podemos ajudar?"></textarea>
+                    </div>
+                    <div id="form-error" class="hidden p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm"></div>
+                    <div id="form-success" class="hidden p-4 rounded-xl bg-green-50 border border-green-200 text-green-700 text-sm"></div>
+                    <button type="submit" id="submit-btn" class="w-full py-4 bg-blue-600 text-white rounded-xl font-bold text-lg hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-500/30 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+                        <span id="submit-text">Enviar Solicitação</span>
+                        <svg id="submit-spinner" class="hidden animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
                     </button>
                     <p class="text-center text-xs text-gray-500 mt-4 leading-relaxed">
                         Ao enviar, você concorda com nossa <a href="/politica-de-privacidade" class="underline">Política de Privacidade</a>.
