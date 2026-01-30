@@ -20,7 +20,7 @@ import Layout from '../layouts/Layout.astro';
 
       <section class="bg-gray-50 border border-gray-100 rounded-3xl p-6 md:p-10 shadow-sm">
         <div class="grid md:grid-cols-2 gap-6">
-          <div class="w-full space-y-6">
+          <div class="w-full space-y-6 order-1 md:order-2">
             <div id="summary" class="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm md:sticky md:top-24">
               <h3 class="text-xl font-bold text-[#003D7A] mb-4">Resumo dos custos</h3>
               <div class="space-y-3 text-gray-600">
@@ -57,7 +57,7 @@ import Layout from '../layouts/Layout.astro';
               </a>
             </div>
           </div>
-          <div class="space-y-4" id="items">
+          <div class="space-y-4 order-2 md:order-1" id="items">
             <!-- Recorrentes -->
             <div class="bg-white border border-gray-100 rounded-2xl p-5" data-item data-type="monthly">
               <div class="flex items-center justify-between">
