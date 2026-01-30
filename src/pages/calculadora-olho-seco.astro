@@ -1,0 +1,330 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Calculadora de Custos do Olho Seco | Saraiva Vision"
+  description="Simule custos mensais e anuais dos tratamentos de olho seco. Compare opções e organize seu plano de cuidado."
+>
+  <main class="pt-24 pb-16 bg-white">
+    <div class="container mx-auto px-6 max-w-5xl">
+      <div class="text-center mb-12">
+        <span class="inline-block bg-cyan-100 text-cyan-700 font-bold uppercase tracking-widest text-xs px-4 py-2 rounded-full mb-4">Simulador</span>
+        <h1 class="text-3xl md:text-5xl font-bold text-[#003D7A] mt-4 mb-4 leading-tight">
+          Calculadora de Custos do Olho Seco
+        </h1>
+        <p class="text-gray-600 text-lg">
+          Selecione os tratamentos e insira os preços. A calculadora mostra o custo mensal, anual e a soma total em tempo real.
+        </p>
+      </div>
+
+      <section class="bg-gray-50 border border-gray-100 rounded-3xl p-6 md:p-10 shadow-sm">
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="space-y-4" id="items">
+            <!-- Recorrentes -->
+            <div class="bg-white border border-gray-100 rounded-2xl p-5" data-item data-type="monthly">
+              <div class="flex items-center justify-between">
+                <label class="flex items-center gap-3 font-semibold text-[#003D7A]">
+                  <input type="checkbox" class="h-5 w-5" data-check />
+                  Ômega 3
+                </label>
+                <span class="text-xs text-gray-400">Mensal</span>
+              </div>
+              <div class="mt-4 grid grid-cols-2 gap-4">
+                <div>
+                  <label class="text-xs text-gray-500">Preço mensal (R$)</label>
+                  <input type="number" min="0" step="0.01" class="mt-1 w-full rounded-lg border-gray-200" data-price />
+                </div>
+                <div class="text-right">
+                  <div class="text-xs text-gray-500">Custo anual</div>
+                  <div class="font-bold text-gray-700" data-annual>R$ 0,00</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white border border-gray-100 rounded-2xl p-5" data-item data-type="monthly">
+              <div class="flex items-center justify-between">
+                <label class="flex items-center gap-3 font-semibold text-[#003D7A]">
+                  <input type="checkbox" class="h-5 w-5" data-check />
+                  Ácido hipocloroso
+                </label>
+                <span class="text-xs text-gray-400">Mensal</span>
+              </div>
+              <div class="mt-4 grid grid-cols-2 gap-4">
+                <div>
+                  <label class="text-xs text-gray-500">Preço mensal (R$)</label>
+                  <input type="number" min="0" step="0.01" class="mt-1 w-full rounded-lg border-gray-200" data-price />
+                </div>
+                <div class="text-right">
+                  <div class="text-xs text-gray-500">Custo anual</div>
+                  <div class="font-bold text-gray-700" data-annual>R$ 0,00</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white border border-gray-100 rounded-2xl p-5" data-item data-type="monthly">
+              <div class="flex items-center justify-between">
+                <label class="flex items-center gap-3 font-semibold text-[#003D7A]">
+                  <input type="checkbox" class="h-5 w-5" data-check />
+                  Colírio lubrificante
+                </label>
+                <span class="text-xs text-gray-400">Mensal</span>
+              </div>
+              <div class="mt-4 grid grid-cols-2 gap-4">
+                <div>
+                  <label class="text-xs text-gray-500">Preço mensal (R$)</label>
+                  <input type="number" min="0" step="0.01" class="mt-1 w-full rounded-lg border-gray-200" data-price />
+                </div>
+                <div class="text-right">
+                  <div class="text-xs text-gray-500">Custo anual</div>
+                  <div class="font-bold text-gray-700" data-annual>R$ 0,00</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white border border-gray-100 rounded-2xl p-5" data-item data-type="monthly">
+              <div class="flex items-center justify-between">
+                <label class="flex items-center gap-3 font-semibold text-[#003D7A]">
+                  <input type="checkbox" class="h-5 w-5" data-check />
+                  Máscara facial descartável
+                </label>
+                <span class="text-xs text-gray-400">Mensal</span>
+              </div>
+              <div class="mt-4 grid grid-cols-2 gap-4">
+                <div>
+                  <label class="text-xs text-gray-500">Preço mensal (R$)</label>
+                  <input type="number" min="0" step="0.01" class="mt-1 w-full rounded-lg border-gray-200" data-price />
+                </div>
+                <div class="text-right">
+                  <div class="text-xs text-gray-500">Custo anual</div>
+                  <div class="font-bold text-gray-700" data-annual>R$ 0,00</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white border border-gray-100 rounded-2xl p-5" data-item data-type="monthly">
+              <div class="flex items-center justify-between">
+                <label class="flex items-center gap-3 font-semibold text-[#003D7A]">
+                  <input type="checkbox" class="h-5 w-5" data-check />
+                  Máscara reutilizável
+                </label>
+                <span class="text-xs text-gray-400">Mensal</span>
+              </div>
+              <div class="mt-4 grid grid-cols-2 gap-4">
+                <div>
+                  <label class="text-xs text-gray-500">Preço mensal (R$)</label>
+                  <input type="number" min="0" step="0.01" class="mt-1 w-full rounded-lg border-gray-200" data-price />
+                </div>
+                <div class="text-right">
+                  <div class="text-xs text-gray-500">Custo anual</div>
+                  <div class="font-bold text-gray-700" data-annual>R$ 0,00</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white border border-gray-100 rounded-2xl p-5" data-item data-type="monthly">
+              <div class="flex items-center justify-between">
+                <label class="flex items-center gap-3 font-semibold text-[#003D7A]">
+                  <input type="checkbox" class="h-5 w-5" data-check />
+                  Colírios anti-inflamatórios
+                </label>
+                <span class="text-xs text-gray-400">Mensal</span>
+              </div>
+              <div class="mt-4 grid grid-cols-2 gap-4">
+                <div>
+                  <label class="text-xs text-gray-500">Preço mensal (R$)</label>
+                  <input type="number" min="0" step="0.01" class="mt-1 w-full rounded-lg border-gray-200" data-price />
+                </div>
+                <div class="text-right">
+                  <div class="text-xs text-gray-500">Custo anual</div>
+                  <div class="font-bold text-gray-700" data-annual>R$ 0,00</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white border border-gray-100 rounded-2xl p-5" data-item data-type="monthly">
+              <div class="flex items-center justify-between">
+                <label class="flex items-center gap-3 font-semibold text-[#003D7A]">
+                  <input type="checkbox" class="h-5 w-5" data-check />
+                  Antibióticos
+                </label>
+                <span class="text-xs text-gray-400">Mensal</span>
+              </div>
+              <div class="mt-4 grid grid-cols-2 gap-4">
+                <div>
+                  <label class="text-xs text-gray-500">Preço mensal (R$)</label>
+                  <input type="number" min="0" step="0.01" class="mt-1 w-full rounded-lg border-gray-200" data-price />
+                </div>
+                <div class="text-right">
+                  <div class="text-xs text-gray-500">Custo anual</div>
+                  <div class="font-bold text-gray-700" data-annual>R$ 0,00</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white border border-gray-100 rounded-2xl p-5" data-item data-type="monthly">
+              <div class="flex items-center justify-between">
+                <label class="flex items-center gap-3 font-semibold text-[#003D7A]">
+                  <input type="checkbox" class="h-5 w-5" data-check />
+                  Lente escleral
+                </label>
+                <span class="text-xs text-gray-400">Mensal</span>
+              </div>
+              <div class="mt-4 grid grid-cols-2 gap-4">
+                <div>
+                  <label class="text-xs text-gray-500">Preço mensal (R$)</label>
+                  <input type="number" min="0" step="0.01" class="mt-1 w-full rounded-lg border-gray-200" data-price />
+                </div>
+                <div class="text-right">
+                  <div class="text-xs text-gray-500">Custo anual</div>
+                  <div class="font-bold text-gray-700" data-annual>R$ 0,00</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white border border-gray-100 rounded-2xl p-5" data-item data-type="monthly">
+              <div class="flex items-center justify-between">
+                <label class="flex items-center gap-3 font-semibold text-[#003D7A]">
+                  <input type="checkbox" class="h-5 w-5" data-check />
+                  Colírio de soro autólogo
+                </label>
+                <span class="text-xs text-gray-400">Mensal</span>
+              </div>
+              <div class="mt-4 grid grid-cols-2 gap-4">
+                <div>
+                  <label class="text-xs text-gray-500">Preço mensal (R$)</label>
+                  <input type="number" min="0" step="0.01" class="mt-1 w-full rounded-lg border-gray-200" data-price />
+                </div>
+                <div class="text-right">
+                  <div class="text-xs text-gray-500">Custo anual</div>
+                  <div class="font-bold text-gray-700" data-annual>R$ 0,00</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Custo único -->
+            <div class="bg-white border border-gray-100 rounded-2xl p-5" data-item data-type="one-time">
+              <div class="flex items-center justify-between">
+                <label class="flex items-center gap-3 font-semibold text-[#003D7A]">
+                  <input type="checkbox" class="h-5 w-5" data-check />
+                  IRPL (3 sessões)
+                </label>
+                <span class="text-xs text-gray-400">Custo único</span>
+              </div>
+              <div class="mt-4 grid grid-cols-2 gap-4">
+                <div>
+                  <label class="text-xs text-gray-500">Preço total (R$)</label>
+                  <input type="number" min="0" step="0.01" class="mt-1 w-full rounded-lg border-gray-200" data-price />
+                </div>
+                <div class="text-right">
+                  <div class="text-xs text-gray-500">Custo mensal</div>
+                  <div class="font-bold text-gray-700" data-monthly>R$ 0,00</div>
+                  <div class="text-xs text-gray-400">(rateado em 12 meses)</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white border border-gray-100 rounded-2xl p-5" data-item data-type="one-time">
+              <div class="flex items-center justify-between">
+                <label class="flex items-center gap-3 font-semibold text-[#003D7A]">
+                  <input type="checkbox" class="h-5 w-5" data-check />
+                  Plug lacrimal
+                </label>
+                <span class="text-xs text-gray-400">Custo único</span>
+              </div>
+              <div class="mt-4 grid grid-cols-2 gap-4">
+                <div>
+                  <label class="text-xs text-gray-500">Preço total (R$)</label>
+                  <input type="number" min="0" step="0.01" class="mt-1 w-full rounded-lg border-gray-200" data-price />
+                </div>
+                <div class="text-right">
+                  <div class="text-xs text-gray-500">Custo mensal</div>
+                  <div class="font-bold text-gray-700" data-monthly>R$ 0,00</div>
+                  <div class="text-xs text-gray-400">(rateado em 12 meses)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <div class="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm">
+              <h3 class="text-xl font-bold text-[#003D7A] mb-4">Resumo dos custos</h3>
+              <div class="space-y-3 text-gray-600">
+                <div class="flex items-center justify-between">
+                  <span>Total mensal</span>
+                  <span class="font-bold text-gray-800" id="total-monthly">R$ 0,00</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span>Total anual</span>
+                  <span class="font-bold text-gray-800" id="total-annual">R$ 0,00</span>
+                </div>
+              </div>
+              <div class="mt-6 text-sm text-gray-500">
+                Os valores são estimativas. O tratamento deve ser individualizado após avaliação oftalmológica.
+              </div>
+            </div>
+
+            <div class="bg-cyan-50 border border-cyan-100 rounded-3xl p-6">
+              <h4 class="text-lg font-bold text-cyan-800 mb-3">Quer orientação personalizada?</h4>
+              <p class="text-cyan-700 text-sm mb-4">Fale com a equipe para entender o melhor custo-benefício para o seu caso.</p>
+              <a href="https://wa.me/5533998601427?text=Ol%C3%A1!%20Usei%20a%20calculadora%20de%20custos%20e%20quero%20orienta%C3%A7%C3%A3o%20sobre%20meu%20tratamento." class="inline-flex items-center gap-2 bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 rounded-full font-bold text-sm transition-colors shadow-md">
+                Falar no WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script is:inline>
+    const formatter = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+    const items = Array.from(document.querySelectorAll('[data-item]'));
+
+    const recalc = () => {
+      let totalMonthly = 0;
+      let totalAnnual = 0;
+
+      items.forEach((item) => {
+        const isChecked = item.querySelector('[data-check]')?.checked;
+        const priceInput = item.querySelector('[data-price]');
+        const type = item.getAttribute('data-type');
+        const price = parseFloat(priceInput?.value || '0');
+
+        let monthly = 0;
+        let annual = 0;
+
+        if (isChecked && price > 0) {
+          if (type === 'one-time') {
+            monthly = price / 12;
+            annual = price;
+            const monthlyEl = item.querySelector('[data-monthly]');
+            if (monthlyEl) monthlyEl.textContent = formatter.format(monthly);
+          } else {
+            monthly = price;
+            annual = price * 12;
+          }
+        } else if (type === 'one-time') {
+          const monthlyEl = item.querySelector('[data-monthly]');
+          if (monthlyEl) monthlyEl.textContent = formatter.format(0);
+        }
+
+        const annualEl = item.querySelector('[data-annual]');
+        if (annualEl) annualEl.textContent = formatter.format(annual);
+
+        totalMonthly += monthly;
+        totalAnnual += annual;
+      });
+
+      document.getElementById('total-monthly').textContent = formatter.format(totalMonthly);
+      document.getElementById('total-annual').textContent = formatter.format(totalAnnual);
+    };
+
+    items.forEach((item) => {
+      item.addEventListener('input', recalc);
+      item.addEventListener('change', recalc);
+    });
+
+    recalc();
+  </script>
+</Layout>
