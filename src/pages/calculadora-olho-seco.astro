@@ -102,22 +102,23 @@ import Layout from '../layouts/Layout.astro';
               </div>
             </div>
 
-            <div class="bg-white border border-gray-100 rounded-2xl p-5" data-item data-type="monthly">
+            <div class="bg-white border border-gray-100 rounded-2xl p-5" data-item data-type="one-time">
               <div class="flex items-center justify-between">
                 <label class="flex items-center gap-3 font-semibold text-[#003D7A]">
                   <input type="checkbox" class="h-5 w-5" data-check />
                   Máscara reutilizável
                 </label>
-                <span class="text-xs text-gray-400">Mensal</span>
+                <span class="text-xs text-gray-400">Custo anual</span>
               </div>
               <div class="mt-4 grid grid-cols-2 gap-4">
                 <div>
-                  <label class="text-xs text-gray-500">Preço mensal (R$)</label>
+                  <label class="text-xs text-gray-500">Preço anual (R$)</label>
                   <input type="number" min="0" step="0.01" class="mt-1 w-full rounded-lg border-gray-200" data-price />
                 </div>
                 <div class="text-right">
-                  <div class="text-xs text-gray-500">Custo anual</div>
-                  <div class="font-bold text-gray-700" data-annual>R$ 0,00</div>
+                  <div class="text-xs text-gray-500">Custo mensal</div>
+                  <div class="font-bold text-gray-700" data-monthly>R$ 0,00</div>
+                  <div class="text-xs text-gray-400">(rateado em 12 meses)</div>
                 </div>
               </div>
             </div>
@@ -203,7 +204,7 @@ import Layout from '../layouts/Layout.astro';
             </div>
 
             <!-- Custo único -->
-            <div class="bg-white border border-gray-100 rounded-2xl p-5" data-item data-type="one-time">
+            <div class="bg-white border border-gray-100 rounded-2xl p-5" data-item data-type="one-time" data-key="irpl">
               <div class="flex items-center justify-between">
                 <label class="flex items-center gap-3 font-semibold text-[#003D7A]">
                   <input type="checkbox" class="h-5 w-5" data-check />
@@ -259,6 +260,17 @@ import Layout from '../layouts/Layout.astro';
                   <span class="font-bold text-gray-800" id="total-annual">R$ 0,00</span>
                 </div>
               </div>
+              <div class="mt-5 pt-4 border-t border-gray-100">
+                <div class="text-sm font-semibold text-gray-700 mb-2">Comparativo IRPL</div>
+                <div class="flex items-center justify-between text-gray-600">
+                  <span>IRPL mensal (rateado)</span>
+                  <span class="font-bold" id="irpl-monthly">R$ 0,00</span>
+                </div>
+                <div class="flex items-center justify-between text-gray-600">
+                  <span>IRPL anual (total)</span>
+                  <span class="font-bold" id="irpl-annual">R$ 0,00</span>
+                </div>
+              </div>
               <div class="mt-6 text-sm text-gray-500">
                 Os valores são estimativas. O tratamento deve ser individualizado após avaliação oftalmológica.
               </div>
@@ -280,6 +292,7 @@ import Layout from '../layouts/Layout.astro';
   <script is:inline>
     const formatter = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
     const items = Array.from(document.querySelectorAll('[data-item]'));
+    const irplItem = document.querySelector('[data-key="irpl"]');
 
     const recalc = () => {
       let totalMonthly = 0;
@@ -315,6 +328,15 @@ import Layout from '../layouts/Layout.astro';
         totalMonthly += monthly;
         totalAnnual += annual;
       });
+
+      // Comparativo IRPL (sempre visível)
+      if (irplItem) {
+        const irplPrice = parseFloat(irplItem.querySelector('[data-price]')?.value || '0');
+        const irplMonthly = irplPrice > 0 ? irplPrice / 12 : 0;
+        const irplAnnual = irplPrice > 0 ? irplPrice : 0;
+        document.getElementById('irpl-monthly').textContent = formatter.format(irplMonthly);
+        document.getElementById('irpl-annual').textContent = formatter.format(irplAnnual);
+      }
 
       document.getElementById('total-monthly').textContent = formatter.format(totalMonthly);
       document.getElementById('total-annual').textContent = formatter.format(totalAnnual);
