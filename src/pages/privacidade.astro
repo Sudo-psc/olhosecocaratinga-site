@@ -1,0 +1,177 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE_CONFIG } from '../lib/config';
+
+const { business } = SITE_CONFIG;
+const lastUpdated = '26 de fevereiro de 2026';
+---
+
+<Layout
+    title="Política de Privacidade | Saraiva Vision"
+    description="Política de Privacidade da Saraiva Vision Clínica Especializada em Olho Seco. Saiba como tratamos seus dados pessoais em conformidade com a LGPD."
+    noindex={false}
+>
+    <main class="pt-24">
+        <!-- Hero -->
+        <section class="bg-gradient-to-br from-blue-900 to-blue-700 text-white py-16">
+            <div class="container mx-auto px-6">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Política de Privacidade</h1>
+                    <p class="text-blue-200 text-sm">Última atualização: {lastUpdated}</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-3xl mx-auto prose prose-slate prose-headings:text-[#003D7A] prose-a:text-cyan-600 prose-a:no-underline hover:prose-a:underline">
+
+                    <p class="lead text-gray-600">
+                        A <strong>Saraiva Vision Clínica Especializada em Olho Seco</strong> (CNPJ {business.cnpj}) respeita a sua privacidade e está comprometida com a proteção dos seus dados pessoais, em conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD – Lei nº 13.709/2018) e demais normas aplicáveis.
+                    </p>
+
+                    <h2>1. Quem somos</h2>
+                    <p>
+                        Somos o <strong>controlador</strong> dos seus dados pessoais coletados por meio deste site ({SITE_CONFIG.url}) e pelos canais de atendimento da clínica.
+                    </p>
+                    <ul>
+                        <li><strong>Razão Social:</strong> {business.name}</li>
+                        <li><strong>CNPJ:</strong> {business.cnpj}</li>
+                        <li><strong>Endereço:</strong> {business.address.street}, {business.address.neighborhood}, {business.address.city}/{business.address.state}, CEP {business.address.zip}</li>
+                        <li><strong>E-mail:</strong> <a href={`mailto:${business.email}`}>{business.email}</a></li>
+                        <li><strong>Telefone/WhatsApp:</strong> {business.phone}</li>
+                    </ul>
+
+                    <h2>2. Dados que coletamos</h2>
+                    <p>Coletamos dados pessoais nas seguintes situações:</p>
+
+                    <h3>2.1 Formulários de contato e agendamento</h3>
+                    <ul>
+                        <li>Nome completo</li>
+                        <li>Endereço de e-mail</li>
+                        <li>Número de telefone/WhatsApp</li>
+                        <li>Mensagem ou motivo do contato</li>
+                    </ul>
+
+                    <h3>2.2 Dados de navegação (cookies e logs)</h3>
+                    <ul>
+                        <li>Endereço IP (anonimizado quando possível)</li>
+                        <li>Tipo de navegador e sistema operacional</li>
+                        <li>Páginas visitadas e tempo de permanência</li>
+                        <li>Origem do acesso (ex.: mecanismo de busca, rede social)</li>
+                    </ul>
+
+                    <h3>2.3 Dados de saúde (prontuário clínico)</h3>
+                    <p>
+                        Os dados de saúde coletados durante consultas e exames são tratados exclusivamente para fins de assistência médica, com base no consentimento expresso do titular e nas obrigações legais que regem o exercício da medicina. Esses dados são armazenados em prontuário eletrônico seguro, em conformidade com o Conselho Federal de Medicina (CFM) e a LGPD.
+                    </p>
+
+                    <h2>3. Finalidade do tratamento</h2>
+                    <p>Utilizamos seus dados para:</p>
+                    <ul>
+                        <li>Responder às suas mensagens e solicitações de agendamento;</li>
+                        <li>Prestar atendimento médico e acompanhamento clínico;</li>
+                        <li>Enviar informações sobre saúde ocular e novidades da clínica (somente com seu consentimento);</li>
+                        <li>Cumprir obrigações legais e regulatórias;</li>
+                        <li>Melhorar a experiência de navegação no site (analytics agregados e anonimizados).</li>
+                    </ul>
+
+                    <h2>4. Base legal</h2>
+                    <p>O tratamento dos seus dados pessoais é realizado com base em uma ou mais das seguintes hipóteses previstas na LGPD:</p>
+                    <ul>
+                        <li><strong>Consentimento</strong> (art. 7º, I): para envio de comunicações de marketing e uso de cookies não essenciais;</li>
+                        <li><strong>Execução de contrato</strong> (art. 7º, V): para prestação dos serviços médicos solicitados;</li>
+                        <li><strong>Obrigação legal</strong> (art. 7º, II): para cumprimento de exigências do CFM, CRM e demais órgãos reguladores;</li>
+                        <li><strong>Proteção da vida e da saúde</strong> (art. 7º, VII e art. 11, II, f): para dados de saúde tratados no contexto da assistência médica;</li>
+                        <li><strong>Legítimo interesse</strong> (art. 7º, IX): para análise de desempenho do site e prevenção a fraudes.</li>
+                    </ul>
+
+                    <h2>5. Compartilhamento de dados</h2>
+                    <p>
+                        Não vendemos nem alugamos seus dados pessoais. Podemos compartilhá-los apenas com:
+                    </p>
+                    <ul>
+                        <li><strong>Prestadores de serviços</strong> (operadores): plataformas de e-mail, serviços de formulário online e ferramentas de analytics, sempre com cláusulas de confidencialidade e proteção de dados;</li>
+                        <li><strong>Autoridades públicas</strong>: quando exigido por lei, decisão judicial ou regulação do CFM/CRM;</li>
+                        <li><strong>Outros profissionais de saúde</strong>: com seu consentimento, para continuidade do seu cuidado médico.</li>
+                    </ul>
+
+                    <h2>6. Seus direitos como titular</h2>
+                    <p>De acordo com a LGPD, você tem direito a:</p>
+                    <ul>
+                        <li>Confirmar a existência de tratamento dos seus dados;</li>
+                        <li>Acessar os dados que possuímos sobre você;</li>
+                        <li>Corrigir dados incompletos, inexatos ou desatualizados;</li>
+                        <li>Solicitar a anonimização, bloqueio ou eliminação de dados desnecessários;</li>
+                        <li>Revogar o consentimento a qualquer momento;</li>
+                        <li>Solicitar a portabilidade dos seus dados;</li>
+                        <li>Obter informações sobre as entidades com quem compartilhamos seus dados;</li>
+                        <li>Peticionar à Autoridade Nacional de Proteção de Dados (ANPD).</li>
+                    </ul>
+                    <p>
+                        Para exercer qualquer um desses direitos, entre em contato conosco pelo e-mail <a href={`mailto:${business.email}`}>{business.email}</a> ou pelo WhatsApp <strong>{business.phone}</strong>. Responderemos no prazo de até 15 dias.
+                    </p>
+
+                    <h2>7. Retenção de dados</h2>
+                    <p>
+                        Mantemos seus dados pelo tempo necessário para cumprir as finalidades descritas nesta política ou conforme exigido por lei:
+                    </p>
+                    <ul>
+                        <li>Dados de prontuário: mínimo de 20 anos, conforme resolução CFM nº 1.638/2002;</li>
+                        <li>Dados de contato e marketing: até a revogação do consentimento ou encerramento do relacionamento;</li>
+                        <li>Logs de acesso ao site: até 6 meses, conforme o Marco Civil da Internet (Lei nº 12.965/2014).</li>
+                    </ul>
+
+                    <h2>8. Segurança</h2>
+                    <p>
+                        Adotamos medidas técnicas e organizacionais adequadas para proteger seus dados contra acesso não autorizado, perda, destruição ou divulgação indevida, incluindo comunicação via HTTPS e controle de acesso aos sistemas internos.
+                    </p>
+
+                    <h2>9. Cookies</h2>
+                    <p>
+                        Este site pode utilizar cookies essenciais para o funcionamento correto das páginas e cookies analíticos para compreender como os visitantes interagem com o conteúdo. Você pode configurar seu navegador para recusar cookies, mas isso pode afetar a experiência de uso do site.
+                    </p>
+
+                    <h2>10. Links para sites externos</h2>
+                    <p>
+                        Este site pode conter links para sites de terceiros (ex.: redes sociais, plataformas de vídeo). Não nos responsabilizamos pelas práticas de privacidade desses sites e recomendamos que você consulte as políticas de privacidade de cada um deles.
+                    </p>
+
+                    <h2>11. Alterações nesta política</h2>
+                    <p>
+                        Podemos atualizar esta Política de Privacidade periodicamente. Quando isso ocorrer, atualizaremos a data de "última atualização" no topo desta página. Recomendamos que você a revise regularmente.
+                    </p>
+
+                    <h2>12. Contato</h2>
+                    <p>
+                        Dúvidas, solicitações ou reclamações relacionadas ao tratamento dos seus dados pessoais podem ser encaminhadas ao nosso encarregado (DPO) pelo e-mail <a href={`mailto:${business.email}`}>{business.email}</a> ou pessoalmente na nossa clínica:
+                    </p>
+                    <address class="not-italic bg-slate-50 rounded-lg p-4 text-sm text-gray-700 border border-slate-100">
+                        <strong>{business.name}</strong><br />
+                        {business.address.street}, {business.address.neighborhood}<br />
+                        {business.address.city}/{business.address.state} – CEP {business.address.zip}<br />
+                        Telefone: {business.phone}<br />
+                        E-mail: <a href={`mailto:${business.email}`}>{business.email}</a>
+                    </address>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="py-12 bg-slate-50 border-t border-slate-100">
+            <div class="container mx-auto px-6 text-center">
+                <p class="text-gray-600 mb-4">Ainda tem dúvidas? Fale com a gente.</p>
+                <a
+                    href={`https://wa.me/${business.whatsapp}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-full transition-colors"
+                >
+                    Falar pelo WhatsApp
+                </a>
+            </div>
+        </section>
+    </main>
+</Layout>
