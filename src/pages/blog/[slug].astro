@@ -32,16 +32,33 @@ if (!post) {
 const postImage = post?.mainImage
   ? urlFor(post.mainImage)!.width(1200).height(630).url()
   : undefined;
+
+const lcpImage = post?.mainImage 
+  ? { src: urlFor(post.mainImage)!.width(1200).height(600).url(), type: "image/webp" } 
+  : undefined;
 ---
 
-<Layout title={`${post.title} | Blog Saraiva Vision`} description={post.excerpt || post.title} image={postImage} imageAlt={post.title} imageWidth={1200} imageHeight={630}>
+<Layout 
+    title={`${post.title} | Blog Saraiva Vision`} 
+    description={post.excerpt || post.title} 
+    image={postImage} 
+    imageAlt={post.title} 
+    imageWidth={1200} 
+    imageHeight={630}
+    preloadImage={lcpImage}
+>
   <article class="bg-white min-h-screen pb-20">
     <!-- Header com Imagem -->
-    <div class="relative h-[400px] md:h-[500px] w-full bg-blue-900">
+    <div class="relative h-[400px] md:h-[500px] w-full bg-blue-900 overflow-hidden">
         {post.mainImage ? (
             <img 
                 src={urlFor(post.mainImage!)!.width(1200).height(600).url()} 
                 alt={post.title} 
+                width="1200"
+                height="600"
+                loading="eager"
+                decoding="async"
+                fetchpriority="high"
                 class="w-full h-full object-cover opacity-80"
             />
         ) : (

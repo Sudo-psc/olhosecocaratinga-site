@@ -33,50 +33,57 @@
 </div>
 
 <script>
-  const popup = document.getElementById('exit-intent-popup');
-  const backdrop = document.getElementById('popup-backdrop');
-  const content = document.getElementById('popup-content');
-  const closeBtn = document.getElementById('close-popup');
-  const dismissBtn = document.getElementById('dismiss-popup');
-  
-  let hasShown = false; // Only show once per session
+  const initExitIntent = () => {
+    const popup = document.getElementById('exit-intent-popup');
+    const backdrop = document.getElementById('popup-backdrop');
+    const content = document.getElementById('popup-content');
+    const closeBtn = document.getElementById('close-popup');
+    const dismissBtn = document.getElementById('dismiss-popup');
+    
+    let hasShown = false; // Only show once per session
 
-  const showPopup = () => {
-    // Check session storage first (per session)
-    if (hasShown || sessionStorage.getItem('exitIntentShown')) return;
-    
-    popup?.classList.remove('hidden');
-    // Small delay for transition
-    setTimeout(() => {
-        backdrop?.classList.remove('opacity-0');
-        content?.classList.remove('scale-95', 'opacity-0');
-        content?.classList.add('scale-100', 'opacity-100');
-    }, 10);
-    
-    hasShown = true;
-    sessionStorage.setItem('exitIntentShown', 'true');
+    const showPopup = () => {
+      // Check session storage first (per session)
+      if (hasShown || sessionStorage.getItem('exitIntentShown')) return;
+      
+      popup?.classList.remove('hidden');
+      // Small delay for transition
+      setTimeout(() => {
+          backdrop?.classList.remove('opacity-0');
+          content?.classList.remove('scale-95', 'opacity-0');
+          content?.classList.add('scale-100', 'opacity-100');
+      }, 10);
+      
+      hasShown = true;
+      sessionStorage.setItem('exitIntentShown', 'true');
+    };
+
+    const hidePopup = () => {
+      backdrop?.classList.add('opacity-0');
+      content?.classList.remove('scale-100', 'opacity-100');
+      content?.classList.add('scale-95', 'opacity-0');
+      
+      setTimeout(() => {
+          popup?.classList.add('hidden');
+      }, 300);
+    };
+
+    // Exit Intent Logic (Mouse leaving top of viewport)
+    document.addEventListener('mouseleave', (e) => {
+      if (e.clientY < 0) {
+        showPopup();
+      }
+    });
+
+    closeBtn?.addEventListener('click', hidePopup);
+    dismissBtn?.addEventListener('click', hidePopup);
+    backdrop?.addEventListener('click', hidePopup);
   };
 
-  const hidePopup = () => {
-    backdrop?.classList.add('opacity-0');
-    content?.classList.remove('scale-100', 'opacity-100');
-    content?.classList.add('scale-95', 'opacity-0');
-    
-    setTimeout(() => {
-        popup?.classList.add('hidden');
-    }, 300);
-  };
-
-  // Exit Intent Logic (Mouse leaving top of viewport)
-  document.addEventListener('mouseleave', (e) => {
-    if (e.clientY < 0) {
-      showPopup();
-    }
-  });
-
-  // Mobile fallback (scroll direction change logic could go here, but omitted for simplicity)
-
-  closeBtn?.addEventListener('click', hidePopup);
-  dismissBtn?.addEventListener('click', hidePopup);
-  backdrop?.addEventListener('click', hidePopup);
+  // Initialize when the browser is idle
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(initExitIntent);
+  } else {
+    setTimeout(initExitIntent, 3000);
+  }
 </script>

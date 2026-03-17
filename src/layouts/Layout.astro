@@ -14,9 +14,15 @@ export interface Props {
     canonical?: string;
     noindex?: boolean;
     schema?: object;
+    preloadImage?: {
+        src: string;
+        srcset?: string;
+        sizes?: string;
+        type?: string;
+    };
 }
 
-const { title, description, image, imageAlt, imageWidth, imageHeight, type = "website", canonical, noindex, schema } = Astro.props;
+const { title, description, image, imageAlt, imageWidth, imageHeight, type = "website", canonical, noindex, schema, preloadImage } = Astro.props;
 
 const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).href;
 const defaultImage = {
@@ -160,39 +166,6 @@ const structuredData = schema ? {
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8" />
-    <!-- Google Tag Manager -->
-    <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-P4NG7B7K');</script>
-    <!-- End Google Tag Manager -->
-    
-    <!-- Google tag (gtag.js) -->
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=AW-11120453144"></script>
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'AW-11120453144');
-    </script>
-
-    <script is:inline>
-      function gtag_report_conversion(url) {
-        var callback = function () {
-          if (typeof url === 'string') {
-            window.location = url;
-          }
-        };
-        gtag('event', 'conversion', {
-          'send_to': 'AW-11120453144/7gsNCMI2_4AbEJjMOrYp',
-          'event_callback': callback
-        });
-        return false;
-      }
-    </script>
-    
     <meta name="description" content={meta.description} />
     <meta name="keywords" content={meta.keywords} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -236,27 +209,64 @@ const structuredData = schema ? {
     <link rel="canonical" href={canonicalUrl} />
     <link rel="alternate" hreflang="pt-BR" href={canonicalUrl} />
     
-    <!-- DNS Prefetch -->
+    <!-- DNS Prefetch & Preconnect -->
     <link rel="dns-prefetch" href="//www.googletagmanager.com" />
     <link rel="dns-prefetch" href="//www.google-analytics.com" />
+    <link rel="dns-prefetch" href="//cdn.sanity.io" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.sanity.io" crossorigin>
 
     <!-- Fonts (Local) -->
     <link rel="preload" href="/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/QGYvz_MVcBeNP4NJtEtqUYLknw.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/fonts/fonts.css" />
 
-    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
-
-    {Astro.url.pathname === "/" && (
+    <!-- LCP Image Preload -->
+    {preloadImage && (
       <link
         rel="preload"
         as="image"
-        href="/optimized/heroeye-800.webp"
-        imagesrcset="/optimized/heroeye-637.webp 637w, /optimized/heroeye-800.webp 800w"
-        imagesizes="(min-width: 1024px) 50vw, 100vw"
+        type={preloadImage.type || "image/avif"}
+        href={preloadImage.src}
+        imagesrcset={preloadImage.srcset}
+        imagesizes={preloadImage.sizes}
+        fetchpriority="high"
       />
     )}
+
+    <!-- Google Tag Manager -->
+    <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-P4NG7B7K');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=AW-11120453144"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'AW-11120453144');
+    </script>
+
+    <script is:inline>
+      function gtag_report_conversion(url) {
+        var callback = function () {
+          if (typeof url === 'string') {
+            window.location = url;
+          }
+        };
+        gtag('event', 'conversion', {
+          'send_to': 'AW-11120453144/7gsNCMI2_4AbEJjMOrYp',
+          'event_callback': callback
+        });
+        return false;
+      }
+    </script>
     
     <!-- Structured Data -->
     <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
@@ -352,12 +362,20 @@ const structuredData = schema ? {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 0.875rem 2rem;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.875rem;
             font-weight: 600;
             border-radius: var(--radius-md);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             gap: 0.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .btn-premium {
+                padding: 0.875rem 2rem;
+                font-size: 1rem;
+            }
         }
 
         .btn-premium-primary {

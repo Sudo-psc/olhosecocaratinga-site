@@ -4,11 +4,9 @@
 User-agent: *
 Allow: /
 
-# Bloquear páginas administrativas
-Disallow: /studio
-Disallow: /studio/*
+# Bloquear páginas administrativas e internas do Astro
 Disallow: /api/*
-Disallow: /_next/*
+Disallow: /_astro/*
 
 # Sitemap
 Sitemap: https://olhosecocaratinga.com.br/sitemap-index.xml
