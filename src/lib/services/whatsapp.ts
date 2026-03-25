@@ -230,7 +230,7 @@ Se precisar de atendimento imediato, responda esta mensagem ou ligue para (33) 9
 Atenciosamente,
 *Equipe Saraiva Vision*
 Dr. Philipe Saraiva Cruz
-CRM-MG 69.870`;
+CRM-MG 69.870 | RQE 307527`;
 
   return sendWhatsAppNotification({
     to: data.telefone,
@@ -291,7 +291,7 @@ Gostaria de agendar uma avaliação? Responda esta mensagem ou acesse: https://s
 
 Atenciosamente,
 *Dr. Philipe Saraiva Cruz*
-CRM-MG 69.870`
+CRM-MG 69.870 | RQE 307527`
       : `Parabéns, ${firstName}! 🌟
 
 Você completou o *Teste dos 10 Segundos* com sucesso! Isso indica uma boa estabilidade do seu filme lacrimal.
@@ -302,7 +302,7 @@ Agende sua avaliação preventiva: https://saraivavision.com.br/agendamento
 
 Atenciosamente,
 *Dr. Philipe Saraiva Cruz*
-CRM-MG 69.870`;
+CRM-MG 69.870 | RQE 307527`;
 
   const [clinicResult, patientResult] = await Promise.all([
     sendWhatsAppNotification({

@@ -372,7 +372,7 @@ export function generatePatientConfirmationEmail(data: {
     <p style="color: #64748b; font-size: 14px; text-align: center;">
       <strong>Dr. Philipe Saraiva Cruz</strong><br>
       Médico pós-graduado em Oftalmologia<br>
-      CRM-MG 69.870
+      CRM-MG 69.870 | RQE 307527
     </p>
   </div>
 
@@ -404,7 +404,7 @@ https://wa.me/5533998601427
 ---
 Dr. Philipe Saraiva Cruz
 Médico pós-graduado em Oftalmologia
-CRM-MG 69.870
+CRM-MG 69.870 | RQE 307527
 
 Saraiva Vision - Clínica Especializada em Olho Seco
 Rua Catarina Maria Passos, 97 - Santa Zita, Caratinga/MG

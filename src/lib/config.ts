@@ -43,6 +43,7 @@ export const SITE_CONFIG = {
         // Título para exibição (UX-friendly) - usado em interfaces visuais
         title: 'Médico pós-graduado em Oftalmologia',
         crm: 'CRM-MG 69.870',
+        rqe: 'RQE 307527',
         // Área de atuação principal (para exibição)
         specialty: 'Olho Seco e Superfície Ocular',
         // Bio longa para uso consistente
@@ -160,11 +161,18 @@ export function getDoctorStructuredData() {
         jobTitle: SITE_CONFIG.doctor.titleFormal,
         medicalSpecialty: 'Ophthalmology',
         description: SITE_CONFIG.doctor.longBio,
-        identifier: {
-            '@type': 'PropertyValue',
-            name: 'CRM',
-            value: SITE_CONFIG.doctor.crm,
-        },
+        identifier: [
+            {
+                '@type': 'PropertyValue',
+                name: 'CRM',
+                value: SITE_CONFIG.doctor.crm,
+            },
+            {
+                '@type': 'PropertyValue',
+                name: 'RQE',
+                value: SITE_CONFIG.doctor.rqe,
+            },
+        ],
         worksFor: {
             '@id': `${SITE_CONFIG.url}/#clinic`,
         },
