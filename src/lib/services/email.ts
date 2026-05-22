@@ -46,17 +46,20 @@ async function getSendPulseToken(): Promise<string | null> {
   }
 
   try {
-    const response = await fetch("https://api.sendpulse.com/oauth/access_token", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetch(
+      "https://api.sendpulse.com/oauth/access_token",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          grant_type: "client_credentials",
+          client_id: clientId,
+          client_secret: clientSecret,
+        }),
       },
-      body: JSON.stringify({
-        grant_type: "client_credentials",
-        client_id: clientId,
-        client_secret: clientSecret,
-      }),
-    });
+    );
 
     if (!response.ok) {
       throw new Error(`SendPulse auth failed: ${response.status}`);
@@ -88,8 +91,10 @@ async function sendViaSendPulse(payload: EmailPayload): Promise<EmailResult> {
     };
   }
 
-  const fromEmail = import.meta.env.SENDPULSE_FROM_EMAIL || "noreply@olhosecocaratinga.com.br";
-  const fromName = import.meta.env.SENDPULSE_FROM_NAME || "Saraiva Vision - Olho Seco";
+  const fromEmail =
+    import.meta.env.SENDPULSE_FROM_EMAIL || "noreply@olhosecocaratinga.com.br";
+  const fromName =
+    import.meta.env.SENDPULSE_FROM_NAME || "Saraiva Vision - Olho Seco";
 
   try {
     const response = await fetch("https://api.sendpulse.com/smtp/emails", {
@@ -151,7 +156,8 @@ async function sendViaResend(payload: EmailPayload): Promise<EmailResult> {
     };
   }
 
-  const fromEmail = import.meta.env.RESEND_FROM_EMAIL || "noreply@olhosecocaratinga.com.br";
+  const fromEmail =
+    import.meta.env.RESEND_FROM_EMAIL || "noreply@olhosecocaratinga.com.br";
 
   try {
     const response = await fetch("https://api.resend.com/emails", {
@@ -204,17 +210,23 @@ export async function sendEmail(payload: EmailPayload): Promise<EmailResult> {
     return sendPulseResult;
   }
 
-  console.warn(`[Email] SendPulse failed: ${sendPulseResult.error}, trying Resend...`);
+  console.warn(
+    `[Email] SendPulse failed: ${sendPulseResult.error}, trying Resend...`,
+  );
 
   // Fallback to Resend
   const resendResult = await sendViaResend(payload);
 
   if (resendResult.success) {
-    console.log(`[Email] Sent via Resend (fallback): ${resendResult.messageId}`);
+    console.log(
+      `[Email] Sent via Resend (fallback): ${resendResult.messageId}`,
+    );
     return resendResult;
   }
 
-  console.error(`[Email] Both providers failed. SendPulse: ${sendPulseResult.error}, Resend: ${resendResult.error}`);
+  console.error(
+    `[Email] Both providers failed. SendPulse: ${sendPulseResult.error}, Resend: ${resendResult.error}`,
+  );
 
   return {
     success: false,
@@ -293,8 +305,7 @@ export function generateClinicNotificationEmail(data: {
 
   <div style="background: #1e293b; padding: 20px; border-radius: 0 0 16px 16px; text-align: center;">
     <p style="color: #94a3b8; margin: 0; font-size: 12px;">
-      Saraiva Vision - Clínica Especializada em Olho Seco<br>
-      Rua Catarina Maria Passos, 97 - Caratinga/MG
+      Saraiva Vision - Clínica Especializada em Olho Seco
     </p>
   </div>
 </body>
@@ -321,9 +332,11 @@ Responder via WhatsApp: https://wa.me/55${data.telefone.replace(/\D/g, "")}
 /**
  * Generate HTML email template for patient confirmation
  */
-export function generatePatientConfirmationEmail(data: {
-  nome: string;
-}): { subject: string; html: string; text: string } {
+export function generatePatientConfirmationEmail(data: { nome: string }): {
+  subject: string;
+  html: string;
+  text: string;
+} {
   const subject = `✅ Recebemos sua mensagem - Saraiva Vision | Olho Seco Caratinga`;
 
   const html = `
@@ -378,8 +391,7 @@ export function generatePatientConfirmationEmail(data: {
 
   <div style="background: #1e293b; padding: 20px; border-radius: 0 0 16px 16px; text-align: center;">
     <p style="color: #94a3b8; margin: 0 0 10px 0; font-size: 12px;">
-      Saraiva Vision - Clínica Especializada em Olho Seco<br>
-      Rua Catarina Maria Passos, 97 - Santa Zita, Caratinga/MG
+      Saraiva Vision - Clínica Especializada em Olho Seco
     </p>
     <p style="margin: 0;">
       <a href="https://olhosecocaratinga.com.br" style="color: #22d3ee; text-decoration: none; font-size: 12px;">olhosecocaratinga.com.br</a>
@@ -407,7 +419,6 @@ Médico pós-graduado em Oftalmologia
 CRM-MG 69.870 | RQE 307527
 
 Saraiva Vision - Clínica Especializada em Olho Seco
-Rua Catarina Maria Passos, 97 - Santa Zita, Caratinga/MG
 https://olhosecocaratinga.com.br
   `;
 

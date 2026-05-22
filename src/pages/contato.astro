@@ -5,13 +5,6 @@ const contact = {
     phone: "(33) 99860-1427",
     whatsapp: "5533998601427",
     email: "contato@saraivavision.com.br",
-    address: {
-        street: "Rua Catarina Maria Passos, 97",
-        neighborhood: "Santa Zita",
-        city: "Caratinga",
-        state: "MG",
-        zip: "35300-299"
-    },
     hours: [
         { day: "Segunda a Sexta", time: "08:00 - 18:00" },
         { day: "Sábado", time: "08:00 - 12:00" },
@@ -170,26 +163,6 @@ const formAction = "https://formsubmit.co/contato@saraivavision.com.br";
                                     <p class="text-purple-600">{contact.email}</p>
                                 </div>
                             </a>
-                            
-                            <!-- Address -->
-                            <div class="p-4 bg-gray-50 rounded-xl">
-                                <div class="flex items-start gap-4">
-                                    <div class="w-12 h-12 bg-gray-500 rounded-full flex items-center justify-center flex-shrink-0">
-                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold text-gray-900">Endereço</p>
-                                        <p class="text-gray-600">
-                                            {contact.address.street}<br />
-                                            {contact.address.neighborhood}, {contact.address.city} - {contact.address.state}<br />
-                                            CEP: {contact.address.zip}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                         
                         <!-- Hours -->
@@ -211,24 +184,6 @@ const formAction = "https://formsubmit.co/contato@saraivavision.com.br";
             </div>
         </section>
 
-        <!-- Map Section -->
-        <section class="bg-gray-100">
-            <div class="container mx-auto px-6 py-12">
-                <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">Nossa Localização</h2>
-                <div class="rounded-2xl overflow-hidden shadow-lg h-[400px]">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3756.8789756731457!2d-42.14469!3d-19.7925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDQ3JzMzLjAiUyA0MsKwMDgnNDAuOSJX!5e0!3m2!1spt-BR!2sbr!4v1234567890"
-                        width="100%" 
-                        height="100%" 
-                        style="border:0;" 
-                        allowfullscreen="" 
-                        loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade"
-                        title="Localização da Clínica Oftalmológica Caratinga"
-                    ></iframe>
-                </div>
-            </div>
-        </section>
     </main>
 </Layout>
 
