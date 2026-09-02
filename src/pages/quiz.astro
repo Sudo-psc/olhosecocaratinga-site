@@ -51,7 +51,7 @@ import Layout from '../layouts/Layout.astro';
         <div class="text-center">
           <h2 class="text-3xl font-bold text-[#003D7A] mb-4">Quase lá!</h2>
           <p class="text-gray-600">
-            Para ver seu resultado e receber seu <strong>cupom de desconto especial</strong> para consulta, preencha os dados abaixo:
+            Para ver seu resultado educativo, preencha os dados abaixo. A unidade de Caratinga está encerrada e não há agendamento.
           </p>
         </div>
         
@@ -85,12 +85,12 @@ import Layout from '../layouts/Layout.astro';
         </div>
         
         <div class="bg-cyan-50 p-6 rounded-2xl border border-cyan-100 text-center">
-          <h3 class="text-xl font-bold text-cyan-800 mb-2">🎁 Bônus Exclusivo Liberado!</h3>
+          <h3 class="text-xl font-bold text-cyan-800 mb-2">Conteúdo educativo</h3>
           <p class="text-cyan-700 mb-4">
-            Você ganhou <strong>R$ 50,00 de desconto</strong> em sua primeira avaliação completa de Olho Seco com Meibografia.
+            A unidade de Caratinga está encerrada. Use o resultado abaixo para entender o tema — sem agendamento.
           </p>
-          <a id="whatsapp-link" href="#" target="_blank" class="btn-premium btn-premium-primary w-full sm:w-auto">
-            Resgatar Desconto via WhatsApp
+          <a id="whatsapp-link" href="/olho-seco" class="btn-premium btn-premium-primary w-full sm:w-auto">
+            Saiba mais sobre olho seco
           </a>
         </div>
         
@@ -265,10 +265,7 @@ import Layout from '../layouts/Layout.astro';
       document.getElementById('result-emoji').textContent = emoji;
       document.getElementById('result-description').innerHTML = description;
       
-      // Update WhatsApp Link
-      const name = document.getElementById('name').value;
-      const whatsappMsg = encodeURIComponent(`Olá! Meu nome é ${name}. Fiz o quiz do Olho Seco e meu resultado foi: ${title}. Gostaria de resgatar meu desconto de R$ 50,00 e agendar uma avaliação.`);
-      document.getElementById('whatsapp-link').href = `https://wa.me/5533998601427?text=${whatsappMsg}`;
+      document.getElementById('whatsapp-link').href = '/olho-seco';
     }
 
     // Event Listeners

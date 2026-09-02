@@ -32,8 +32,8 @@ Implementar uma estratégia completa de SEO técnico focada em dados estruturado
     "postalCode": "35300-000",
     "addressCountry": "BR"
   },
-  "telephone": "+55 33 99860-1427",
-  "openingHours": ["Mo-Fr 08:00-18:00", "Sa 08:00-12:00"]
+  "telephone": "",
+  "openingHours": []
 }
 ```
 

@@ -270,9 +270,9 @@ Build output is static HTML with:
 **Clinic Details:**
 - Name: Saraiva Vision Clínica Especializada em Olho Seco
 - Address: Rua Catarina Maria Passos, 97, Bairro Santa Zita (Amor e Saúde), Caratinga/MG, CEP 35300-299
-- Phone/WhatsApp: (33) 99860-1427
-- Email: contato@saraivavision.com.br
-- Hours: Mon-Fri 08:00-18:00, Sat 08:00-12:00
+- Phone/WhatsApp: none (clinic closed — no scheduling)
+- Email: contato@saraivavision.com.br (no transactional email from this site)
+- Hours: unit closed — do not publish Mon–Fri 08–18 / Sat 08–12 or WhatsApp appointment CTAs
 
 **Primary Treatments Featured:**
 1. E-Eye IRPL (Intense Regulated Pulsed Light) - Featured treatment
