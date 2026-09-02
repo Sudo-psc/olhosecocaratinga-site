@@ -4,7 +4,7 @@
  */
 
 interface WhatsAppMessage {
-  to: string; // Phone number with country code (e.g., 5533998601427)
+  to: string; // Destination number in E.164 digits, no plus prefix
   message: string;
   type?: "text" | "template";
 }
