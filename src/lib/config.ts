@@ -10,17 +10,17 @@ export const SITE_CONFIG = {
   locale: "pt_BR",
   language: "pt-BR",
 
-  // Business Info
+  // Business Info — clinic is closed: no hours, no phone/WhatsApp scheduling
   business: {
     name: "Saraiva Vision Clínica Especializada em Olho Seco",
     cnpj: "53.864.119/0001-79",
-    phone: "(33) 99860-1427",
-    whatsapp: "5533998601427",
+    phone: "",
+    whatsapp: "",
     email: "contato@saraivavision.com.br",
+    closed: true,
     hours: {
-      weekdays: "08:00 - 18:00",
-      saturday: "08:00 - 12:00",
-      sunday: "Fechado",
+      status: "Encerrada",
+      note: "A unidade de Caratinga está encerrada. Não há atendimento presencial nem agendamento.",
     },
     coordinates: {
       lat: -19.7925,
@@ -37,7 +37,7 @@ export const SITE_CONFIG = {
     // Título para exibição (UX-friendly) - usado em interfaces visuais
     title: "Médico pós-graduado em Oftalmologia",
     crm: "CRM-MG 69.870",
-    rqe: "RQE 307527",
+    rqe: "RQE 71.903",
     // Área de atuação principal (para exibição)
     specialty: "Olho Seco e Superfície Ocular",
     // Bio longa para uso consistente
@@ -95,7 +95,7 @@ export const SITE_CONFIG = {
       { name: "Plugs Lacrimais", href: "/tratamentos#plugs" },
       { name: "Jato de Plasma", href: "/tratamentos#plasma" },
       { name: "Meibografia", href: "/tratamentos#meibografia" },
-      { name: "Consulta Oftalmológica", href: "/contato" },
+      { name: "Situação da clínica", href: "/contato" },
     ],
     legal: [
       { name: "Política de Privacidade", href: "/privacidade" },
@@ -114,27 +114,12 @@ export function getClinicStructuredData() {
     alternateName: SITE_CONFIG.name,
     description: SITE_CONFIG.description,
     url: SITE_CONFIG.url,
-    telephone: SITE_CONFIG.business.phone,
     email: SITE_CONFIG.business.email,
     geo: {
       "@type": "GeoCoordinates",
       latitude: SITE_CONFIG.business.coordinates.lat,
       longitude: SITE_CONFIG.business.coordinates.lng,
     },
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        opens: "08:00",
-        closes: "18:00",
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: "Saturday",
-        opens: "08:00",
-        closes: "12:00",
-      },
-    ],
     priceRange: "$$",
     currenciesAccepted: "BRL",
     paymentAccepted: "Cash, Credit Card, Debit Card, PIX",

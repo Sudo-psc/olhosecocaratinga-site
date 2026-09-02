@@ -183,7 +183,7 @@ export async function notifyClinic(data: {
   mensagem: string;
   origem: string;
 }): Promise<WhatsAppResult> {
-  const clinicPhone = import.meta.env.CLINIC_WHATSAPP || "5533998601427";
+  const clinicPhone = import.meta.env.CLINIC_WHATSAPP || "";
 
   const message = `🆕 *NOVO CONTATO DO SITE*
 
@@ -219,18 +219,14 @@ export async function notifyPatient(data: {
 
   const message = `Olá, ${firstName}! 👋
 
-Recebemos sua mensagem no site *Olho Seco Caratinga* e entraremos em contato em breve.
+Recebemos sua mensagem no site *Olho Seco Caratinga*.
 
-⏰ *Horário de Atendimento:*
-Seg-Sex: 08h às 18h
-Sábado: 08h às 12h
-
-Se precisar de atendimento imediato, responda esta mensagem ou ligue para (33) 99860-1427.
+A unidade de Caratinga está encerrada. Este site permanece como conteúdo educativo sobre olho seco. Não há agendamento de consultas.
 
 Atenciosamente,
 *Equipe Saraiva Vision*
 Dr. Philipe Saraiva Cruz
-CRM-MG 69.870 | RQE 307527`;
+CRM-MG 69.870 | RQE 71.903`;
 
   return sendWhatsAppNotification({
     to: data.telefone,
@@ -251,7 +247,7 @@ export async function notifyTestResult(data: {
   tempoSegundos: number;
   resultado: "passou" | "piscou_antes";
 }): Promise<{ clinic: WhatsAppResult; patient: WhatsAppResult }> {
-  const clinicPhone = import.meta.env.CLINIC_WHATSAPP || "5533998601427";
+  const clinicPhone = import.meta.env.CLINIC_WHATSAPP || "";
   const firstName = data.nome.split(" ")[0];
 
   // Notify clinic
@@ -264,9 +260,9 @@ export async function notifyTestResult(data: {
 ⏱️ *Tempo:* ${data.tempoSegundos.toFixed(1)}s (piscou antes dos 10s)
 🎯 *Indicativo:* Possível Olho Seco Evaporativo
 
-⚡ *AÇÃO RECOMENDADA:* Entrar em contato para agendar avaliação
+ℹ️ A unidade de Caratinga está encerrada. Não há agendamento.
 
-💬 Responder: https://wa.me/55${data.telefone.replace(/\D/g, "")}`
+💬 Telefone informado: ${data.telefone}`
       : `✅ *TESTE RÁPIDO CONCLUÍDO*
 
 👤 *Nome:* ${data.nome}
@@ -287,22 +283,22 @@ Isso pode indicar *Olho Seco Evaporativo*, uma condição tratável com tecnolog
 
 🔬 Oferecemos exames como Meibografia e tratamentos como o E-Eye IRPL.
 
-Gostaria de agendar uma avaliação? Responda esta mensagem ou acesse: https://saraivavision.com.br/agendamento
+A unidade de Caratinga está encerrada. Não há agendamento de consultas. Conteúdo educativo: https://olhosecocaratinga.com.br/olho-seco
 
 Atenciosamente,
 *Dr. Philipe Saraiva Cruz*
-CRM-MG 69.870 | RQE 307527`
+CRM-MG 69.870 | RQE 71.903`
       : `Parabéns, ${firstName}! 🌟
 
 Você completou o *Teste dos 10 Segundos* com sucesso! Isso indica uma boa estabilidade do seu filme lacrimal.
 
 Mesmo assim, recomendamos check-ups regulares para manter sua saúde ocular em dia.
 
-Agende sua avaliação preventiva: https://saraivavision.com.br/agendamento
+A unidade de Caratinga está encerrada. Não há agendamento de consultas. Conteúdo educativo: https://olhosecocaratinga.com.br/olho-seco
 
 Atenciosamente,
 *Dr. Philipe Saraiva Cruz*
-CRM-MG 69.870 | RQE 307527`;
+CRM-MG 69.870 | RQE 71.903`;
 
   const [clinicResult, patientResult] = await Promise.all([
     sendWhatsAppNotification({

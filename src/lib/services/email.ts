@@ -358,34 +358,15 @@ export function generatePatientConfirmationEmail(data: { nome: string }): {
     </p>
 
     <p style="color: #475569;">
-      Recebemos sua mensagem e entraremos em contato em breve pelo WhatsApp ou telefone informado.
+      A unidade de Caratinga está encerrada. Este site permanece como conteúdo educativo sobre olho seco. Não há agendamento de consultas.
     </p>
-
-    <div style="background: #ecfeff; border: 1px solid #06b6d4; border-radius: 12px; padding: 20px; margin: 20px 0;">
-      <p style="margin: 0; color: #0e7490; font-weight: 500;">
-        ⏰ <strong>Horário de Atendimento:</strong><br>
-        Segunda a Sexta: 08h às 18h<br>
-        Sábado: 08h às 12h
-      </p>
-    </div>
-
-    <p style="color: #475569;">
-      Se precisar de atendimento imediato, entre em contato diretamente pelo WhatsApp:
-    </p>
-
-    <div style="text-align: center; margin: 25px 0;">
-      <a href="https://wa.me/5533998601427"
-         style="display: inline-block; background: #22c55e; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 16px;">
-        💬 Falar no WhatsApp
-      </a>
-    </div>
 
     <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 25px 0;">
 
     <p style="color: #64748b; font-size: 14px; text-align: center;">
       <strong>Dr. Philipe Saraiva Cruz</strong><br>
       Médico pós-graduado em Oftalmologia<br>
-      CRM-MG 69.870 | RQE 307527
+      CRM-MG 69.870 | RQE 71.903
     </p>
   </div>
 
@@ -404,19 +385,12 @@ export function generatePatientConfirmationEmail(data: { nome: string }): {
   const text = `
 Olá, ${data.nome}!
 
-Recebemos sua mensagem e entraremos em contato em breve pelo WhatsApp ou telefone informado.
-
-HORÁRIO DE ATENDIMENTO:
-Segunda a Sexta: 08h às 18h
-Sábado: 08h às 12h
-
-Se precisar de atendimento imediato, entre em contato diretamente pelo WhatsApp:
-https://wa.me/5533998601427
+A unidade de Caratinga está encerrada. Este site permanece como conteúdo educativo sobre olho seco. Não há agendamento de consultas.
 
 ---
 Dr. Philipe Saraiva Cruz
 Médico pós-graduado em Oftalmologia
-CRM-MG 69.870 | RQE 307527
+CRM-MG 69.870 | RQE 71.903
 
 Saraiva Vision - Clínica Especializada em Olho Seco
 https://olhosecocaratinga.com.br
