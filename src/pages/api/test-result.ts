@@ -181,7 +181,7 @@ export const POST: APIRoute = async ({ request }) => {
           success: false,
           error: "Não foi possível enviar as notificações",
           fallbackUrl: `https://wa.me/5533998601427?text=${encodeURIComponent(
-            `Olá! Fiz o teste dos 10 segundos e ${isQualifiedLead ? `pisquei em ${sanitized.tempoSegundos}s` : "completei"}. Gostaria de agendar uma avaliação.`
+            `Olá! Fiz o teste dos 10 segundos e ${isQualifiedLead ? `pisquei em ${sanitized.tempoSegundos}s` : "completei"}. Gostaria de mais informações.`
           )}`,
         }),
         { status: 500, headers }
@@ -201,7 +201,7 @@ export const POST: APIRoute = async ({ request }) => {
       JSON.stringify({
         success: true,
         message: isQualifiedLead
-          ? "Entraremos em contato em breve para agendar sua avaliação!"
+          ? "Obrigado! Seu resultado foi registrado."
           : "Obrigado por fazer o teste! Mantenha seus check-ups em dia.",
         leadScore,
         isQualifiedLead,
